@@ -8,21 +8,32 @@ let isSearch = false;
 let num = 1;
 let temp = ""; //temp가 undefined 되는거 해결
 
-function urlAdr(num) {
-  return `https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=${num}`;
+function urlAdr(num, what) {
+  return `https://api.themoviedb.org/3/movie/${what}?language=ko-KR&page=${num}`;
 }
 
-let datas = await getData(urlAdr(num));
+//높은 평점순 데이터 가져오기
+let datas = await getData(urlAdr(num, "top_rated"));
 let total = datas.total_pages;
+// datasRepeat(datas.results, {sort: "hightAvg"});
 
-datasRepeat(datas.results);
+//인기영화 데이터 가져오기.
+let popularDatas = await getData(urlAdr(num, "popular"));
 
-function datasRepeat(data) {
+datasRepeat(popularDatas.results, { sort: "popular" });
+
+function datasRepeat(data, sortType) {
   for (let i = 0; i < data.length; i++) {
+    Object.assign(data[i], sortType);
+    console.log(data[i]);
     temp += appendFunc(data[i]);
   }
   // console.log(temp);
-  return (cardContainer.innerHTML += temp);
+  if (sortType.sort === "popular") {
+    return (document.querySelector(".swiper-wrapper").innerHTML += temp);
+  } else if (sortType.sort === "hightAvg") {
+    return (cardContainer.innerHTML += temp);
+  }
 }
 
 //more버튼 누르면  more 함수 실행

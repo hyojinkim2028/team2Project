@@ -12,10 +12,17 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/swiper.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script type="module" src="main.js"></script>
+    <script type="module" src="./src/swiper.js"></script>
   </head>
   <body>
     <header>
@@ -33,6 +40,20 @@
         />
         <button id="searchBtn">검색</button>
       </div>
+      <!-- Slider main container -->
+      <swiper-container>
+        <div #swiperRef="" class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div> -->
+          </div>
+          <i class="fa-solid fa-circle-arrow-left"></i>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </swiper-container>
       <div class="cardsWrap">
         <div class="cardContainer">
           <!-- <div class="card">
