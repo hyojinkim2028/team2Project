@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+
+header {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+
+  height: 300px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  letter-spacing: 2px;
+  word-spacing: 4px;
+  font-size: 31px;
+  font-family: "Playfair Display", serif;
+}
+
+main {
+  background-color: brown;
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  background-color: brown;
+  /* background-color: rgb(253, 246, 239); */
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Gugi", sans-serif;
+  font-size: 20px;
+}
+
+.searchContainer {
+  padding: 0px 4% 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-color: black;
+  /* background-color: brown; */
+}
+
+#searchInput {
+  padding: 3px 3px 3px 10px;
+  height: 35px;
+  width: 300px;
+  font-size: 17px;
+  font-family: "Gugi", sans-serif;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+  outline: none;
+  border-radius: 5px;
+}
+
+#searchBtn {
+  padding: 0.6%;
+  margin-left: 20px;
+  font-size: 18px;
+  font-family: "Gugi", sans-serif;
+  letter-spacing: 4px;
+
+  /* border: transparent; */
+  border-radius: 10px;
+  /* background-color: rgb(35, 62, 8); */
+  background-color: brown;
+  color: white;
+}
+
+#searchBtn:hover {
+  height: 46px;
+  width: 70px;
+  font-size: 19px;
+}
+
+.upIconWarp {
+  position: fixed;
+  top: 90%;
+  right: 2.5vw;
+  color: rgb(212, 214, 214);
+}
+
+.cardsWrap {
+  background-color: rgb(0, 0, 0);
+  width: 90%;
+  height: 100%;
+  margin: 3% auto 0% auto;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-radius: 20px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* 넘어감 카드 1개 보여줬다가 4개 보여줫다가*/
+  flex-wrap: wrap;
+  min-height: 500px;
+}
+
+.card {
+  background-color: white;
+  /*풀 일때 카드 4개로*/
+  width: 19.3%;
+  min-width: 300px;
+  height: 800px;
+  margin: 1%;
+  padding: 1%;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  /* font-family: "Gugi", sans-serif; */
+  font-family: "Gowun Batang", serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+img {
+  max-width: 350px;
+  max-height: 450px;
+  min-width: 300px;
+  min-height: 450px;
+  object-fit: cover;
+}
+.poster {
+  height: fit-content;
+  width: 100%;
+  background-size: cover;
+}
+
+.comment {
+  font-size: 17px;
+}
+
+.title {
+  font-size: 25px;
+}
+
+.searchNone {
+  height: 300px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+
+  font-family: "Gugi", sans-serif;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+}
+
+#moreWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#more {
+  background-color: brown;
+  color: white;
+  border-radius: 10px;
+
+  padding: 0.8%;
+  margin-top: 20px;
+  font-size: 18px;
+  font-family: "Gugi", sans-serif;
+  letter-spacing: 4px;
+}
+
+.hide {
+  display: none;
+}
+
+.noResult {
+  color: azure;
+  font-weight: bolder;
+  letter-spacing: 4px;
+  word-spacing: 4px;
+  font-size: 40px;
+  font-family: "Gugi", sans-serif;
+}

@@ -1,9 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="main.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Collection of Top rated Movies</h1>
+    </header>
+
+    <main>
+      <div class="searchContainer">
+        <!-- 페이지 로드되자마자 커서 오도록 autofocus설정 -->
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="영화 제목을 검색해 보세요"
+          autofocus
+        />
+        <button id="searchBtn">검색</button>
+      </div>
+      <div class="cardsWrap">
+        <div class="cardContainer">
+          <!-- <div class="card">
+            <img class="poster" src="" alt="" />
+            <h5 class="title"></h5>
+            <span class="comment"></span>
+            <p class="avg"></p>
+          </div> -->
+        </div>
+        <div id="moreWrap">
+          <button id="more">more</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="upIconWarp">
+      <i class="fa-regular fa-circle-up fa-2xl"></i>
+    </div>
+
+    <div></div>
+
+    <footer>
+      <div>
+        <span id="footerText">Made By .</span>
+        <span id="footerName">유은지</span>
+      </div>
+      <p>Junior Back-end Developer</p>
+    </footer>
+    <script type="module" src="main.js"></script>
+    <!-- <script type="module" src="getData.js"></script>
+    <script type="module" src="append.js"></script> -->
+  </body>
 </html>
