@@ -101,8 +101,7 @@ footer,
 header,
 hgroup,
 menu,
-nav,
-section {
+nav {
   display: block;
 }
 body {
@@ -120,7 +119,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
