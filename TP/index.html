@@ -10,8 +10,8 @@
   <script type="module" src="test.js"></script>
 </head>
 
-<body style="background-color: black;">
-  <!--  동영상  -->
+<body >
+  <!--  동영상 style="background-color: black;" -->
   <div class="video">
     <div>
       <iframe id="youtubeFrame" width="1189" height="669" src="https://www.youtube.com/embed/dKUEIGYfY7A"
@@ -21,19 +21,17 @@
     </div>
   </div>
 <!--  탭 -->
-<div class="wrap">
-  <div class="tabMenu">
-    <ul class="list">
-      <li class="isOn">
-        <a href="#tab1" class="btn">정보</a>
-        <div id="tab1" class="cont">상세내용</div>
-      </li>
-      <li>
-        <a href="#tab2" class="btn">Tab Button2</a>
-        <div id="tab2" class="cont">Tab Content2</div>
-      </li>
-     </ul>
-  </div>
+<div class="tab_menu">
+  <ul class="tab">
+      <li class="tab_item active">탭메뉴1</li>
+      <li class="tab_item">탭메뉴2</li>
+
+  </ul>
+  <div class="tab_inner_wrap">
+      <div class="tab_inner active">탭 컨텐츠입니다1.</div>
+      <div class="tab_inner">탭 컨텐츠입니다2.</div>
+
+</div>
 </div>
 
 </body>
