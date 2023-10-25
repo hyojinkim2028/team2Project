@@ -1,4 +1,6 @@
-//영화 api 조회
+// 메인페이지 장르별 탭이동 구현
+
+// 영화 api 조회
 const options = {
   method: 'GET',
   headers: {
@@ -19,6 +21,7 @@ $nav.addEventListener('click', (e) => {
 
   const focusedTabId = e.target.dataset.tabSection
 
+  // 탭을 누르면 태그의 hidden 속성이 지워지며 해당 탭이 화면이 보여지고 나머지 탭의 화면들이 가려지게 구현함
   $sections.forEach(($section) => {
     if ($section.id === focusedTabId) {
       $section.removeAttribute('hidden')
@@ -35,7 +38,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) =>
-    response.results.slice(0, 10).forEach((data, index) => {
+    response.results.slice(0, 10).forEach((data) => {
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -75,7 +78,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) =>
-    response.results.slice(0, 10).forEach((data, index) => {
+    response.results.slice(0, 10).forEach((data) => {
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -115,7 +118,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) =>
-    response.results.slice(0, 10).forEach((data, index) => {
+    response.results.slice(0, 10).forEach((data) => {
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -155,7 +158,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) =>
-    response.results.slice(0, 10).forEach((data, index) => {
+    response.results.slice(0, 10).forEach((data) => {
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -195,7 +198,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) =>
-    response.results.slice(0, 10).forEach((data, index) => {
+    response.results.slice(0, 10).forEach((data) => {
       // 영화 아이디
       let id = data.id
       // 영화제목
