@@ -38,4 +38,35 @@ function datasRepeat(data, sortType, index, many) {
   }
 }
 
+//검색 버튼 누르면 인풋값 가져오는 함수 실행
+document
+  .querySelector("#searchBtn")
+  .addEventListener("click", async function () {
+    temp = "";
+    cardContainer.innerHTML = "";
+    num = 1;
+    isSearch = true;
+
+    return await searchStart();
+  });
+
+//엔터키 입력하면 인풋값 가져오는 함수 실행
+document
+  .querySelector("#searchInput")
+  .addEventListener("keypress", async function (e) {
+    if (e.keyCode == 13 || e.which == 13) {
+      temp = "";
+      cardContainer.innerHTML = "";
+      num = 1;
+      isSearch = true;
+
+      return await searchStart();
+    }
+  });
+
+//카드 누르면 아이디 값 보여주고, 해당 페이지로 이동
+document
+  .querySelector(".cardContainer")
+  .addEventListener("click", (e) => clickShow(e));
+
 export { cardContainer, num, temp, isSearch, datasRepeat };

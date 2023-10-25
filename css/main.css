@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
 
 header {
   background-color: var(--black);
@@ -15,7 +15,7 @@ header {
 
   letter-spacing: 2px;
   word-spacing: 4px;
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
 }
 
 main {
@@ -33,7 +33,7 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 1px;
   word-spacing: 2px;
   font-size: 20px;
@@ -53,7 +53,7 @@ footer {
   height: 35px;
   width: 300px;
   font-size: 17px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 2px;
   word-spacing: 4px;
   outline: none;
@@ -64,19 +64,16 @@ footer {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
-
-  /* border: transparent; */
   border-radius: 10px;
-  /* background-color: rgb(35, 62, 8); */
   background-color: var(--red);
   color: var(--white);
+  height: 46px;
+  width: 70px;
 }
 
 #searchBtn:hover {
-  height: 46px;
-  width: 70px;
   font-size: 19px;
 }
 
@@ -85,6 +82,67 @@ footer {
   top: 90%;
   right: 2%;
   color: var(--icon);
+}
+
+/* 탭박스 css */
+.tabBox {
+  margin: auto;
+  margin-top: 3%;
+  width: 90%;
+}
+
+.navBox {
+  margin: auto;
+  margin-top: 5%;
+  background-color: black;
+  width: 40%;
+  height: 60px;
+  border: none;
+  border-radius: 20px;
+}
+
+#tabButtonNav {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.tabButton {
+  background-color: black;
+  width: 150px;
+  height: 40px;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.tabButton:hover {
+  color: antiquewhite;
+  font-weight: 800;
+}
+.tabButton:active {
+  color: gray;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.tabPage {
+  margin: 0px;
+  background-color: white;
+  width: 100%;
+  height: 400px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow-x: scroll;
 }
 
 .cardsWrap {
@@ -102,14 +160,12 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* 넘어감 카드 1개 보여줬다가 4개 보여줫다가*/
   flex-wrap: wrap;
   min-height: 500px;
 }
 
 .card {
   background-color: var(--white);
-  /*풀 일때 카드 4개로*/
   width: 19.3%;
   min-width: 300px;
   height: 800px;
@@ -117,8 +173,7 @@ footer {
   padding: 1%;
   border: 1px solid;
   border-radius: 10px;
-  /* font-family: "Gugi", sans-serif; */
-  font-family: "Gowun Batang", serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 17px;
   font-weight: 700;
 }
@@ -152,7 +207,7 @@ img {
   align-items: center;
   font-size: 30px;
 
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 2px;
   word-spacing: 4px;
 }
@@ -173,7 +228,7 @@ img {
   padding: 0.8%;
   margin-top: 20px;
   font-size: 18px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
 }
 
@@ -187,7 +242,7 @@ img {
   letter-spacing: 4px;
   word-spacing: 4px;
   font-size: 40px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
 }
 
 .slideTitle {

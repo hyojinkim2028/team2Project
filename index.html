@@ -16,22 +16,28 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
+    <!-- 각 css 파일 연결 -->
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/swiper.css" />
+    <!-- 각 스크립트 파일 연결 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="./main.js"></script>
+    <script type="module" src="./src/search.js"></script>
     <script type="module" src="./src/swiper.js"></script>
+    <script defer src="./src/genreTap.js"></script>
   </head>
+
   <body>
+
     <header>
       <h1>Collection of Top rated Movies</h1>
     </header>
 
     <main>
+      <!-- 검색창 -->
       <div class="searchContainer">
-        <!-- 페이지 로드되자마자 커서 오도록 autofocus설정 -->
         <input
           id="searchInput"
           type="text"
@@ -40,47 +46,136 @@
         />
         <button id="searchBtn">검색</button>
       </div>
-      <!-- Slider main container -->
+
+      <!-- 인기영화 탑10 -->
       <swiper-container>
         <div #swiperRef="" class="swiper mySwiper">
           <h4 class="slideTitle">인기 영화 top 10</h4>
           <button class="slideMore more">more</button>
           <div class="swiper-wrapper">
-            <!-- <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div> -->
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
       </swiper-container>
+
+
+      <!-- 명작 탑10 -->
       <swiper-container>
         <div #swiperRef="" class="swiper mySwiper">
           <h4 class="slideTitle">평점 높은 영화 top 10</h4>
           <button class="slideMore more">more</button>
           <div class="swiper-wrapper">
-            <!-- <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div> -->
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
       </swiper-container>
+
+
+      <!-- 장르별 탑10 -->
+      <!-- 장르별 탭이동 -->
+        <header class="navBox">
+          <nav id="tabButtonNav">
+            <button class="tabButton" data-tab-section="tabSection1">액션</button>
+            <button class="tabButton" data-tab-section="tabSection2">범죄</button>
+            <button class="tabButton" data-tab-section="tabSection3">로맨스</button>
+            <button class="tabButton" data-tab-section="tabSection4">판타지</button>
+            <button class="tabButton" data-tab-section="tabSection5">코미디</button>
+          </nav>
+        </header>
+  
+          <!--  탭1 -->
+          <section id="tabSection1" class="tabSection">
+              <swiper-container>
+              <div #swiperRef="" class="swiper mySwiper">
+                <h4 class="slideTitle">장르별 top 10</h4>
+                <button class="more slideMore">more</button>
+                <div id="section1" class="swiper-wrapper">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+            </swiper-container>
+          </section>
+
+          <!--  탭2 -->
+          <section id="tabSection2" class="tabSection" hidden>
+            <swiper-container>
+              <div #swiperRef="" class="swiper mySwiper">
+                <h4 class="slideTitle">장르별 top 10</h4>
+                <button class="more slideMore">more</button>
+                <div id="section2" class="swiper-wrapper">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </swiper-container>
+          </section>
+
+          <!--  탭3 -->
+          <section id="tabSection3" class="tabSection" hidden>
+            <swiper-container>
+              <div #swiperRef="" class="swiper mySwiper">
+                <h4 class="slideTitle">장르별 top 10</h4>
+                <button class="more slideMore">more</button>
+                <div id="section3" class="swiper-wrapper">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </swiper-container>
+          </section>
+
+          <!--  탭4 -->
+          <section id="tabSection4" class="tabSection" hidden>
+            <swiper-container>
+              <div #swiperRef="" class="swiper mySwiper">
+                <h4 class="slideTitle">장르별 top 10</h4>
+                <button class="more slideMore">more</button>
+                <div id="section4" class="swiper-wrapper">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </swiper-container>
+          </section>
+
+          <!--  탭5 -->
+          <section id="tabSection5" class="tabSection" hidden>
+            <swiper-container>
+              <div #swiperRef="" class="swiper mySwiper">
+                <h4 class="slideTitle">장르별 top 10</h4>
+                <button class="more slideMore">more</button>
+                <div id="section5" class="swiper-wrapper">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-scrollbar"></div>
+              </div>
+            </swiper-container>
+          </section>
     </main>
 
-    <!-- <div class="upIconWarp">
+    <!-- 위로가기 아이콘 -->
+    <div class="upIconWarp">
       <i class="fa-regular fa-circle-up fa-2xl"></i>
-    </div> -->
+    </div>
+  
+  </div>
 
-    <div></div>
-
+    <!-- 하단 팀 싸인 -->
     <footer>
       <div>
-        <span id="footerText">Made By .</span>
-        <span id="footerName">유은지</span>
+        <span id="footerText">Project By .</span>
+        <span id="footerName">team 2</span>
       </div>
-      <p>Junior Back-end Developer</p>
+      <p>유은지, 고병옥, 김효진, 하정현, 이상권</p>
     </footer>
+  </main>
+
   </body>
 </html>
