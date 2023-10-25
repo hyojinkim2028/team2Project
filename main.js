@@ -17,16 +17,19 @@ function urlAdr(num, what) {
 //높은 평점순 데이터 가져오기
 let datas = await getData(urlAdr(num, "top_rated"));
 let total = datas.total_pages;
-datasRepeat(datas.results, { sort: "hightAvg" }, 1);
+datasRepeat(datas.results, { sort: "hightAvg" }, 1, 10);
 
 //인기영화 데이터 가져오기.
 let popularDatas = await getData(urlAdr(num, "popular"));
-datasRepeat(popularDatas.results, { sort: "popular" }, 0);
+datasRepeat(popularDatas.results, { sort: "popular" }, 0, 10);
 
-console.log(swiperWrapper[1]);
-function datasRepeat(data, sortType, index) {
+//인기영화 리스트 데이터
+// datasRepeat(popularDatas.results, { sort: "popularList" }, 0, 20);
+
+console.log(swiperWrapper[0]);
+function datasRepeat(data, sortType, index, many) {
   temp = "";
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < many; i++) {
     if (i < 3) {
       Object.assign(data[i], { king: "👑" }, sortType);
     } else {
@@ -37,10 +40,10 @@ function datasRepeat(data, sortType, index) {
   }
   console.log(temp);
 
-  // if (sortType.sort === "popular") {
+  // if (sortType.sort === "popularList") {
+  // return (cardContainer.innerHTML += temp);
+  // } else if (sortType.sort === "hightAvg" || sortType.sort === "popular") {
   return (swiperWrapper[index].innerHTML += temp);
-  // } else if (sortType.sort === "hightAvg") {
-  //   return (cardContainer.innerHTML += temp);
   // }
 }
 
