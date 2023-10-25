@@ -4,7 +4,7 @@ import { searchStart } from "./src/search.js";
 import { clickShow } from "./src/go.js";
 
 let cardContainer = document.querySelector(".cardContainer");
-let swiperWrapper = document.querySelectorAll(".swiper-wrapper");
+let swiperWrapper = document.querySelector(".swiper-wrapper");
 let isSearch = false;
 let num = 1;
 let temp = ""; //temp가 undefined 되는거 해결
@@ -23,10 +23,6 @@ datasRepeat(datas.results, { sort: "hightAvg" }, 1, 10);
 let popularDatas = await getData(urlAdr(num, "popular"));
 datasRepeat(popularDatas.results, { sort: "popular" }, 0, 10);
 
-//인기영화 리스트 데이터
-// datasRepeat(popularDatas.results, { sort: "popularList" }, 0, 20);
-
-console.log(swiperWrapper[0]);
 function datasRepeat(data, sortType, index, many) {
   temp = "";
   for (let i = 0; i < many; i++) {
@@ -39,12 +35,9 @@ function datasRepeat(data, sortType, index, many) {
     temp += appendFunc(data[i]);
   }
   console.log(temp);
-
-  // if (sortType.sort === "popularList") {
-  // return (cardContainer.innerHTML += temp);
-  // } else if (sortType.sort === "hightAvg" || sortType.sort === "popular") {
+  // console.log(swiperWrapper);
+  // console.log(document.querySelectorAll(".swiper-wrapper")[0]);
   return (swiperWrapper[index].innerHTML += temp);
-  // }
 }
 
 //more버튼 누르면  more 함수 실행
