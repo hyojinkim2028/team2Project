@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
 
 header {
   background-color: var(--black);
@@ -15,7 +15,7 @@ header {
 
   letter-spacing: 2px;
   word-spacing: 4px;
-  font-family: "Playfair Display", serif;
+  font-family: 'Playfair Display', serif;
 }
 
 main {
@@ -33,7 +33,7 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 1px;
   word-spacing: 2px;
   font-size: 20px;
@@ -53,7 +53,7 @@ footer {
   height: 35px;
   width: 300px;
   font-size: 17px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 2px;
   word-spacing: 4px;
   outline: none;
@@ -64,7 +64,7 @@ footer {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
 
   /* border: transparent; */
@@ -86,6 +86,55 @@ footer {
   right: 2%;
   color: var(--icon);
 }
+
+/* 탭박스 css */
+.tabBox {
+  margin: auto;
+  margin-top: 3%;
+  width: 90%;
+}
+
+.navBox {
+  margin: auto;
+  margin-top: 3%;
+  background-color: white;
+  width: 40%;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+}
+
+#tabButtonNav {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.tabButton {
+  background-color: white;
+  width: 150px;
+  height: 40px;
+  border: none;
+}
+
+.tabPage {
+  background-color: white;
+  width: 100%;
+  height: 400px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  overflow-x: scroll;
+  /* overflow-y: hidden; */
+}
+/*  */
 
 .cardsWrap {
   background-color: var(--black);
@@ -118,7 +167,7 @@ footer {
   border: 1px solid;
   border-radius: 10px;
   /* font-family: "Gugi", sans-serif; */
-  font-family: "Gowun Batang", serif;
+  font-family: 'Gowun Batang', serif;
   font-size: 17px;
   font-weight: 700;
 }
@@ -152,7 +201,7 @@ img {
   align-items: center;
   font-size: 30px;
 
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 2px;
   word-spacing: 4px;
 }
@@ -173,7 +222,7 @@ img {
   padding: 0.8%;
   margin-top: 20px;
   font-size: 18px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
 }
 
@@ -187,7 +236,7 @@ img {
   letter-spacing: 4px;
   word-spacing: 4px;
   font-size: 40px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
 }
 
 .slideTitle {
