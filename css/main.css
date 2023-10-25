@@ -66,17 +66,14 @@ footer {
   font-size: 18px;
   font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
-
-  /* border: transparent; */
   border-radius: 10px;
-  /* background-color: rgb(35, 62, 8); */
   background-color: var(--red);
   color: var(--white);
+  height: 46px;
+  width: 70px;
 }
 
 #searchBtn:hover {
-  height: 46px;
-  width: 70px;
   font-size: 19px;
 }
 
@@ -96,16 +93,16 @@ footer {
 
 .navBox {
   margin: auto;
-  margin-top: 3%;
-  background-color: white;
+  margin-top: 5%;
+  background-color: black;
   width: 40%;
-  height: 40px;
+  height: 60px;
   border: none;
   border-radius: 20px;
 }
 
 #tabButtonNav {
-  background-color: white;
+  background-color: black;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -116,13 +113,27 @@ footer {
 }
 
 .tabButton {
-  background-color: white;
+  background-color: black;
   width: 150px;
   height: 40px;
   border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.tabButton:hover {
+  color: antiquewhite;
+  font-weight: 800;
+}
+.tabButton:active {
+  color: gray;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .tabPage {
+  margin: 0px;
   background-color: white;
   width: 100%;
   height: 400px;
@@ -132,9 +143,7 @@ footer {
   align-items: flex-start;
   align-content: flex-start;
   overflow-x: scroll;
-  /* overflow-y: hidden; */
 }
-/*  */
 
 .cardsWrap {
   background-color: var(--black);
@@ -151,14 +160,12 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /* 넘어감 카드 1개 보여줬다가 4개 보여줫다가*/
   flex-wrap: wrap;
   min-height: 500px;
 }
 
 .card {
   background-color: var(--white);
-  /*풀 일때 카드 4개로*/
   width: 19.3%;
   min-width: 300px;
   height: 800px;
@@ -166,7 +173,6 @@ footer {
   padding: 1%;
   border: 1px solid;
   border-radius: 10px;
-  /* font-family: "Gugi", sans-serif; */
   font-family: 'Gowun Batang', serif;
   font-size: 17px;
   font-weight: 700;
