@@ -24,11 +24,16 @@ datasRepeat(popularDatas.results, { sort: "popular" });
 
 function datasRepeat(data, sortType) {
   for (let i = 0; i < data.length; i++) {
-    Object.assign(data[i], sortType);
-    console.log(data[i]);
+    if (i < 3) {
+      Object.assign(data[i], { king: "👑" }, sortType);
+    } else {
+      Object.assign(data[i], sortType);
+      console.log(data[i]);
+    }
     temp += appendFunc(data[i]);
   }
   // console.log(temp);
+
   if (sortType.sort === "popular") {
     return (document.querySelector(".swiper-wrapper").innerHTML += temp);
   } else if (sortType.sort === "hightAvg") {

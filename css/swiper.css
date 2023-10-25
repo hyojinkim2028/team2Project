@@ -2,16 +2,23 @@
   width: 90%;
   height: 100%;
   position: relative;
+  background-color: var(--black);
+  padding: 2%;
+  margin: 2%;
+  border-radius: 20px;
 }
 
+.swiper-wrapper {
+  background-color: var(--black);
+  margin: 2%;
+}
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  /* background: var(--black); */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 20%; */
+  /* margin: 1%; */
 }
 
 .swiper-slide img {
@@ -22,16 +29,58 @@
 }
 
 .swiper-button-next {
-  background: url(/godiva/img/common/next.png) no-repeat;
-  background-size: 50% auto;
   background-position: center;
+  color: aquamarine;
+  /* width: 35px;
+  height: 35[x]; */
+  /* background-color: rgb(0, 0, 0); */
+  border-radius: 50%;
+  /* float: right; */
 }
 
 .swiper-button-prev {
   background: url(/godiva/img/common/prev.png) no-repeat;
+  color: aquamarine;
+  border-radius: 50%;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  display: none;
+.slideCard {
+  background-color: var(--white);
+  /*풀 일때 카드 4개로*/
+  width: 15.3%;
+  min-width: 200px;
+  height: 450px;
+  margin: 1%;
+  padding: 2%;
+  border: 1px solid;
+  border-radius: 10px;
+  /* font-family: "Gugi", sans-serif; */
+  font-family: "Gowun Batang", serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.slideCard img {
+  max-width: 250px;
+  max-height: 350px;
+  min-width: 200px;
+  min-height: 350px;
+  object-fit: cover;
+}
+
+.slideCard .title {
+  font-size: 18px;
+}
+
+.slideCard .releasDate,
+.slideCard .avg {
+  font-size: 13px;
+  margin-top: 120%;
+}
+
+.slideCard .avg {
+  font-weight: bolder;
+
+  margin-right: 6%;
+  padding-right: 6%;
 }

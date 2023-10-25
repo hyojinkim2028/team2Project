@@ -188,3 +188,9 @@ img {
   font-size: 40px;
   font-family: "Gugi", sans-serif;
 }
+
+.slideTitle {
+  color: var(--white);
+  font-size: 25px;
+  margin-left: 4%;
+}
