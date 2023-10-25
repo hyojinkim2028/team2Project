@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+
+
+
+
+/* 동영상 */
+.video { 
+  margin: 50px 350px 50px 350px;  
+}
+
+
+.wrap {
+  padding:15px; 
+  letter-spacing:-0.5px;
+  
+}
+
+/* 동영상 */
+.tabMenu {
+  position:relative;
+  
+  
+}
+
+/* 탭버튼 줄 */
+.tabMenu .list {
+  overflow:hidden;
+  
+  background-color: rgb(52, 236, 175);
+}
+
+/* 탭버튼주변  */
+.tabMenu .list li {
+  float:left; 
+  margin-right:14px;
+  
+  
+  background-color: rgb(228, 24, 235);
+}
+
+/* 탭버튼 */
+.tabMenu .list .btn {
+  font-size:13px;
+  margin: auto;
+  margin-top: 3%;
+  background-color: rgb(98, 247, 13);
+}
+
+/* 내용칸 */
+.tabMenu .list .cont {
+  display:none; 
+  position:absolute; 
+  top:25px; 
+  left:0; 
+  background:#555; 
+  color:#fff; 
+  text-align:center; 
+  width:250px; 
+  height:100px; 
+  line-height:100px;
+}
+
+/* 선택된 탭버튼 */
+.tabMenu .list li.isOn .btn {
+  font-weight:bold; 
+  color:rgb(247, 21, 21);
+}
+
+/* 동영상 */
+.tabMenu .list li.isOn .cont {
+  display:block;
+}
+
+
