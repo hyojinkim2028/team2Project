@@ -36,8 +36,6 @@ fetch(
   .then((response) => response.json())
   .then((response) =>
     response.results.slice(0, 10).forEach((data, index) => {
-      // 조회해온 데이터 각각 배열에 푸쉬
-
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -78,8 +76,6 @@ fetch(
   .then((response) => response.json())
   .then((response) =>
     response.results.slice(0, 10).forEach((data, index) => {
-      // 조회해온 데이터 각각 배열에 푸쉬
-
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -120,8 +116,6 @@ fetch(
   .then((response) => response.json())
   .then((response) =>
     response.results.slice(0, 10).forEach((data, index) => {
-      // 조회해온 데이터 각각 배열에 푸쉬
-
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -162,8 +156,6 @@ fetch(
   .then((response) => response.json())
   .then((response) =>
     response.results.slice(0, 10).forEach((data, index) => {
-      // 조회해온 데이터 각각 배열에 푸쉬
-
       // 영화 아이디
       let id = data.id
       // 영화제목
@@ -204,8 +196,6 @@ fetch(
   .then((response) => response.json())
   .then((response) =>
     response.results.slice(0, 10).forEach((data, index) => {
-      // 조회해온 데이터 각각 배열에 푸쉬
-
       // 영화 아이디
       let id = data.id
       // 영화제목
