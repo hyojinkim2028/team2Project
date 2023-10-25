@@ -38,31 +38,34 @@ function datasRepeat(data, sortType, index, many) {
   }
 }
 
-//검색 버튼 누르면 인풋값 가져오는 함수 실행
-document
-  .querySelector("#searchBtn")
-  .addEventListener("click", async function () {
-    temp = "";
-    cardContainer.innerHTML = "";
-    num = 1;
-    isSearch = true;
+// //검색 버튼 누르면 인풋값 가져오는 함수 실행
+// document
+//   .querySelector("#searchBtn")
+//   .addEventListener("click", async function () {
+//     console.log('클릭')
+//     //검색버튼을 누르면, list.html 페이지로 넘어가고 입력값을 쿼리스트링으로 주기,
+//     //주소에 있는 입력값에 해당하는 데이터 불러와서 붙여주고,
+//     temp = "";
+//     cardContainer.innerHTML = "";
+//     num = 1;
+//     isSearch = true;
 
-    return await searchStart();
-  });
+//     return await searchStart();
+//   });
 
-//엔터키 입력하면 인풋값 가져오는 함수 실행
-document
-  .querySelector("#searchInput")
-  .addEventListener("keypress", async function (e) {
-    if (e.keyCode == 13 || e.which == 13) {
-      temp = "";
-      cardContainer.innerHTML = "";
-      num = 1;
-      isSearch = true;
+// //엔터키 입력하면 인풋값 가져오는 함수 실행
+// document
+//   .querySelector("#searchInput")
+//   .addEventListener("keypress", async function (e) {
+//     if (e.keyCode == 13 || e.which == 13) {
+//       temp = "";
+//       cardContainer.innerHTML = "";
+//       num = 1;
+//       isSearch = true;
 
-      return await searchStart();
-    }
-  });
+//       return await searchStart();
+//     }
+//   });
 
 //카드 누르면 아이디 값 보여주고, 해당 페이지로 이동
 document

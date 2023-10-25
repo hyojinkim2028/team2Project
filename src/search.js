@@ -4,7 +4,7 @@ import { getData } from "./getData.js";
 //인풋값 가져오는 함수
 async function getInput() {
   let inputVal = document.querySelector("input").value;
-
+  console.log(inputVal);
   //인풋 없으면 검색어 입력하라고 알러트
   if (!inputVal) {
     return alert("검색어를 입력하세요");
@@ -23,7 +23,9 @@ async function makeSearchUrl(inputVal, num) {
 
 //데이터 가져와서 붙여주기
 async function searchStart() {
+  console.log("서치");
   let url = await getInput();
+  console.log(url);
   let searchData = await getData(url);
   // let searchTotal = searchData.total_pages;
   if (searchData.results.length === 0) {
