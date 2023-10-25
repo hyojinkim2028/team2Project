@@ -4,9 +4,11 @@ import { searchStart } from "./src/search.js";
 import { clickShow } from "./src/go.js";
 
 let cardContainer = document.querySelector(".cardContainer");
+let swiperWrapper = document.querySelectorAll(".swiper-wrapper");
 let isSearch = false;
 let num = 1;
 let temp = ""; //temp가 undefined 되는거 해결
+let tempSwiper = "";
 
 function urlAdr(num, what) {
   return `https://api.themoviedb.org/3/movie/${what}?language=ko-KR&page=${num}`;
@@ -15,34 +17,35 @@ function urlAdr(num, what) {
 //높은 평점순 데이터 가져오기
 let datas = await getData(urlAdr(num, "top_rated"));
 let total = datas.total_pages;
-// datasRepeat(datas.results, {sort: "hightAvg"});
+datasRepeat(datas.results, { sort: "hightAvg" }, 1);
 
 //인기영화 데이터 가져오기.
 let popularDatas = await getData(urlAdr(num, "popular"));
+datasRepeat(popularDatas.results, { sort: "popular" }, 0);
 
-datasRepeat(popularDatas.results, { sort: "popular" });
-
-function datasRepeat(data, sortType) {
-  for (let i = 0; i < data.length; i++) {
+console.log(swiperWrapper[1]);
+function datasRepeat(data, sortType, index) {
+  temp = "";
+  for (let i = 0; i < 10; i++) {
     if (i < 3) {
       Object.assign(data[i], { king: "👑" }, sortType);
     } else {
       Object.assign(data[i], sortType);
-      console.log(data[i]);
+      // console.log(data[i]);
     }
     temp += appendFunc(data[i]);
   }
-  // console.log(temp);
+  console.log(temp);
 
-  if (sortType.sort === "popular") {
-    return (document.querySelector(".swiper-wrapper").innerHTML += temp);
-  } else if (sortType.sort === "hightAvg") {
-    return (cardContainer.innerHTML += temp);
-  }
+  // if (sortType.sort === "popular") {
+  return (swiperWrapper[index].innerHTML += temp);
+  // } else if (sortType.sort === "hightAvg") {
+  //   return (cardContainer.innerHTML += temp);
+  // }
 }
 
 //more버튼 누르면  more 함수 실행
-document.querySelector("#more").addEventListener("click", () => more());
+// document.querySelector("#more").addEventListener("click", () => more());
 
 //추가 데이터 가져와서 붙여주기.
 async function more() {

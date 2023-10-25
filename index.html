@@ -44,7 +44,7 @@
       <swiper-container></swiper-container>
         <div #swiperRef="" class="swiper mySwiper">
           <h4 class = "slideTitle">인기 영화 top 10</h4>
-          <button class = "more slideMore">more</button>
+          <button class = "slideMore more">more</button>
           <div class="swiper-wrapper">
             <!-- <div class="swiper-slide">Slide 1</div>
             <div class="swiper-slide">Slide 2</div>
@@ -54,19 +54,32 @@
           <div class="swiper-button-prev"></div>
         </div>
       </swiper-container>
-      <div class="cardsWrap">
+      <swiper-container></swiper-container>
+        <div #swiperRef="" class="swiper mySwiper">
+          <h4 class = "slideTitle">평점 높은 영화 top 10</h4>
+          <button class = "slideMore more">more</button>
+          <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div> -->
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </swiper-container>
+      <!-- <div class="cardsWrap">
         <div class="cardContainer">
-          <!-- <div class="card">
+          <div class="card">
             <img class="poster" src="" alt="" />
             <h5 class="title"></h5>
             <span class="comment"></span>
             <p class="avg"></p>
-          </div> -->
+          </div>
         </div>
         <div id="moreWrap">
           <button id="more">more</button>
         </div>
-      </div>
+      </div> -->
     </main>
 
     <div class="upIconWarp">

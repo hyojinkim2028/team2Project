@@ -164,7 +164,8 @@ img {
   flex-direction: column;
 }
 
-#more {
+#more,
+.more {
   background-color: var(--red);
   color: var(--white);
   border-radius: 10px;
