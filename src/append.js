@@ -18,36 +18,33 @@ function appendFunc(data) {
 
 //받은 데이터로 html파일 보내주기.
 function temping(src, data) {
-  console.log(data.king);
   let length = 130;
   if (data.overview.length > length) {
     data.overview = data.overview.substr(0, length - 1) + "...";
   }
-  if (data.sort === "popular") {
-    if (data.king === "👑") {
-      return `
+  if (data.king === "👑") {
+    return `
+      <div class="swiper-slide">
+        <div class="slideCard" id = ${data.id}>
+          <img class="poster" src="${src}" alt="" />
+          <h5 class="title">${data.king}  ${data.title} </h5>
+          <span class="avg">평점 ${data.vote_average}</span>
+          <span class="releasDate">${data.release_date}</span>
+        </div>
+      </div>
+    `;
+  } else if (data.king !== "👑") {
+    return `
         <div class="swiper-slide">
           <div class="slideCard" id = ${data.id}>
             <img class="poster" src="${src}" alt="" />
-            <h5 class="title">${data.king}  ${data.title}</h5>
+            <h5 class="title">${data.title}</h5>
             <span class="avg">평점 ${data.vote_average}</span>
             <span class="releasDate">${data.release_date}</span>
           </div>
         </div>
       `;
-    } else {
-      return `
-          <div class="swiper-slide">
-            <div class="slideCard" id = ${data.id}>
-              <img class="poster" src="${src}" alt="" />
-              <h5 class="title">${data.title}</h5>
-              <span class="avg">평점 ${data.vote_average}</span>
-              <span class="releasDate">${data.release_date}</span>
-            </div>
-          </div>
-        `;
-    }
-  } else if (data.sort === "hightAvg") {
+  } else if (data.sort === "populerList") {
     return `
         <div class="card" id = ${data.id}>
           <img class="poster" src="${src}" alt="" />

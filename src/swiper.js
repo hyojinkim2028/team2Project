@@ -1,5 +1,7 @@
-let swipers = new Swiper('.mySwiper', {
-  direction: 'horizontal', // 가로 슬라이드 설정
+
+let swipers = new Swiper(".mySwiper", {
+  direction: "horizontal", // 가로 슬라이드 설정
+
   slidesPerView: 5, // 동시에 보여줄 슬라이드 갯수
   spaceBetween: 1, // 슬라이드간 간격
   // centeredSlides: true, //false로 바꾸면 왼쪽부터 순차적으로 슬라이드가 들어섬
@@ -15,9 +17,18 @@ let swipers = new Swiper('.mySwiper', {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
+
 })
 document.querySelector('.slideMore').addEventListener('click', function () {
   console.log(e.target.prev())
   // window.location.href = `"populerList.html?ID=" +${num}`
   window.location.href = 'populerList.html'
 })
+
+});
+document.querySelector(".slideMore").addEventListener("click", function () {
+  console.log(e.target.prev());
+  // window.location.href = `"populerList.html?ID=" +${num}`
+  window.location.href = "populerList.html";
+});
+

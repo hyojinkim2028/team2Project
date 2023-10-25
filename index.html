@@ -41,17 +41,26 @@
         />
         <button id="searchBtn">검색</button>
       </div>
+
       <!-- 인기영화 탑10 -->
       <swiper-container>
         <div #swiperRef="" class="swiper mySwiper">
           <h4 class="slideTitle">인기 영화 top 10</h4>
           <button class="more slideMore">more</button>
+
+      <!-- Slider main container -->
+      <swiper-container>
+        <div #swiperRef="" class="swiper mySwiper">
+          <h4 class="slideTitle">인기 영화 top 10</h4>
+          <button class="slideMore more">more</button>
+
           <div class="swiper-wrapper">
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
       </swiper-container>
+
 
       <!-- 명작 탑10 -->
       <div class="cardsWrap">
@@ -62,11 +71,8 @@
         </div>
       </div>
 
-      <!--  -->
-
       <!-- 장르별 탑10 -->
       <!-- 장르별 탭이동 -->
-        <!-- 탭이동 -->
         <header class="navBox">
           <nav id="tabButtonNav">
             <button class="tabButton" data-tab-section="tabSection1">액션</button>
@@ -155,13 +161,33 @@
        <!--  -->
         
 
+      <swiper-container>
+        <div #swiperRef="" class="swiper mySwiper">
+          <h4 class="slideTitle">평점 높은 영화 top 10</h4>
+          <button class="slideMore more">more</button>
+          <div class="swiper-wrapper">
+            <!-- <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div> -->
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </swiper-container>
+    </main>
 
-      
 
-    <div class="upIconWarp">
+    <!-- <div class="upIconWarp">
       <i class="fa-regular fa-circle-up fa-2xl"></i>
+
     </div>
     
+
+    </div> -->
+
+    <div></div>
+
+
     <footer>
       <div>
         <span id="footerText">Made By .</span>
