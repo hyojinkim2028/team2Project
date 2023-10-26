@@ -1,6 +1,7 @@
 // 탭버튼 구성
 const tabItem = document.querySelectorAll('.tab_item')
 const tabInner = document.querySelectorAll('.tab_inner')
+let paramId = ''
 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener('click', function () {
@@ -17,7 +18,6 @@ tabItem.forEach((tab, idx) => {
   })
 })
 
-
 // 상세정보
 
 // 임시 tmdb 키
@@ -33,34 +33,46 @@ const options = {
 document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
-  const id = urlParams.get('id')
+  paramId = urlParams.get('id')
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options)
+  if (paramId == null) {
+    paramId = 122
+  }
+
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
     .then((response) => response.json())
     .then((response) => setDetailInfo(response))
     .catch((err) => console.error(err))
 
   fetch(
-    `https://api.themoviedb.org/3/movie/${id}/credits?language=ko-KR`,
+    `https://api.themoviedb.org/3/movie/${paramId}/credits?language=ko-KR`,
     options
   )
     .then((response) => response.json())
     .then((response) => searchDirector(response))
     .catch((err) => console.error(err))
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}/images`, options)
     .then((response) => response.json())
     .then((response) => searchImage(response))
     .catch((err) => console.error(err))
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}/release_dates`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}/release_dates`, options)
     .then((response) => response.json())
     .then((response) => searchRelease(response))
+    .catch((err) => console.error(err))
+
+  //비디오 api
+  fetch(
+    `https://api.themoviedb.org/3/movie/${paramId}/videos?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => console.log(response.results[0].key)) // key값 불러오는 거
     .catch((err) => console.error(err))
 })
 
 function setDetailInfo(response) {
-  console.log(response)
   document.querySelector('#detailInfo .title').innerHTML = response.title
   document.querySelector('#detailInfo .releaseDate').innerHTML =
     response.release_date
@@ -78,19 +90,16 @@ function setDetailInfo(response) {
 }
 
 function searchDirector(response) {
-  console.log(response)
   // jsonData.crew.filter(({job})=> job ==='Director')
   let directorArray = response.crew.filter((e) => {
     return e.job === 'Director'
   })
-  console.log(directorArray)
   document.querySelector('#detailInfo .director').innerHTML =
     directorArray[0].name
 
   let actorArray = response.cast.filter((e) => {
     return e.known_for_department === 'Acting'
   })
-  console.log(actorArray)
   document.querySelector('#detailInfo .actor').innerHTML = actorArray.reduce(
     (str, e, idx) => {
       return (str += e.name + (actorArray.length != idx + 1 ? ', ' : ''))
@@ -100,7 +109,6 @@ function searchDirector(response) {
 }
 
 function searchImage(response) {
-  console.log(response)
   let tempHtml = ''
   response.backdrops.forEach((e) => {
     tempHtml += `
@@ -112,10 +120,7 @@ function searchImage(response) {
 }
 
 function searchRelease(response) {
-  console.log(response)
-
   let releaseArray = response.results
-  console.log(releaseArray)
 
   let release = response.results.find((result) => {
     if (result.iso_3166_1 === 'KR') {
@@ -124,19 +129,25 @@ function searchRelease(response) {
   })
   // let release;
 
-  // 한국 없으면 최상단 배열값
+  // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
-    release = releaseArray[0]
+    // release = releaseArray[0]
+    //
+    document.querySelector('#detailInfo .certification').innerHTML =
+      '권장연령미확인'
+  } else {
+    document.querySelector('#detailInfo .certification').innerHTML =
+      release.release_dates[0].certification
   }
 
-  document.querySelector('#detailInfo .certification').innerHTML =
-    release.release_dates[0].certification
+  // document.querySelector('#detailInfo .certification').innerHTML =
+  //   release.release_dates[0].certification
 
   // 음.. 이부분 이슈가 있어서 그냥............
-  searchCertification(
-    release.iso_3166_1,
-    release.release_dates[0].certification
-  )
+  // searchCertification(
+  //   release.iso_3166_1,
+  //   release.release_dates[0].certification
+  // )
 }
 
 function searchCertification(iso, cert) {
@@ -174,95 +185,79 @@ function minToHourMin(min) {
   return hour > 0 ? hour + '시간 ' + leftMin + '분' : leftMin + '분'
 }
 
-
 // 관람평
 
-
+//
 //테스트용 버튼
-const btn = document.querySelector("#btn")
+const btn = document.querySelector('#btn')
 
 //버튼 클릭시 생성될 영역
-const section = document.querySelector("section");
-
+const section = document.querySelector('section')
 
 //ul태그
-const reviewUl = document.getElementById("ul");
-
+const reviewUl = document.getElementById('ul')
 
 //form 태그에 정보 담아서 localstorage에 저장
-const reviewSubmit = document.querySelector(".reviewSubmit");
-const reviewInput = document.querySelector(".reviewSubmit input");
-
+const reviewSubmit = document.querySelector('.reviewSubmit')
+const reviewInput = document.querySelector('.reviewSubmit input')
 
 // loginReviewPoint도 만들어야됨
 
-const login = document.querySelector("#login");
-const loginId = document.querySelector("#login .loginId");
-const loginPwd = document.querySelector("#login .loginPwd");
-const loginReview = document.querySelector("#login .review");
+const login = document.querySelector('#login')
+const loginId = document.querySelector('#login .loginId')
+const loginPwd = document.querySelector('#login .loginPwd')
+const loginReview = document.querySelector('#login .review')
 
 //클래스에 들어갈 변수 모음
-let id = "";
-let pwd = "";
-let reviewPoint = "";
-let review = "";
+let id = ''
+let pwd = ''
+let reviewPoint = ''
+let review = ''
 
-let count = 0;
-
+let count = 0
 
 function onLogin(event) {
   //event.preventDefault();
-  
-  id = loginId.value;
-  pwd = loginPwd.value;
-  review = loginReview.value;
-  //window.localStorage.setItem(id, pwd);  
-  
 
-  //버튼 누르면 count++ 
-  // count 값을 기준으로 반복문 
-  
-  let user1 = new Review(id, pwd, review);
+  id = loginId.value
+  pwd = loginPwd.value
+  review = loginReview.value
+  //window.localStorage.setItem(id, pwd);
 
-  window.localStorage.setItem(pwd, user1);
-  console.log(user1);
+  //버튼 누르면 count++
+  // count 값을 기준으로 반복문
+
+  let user1 = new Review(id, pwd, review)
+
+  window.localStorage.setItem(pwd, user1)
+  console.log(user1)
 }
 
-login.addEventListener("submit", onLogin);
+login.addEventListener('submit', onLogin)
 
 class Review {
-    constructor(id, pwd, reviewPoint, review) {
-        this.id = id;
-        this.pwd = pwd;
-        this.reviewPoint = reviewPoint;
-        this.review = review;
-
-    }
+  constructor(id, pwd, reviewPoint, review) {
+    this.id = id
+    this.pwd = pwd
+    this.reviewPoint = reviewPoint
+    this.review = review
+  }
 }
 
 //local Storage에 있는 데이터 불러서 li로 만들기
 //여기부터 만들면 됨
-function drawReview(){
-    let drawTemp ="";
-    
-    for(let i=0; i<window.localStorage.length; i++){
-        drawTemp = 
-        `<li>
+function drawReview() {
+  let drawTemp = ''
+
+  for (let i = 0; i < window.localStorage.length; i++) {
+    drawTemp = `<li>
         <div>
         <li>
         `
-        
-    }
+  }
 
-    // localStorage.setItem(,JSON.stringify());
-
-    
-
+  // localStorage.setItem(,JSON.stringify());
 }
-
-
-
-
 
 //localStorage를 사용하기 위해선 변수가 필요할 듯?
 // 아이디 비번 (key, value)로 저장
@@ -274,5 +269,4 @@ function drawReview(){
 // if(x ===null ) 이면
 // const y = JSON.stringify([]);
 // localStorage.setItem("x", y);
-// 이런식으로? 
-
+// 이런식으로?
