@@ -1,7 +1,7 @@
 // 탭버튼 구성
 const tabItem = document.querySelectorAll('.tab_item')
 const tabInner = document.querySelectorAll('.tab_inner')
-let paramId = '';
+let paramId = ''
 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener('click', function () {
@@ -17,7 +17,6 @@ tabItem.forEach((tab, idx) => {
     tabInner[idx].classList.add('active')
   })
 })
-
 
 // 상세정보
 
@@ -36,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const urlParams = new URLSearchParams(window.location.search)
   paramId = urlParams.get('id')
 
-  if(paramId == null){
-    paramId = 122;
+  if (paramId == null) {
+    paramId = 122
   }
 
   fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
@@ -63,7 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => searchRelease(response))
     .catch((err) => console.error(err))
 
-
+  //비디오 api
+  fetch(
+    `https://api.themoviedb.org/3/movie/${paramId}/videos?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => console.log(response.results[0].key)) // key값 불러오는 거
+    .catch((err) => console.error(err))
 })
 
 function setDetailInfo(response) {
@@ -126,11 +132,12 @@ function searchRelease(response) {
   // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
     // release = releaseArray[0]
-    // 
-    document.querySelector('#detailInfo .certification').innerHTML = '권장연령미확인'
-  }
-  else{
-    document.querySelector('#detailInfo .certification').innerHTML = release.release_dates[0].certification;
+    //
+    document.querySelector('#detailInfo .certification').innerHTML =
+      '권장연령미확인'
+  } else {
+    document.querySelector('#detailInfo .certification').innerHTML =
+      release.release_dates[0].certification
   }
 
   // document.querySelector('#detailInfo .certification').innerHTML =
@@ -141,7 +148,6 @@ function searchRelease(response) {
   //   release.iso_3166_1,
   //   release.release_dates[0].certification
   // )
-
 }
 
 function searchCertification(iso, cert) {
@@ -179,95 +185,79 @@ function minToHourMin(min) {
   return hour > 0 ? hour + '시간 ' + leftMin + '분' : leftMin + '분'
 }
 
-
 // 관람평
 
-
+//
 //테스트용 버튼
-const btn = document.querySelector("#btn")
+const btn = document.querySelector('#btn')
 
 //버튼 클릭시 생성될 영역
-const section = document.querySelector("section");
-
+const section = document.querySelector('section')
 
 //ul태그
-const reviewUl = document.getElementById("ul");
-
+const reviewUl = document.getElementById('ul')
 
 //form 태그에 정보 담아서 localstorage에 저장
-const reviewSubmit = document.querySelector(".reviewSubmit");
-const reviewInput = document.querySelector(".reviewSubmit input");
-
+const reviewSubmit = document.querySelector('.reviewSubmit')
+const reviewInput = document.querySelector('.reviewSubmit input')
 
 // loginReviewPoint도 만들어야됨
 
-const login = document.querySelector("#login");
-const loginId = document.querySelector("#login .loginId");
-const loginPwd = document.querySelector("#login .loginPwd");
-const loginReview = document.querySelector("#login .review");
+const login = document.querySelector('#login')
+const loginId = document.querySelector('#login .loginId')
+const loginPwd = document.querySelector('#login .loginPwd')
+const loginReview = document.querySelector('#login .review')
 
 //클래스에 들어갈 변수 모음
-let id = "";
-let pwd = "";
-let reviewPoint = "";
-let review = "";
+let id = ''
+let pwd = ''
+let reviewPoint = ''
+let review = ''
 
-let count = 0;
-
+let count = 0
 
 function onLogin(event) {
   //event.preventDefault();
 
-  id = loginId.value;
-  pwd = loginPwd.value;
-  review = loginReview.value;
-  //window.localStorage.setItem(id, pwd);  
+  id = loginId.value
+  pwd = loginPwd.value
+  review = loginReview.value
+  //window.localStorage.setItem(id, pwd);
 
+  //버튼 누르면 count++
+  // count 값을 기준으로 반복문
 
-  //버튼 누르면 count++ 
-  // count 값을 기준으로 반복문 
+  let user1 = new Review(id, pwd, review)
 
-  let user1 = new Review(id, pwd, review);
-
-  window.localStorage.setItem(pwd, user1);
-  console.log(user1);
+  window.localStorage.setItem(pwd, user1)
+  console.log(user1)
 }
 
-login.addEventListener("submit", onLogin);
+login.addEventListener('submit', onLogin)
 
 class Review {
   constructor(id, pwd, reviewPoint, review) {
-    this.id = id;
-    this.pwd = pwd;
-    this.reviewPoint = reviewPoint;
-    this.review = review;
-
+    this.id = id
+    this.pwd = pwd
+    this.reviewPoint = reviewPoint
+    this.review = review
   }
 }
 
 //local Storage에 있는 데이터 불러서 li로 만들기
 //여기부터 만들면 됨
 function drawReview() {
-  let drawTemp = "";
+  let drawTemp = ''
 
   for (let i = 0; i < window.localStorage.length; i++) {
-    drawTemp =
-      `<li>
+    drawTemp = `<li>
         <div>
         <li>
         `
-
   }
 
   // localStorage.setItem(,JSON.stringify());
-
-
-
 }
-
-
-
-
 
 //localStorage를 사용하기 위해선 변수가 필요할 듯?
 // 아이디 비번 (key, value)로 저장
@@ -279,5 +269,4 @@ function drawReview() {
 // if(x ===null ) 이면
 // const y = JSON.stringify([]);
 // localStorage.setItem("x", y);
-// 이런식으로? 
-
+// 이런식으로?
