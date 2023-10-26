@@ -31,7 +31,7 @@ let count = 0;
 
 
 function onLogin(event) {
-  //event.preventDefault();
+  //event.preventDefault();\
   
   id = loginId.value;
   pwd = loginPwd.value;
@@ -44,8 +44,7 @@ function onLogin(event) {
   
   let user1 = new Review(id, pwd, review);
 
-  window.localStorage.setItem(pwd, user1);
-  console.log(user1);
+  window.localStorage.setItem(pwd, JSON.stringify(user1));
 }
 
 login.addEventListener("submit", onLogin);
@@ -64,22 +63,36 @@ class Review {
 //여기부터 만들면 됨
 function drawReview(){
     let drawTemp ="";
-    
+    console.log(window.localStorage);
+    a = window.localStorage.getItem(33);
+    console.log(a);
+    console.log(JSON.parse(a));
+    console.log(typeof a);
+
+    temp1 = new Review('aa', 'bb', 'cc');
+    console.log(typeof temp1);
+    console.log(temp1);
+
     for(let i=0; i<window.localStorage.length; i++){
-        drawTemp = 
+        let usr = JSON.parse( window.localStorage.getItem( window.localStorage.key(i) ) );
+        console.log(usr);
+
+
+        drawTemp += 
         `<li>
-        <div>
+            ${usr.id}
         <li>
         `
         
     }
+    document.getElementById('reviewList').append(drawTemp);
 
     // localStorage.setItem(,JSON.stringify());
 
     
 
 }
-
+drawReview();
 
 
 
