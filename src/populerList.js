@@ -61,16 +61,7 @@ async function searchStart2(url) {
   let searchData = await getData(url);
   console.log(searchData);
   let total = searchData.total_pages;
-  // datasRepeat(searchDatas.results, { sort: "top_rated" }, 1, 10);
-  // let searchTotal = searchData.total_pages;
-  // if (searchData.results.length === 0) {
-  //   document.querySelector(
-  //     ".cardContainer"
-  //   ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`;
-  //   document.querySelector("#more").classList.add("hide");
-  // } else {
   moreHide(searchData, num);
-  // }
 }
 
 //페이지에 따라 더보기 버튼
@@ -102,7 +93,7 @@ async function more(e) {
 
   let genreId = e.target.nextElementSibling.firstElementChild.id;
   console.log(genreId);
-  window.location.href = `./populerList.html?id =more& genre = ${genreId}`;
+  window.location.href = `./populerList.html?id=more&genre=${genreId}`;
 }
 // function urlAdr(num, what) {
 //   return `https://api.themoviedb.org/3/movie/${what}?language=ko-KR&page=${num}`;
