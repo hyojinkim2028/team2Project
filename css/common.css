@@ -1,0 +1,27 @@
+:root {
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --red: brown;
+  --icon: rgb(212, 214, 214);
+  --yellow: rgb(223, 177, 27);
+}
+
+h1 {
+  font-size: 60px;
+}
+
+span {
+  /* margin: 40px 0px 0px 10px; */
+  line-height: 140%;
+  word-spacing: 1.5px;
+  letter-spacing: 0.5px;
+}
+
+p {
+  margin: 10px 10px 10px 10px;
+}
+
+h5 {
+  margin: 15px 0px 10px 10px;
+  line-height: 140%;
+}
