@@ -1,56 +1,34 @@
 import { getData } from "./getData.js";
-// import { appendFunc } from "./append.js";
-// import { searchStart } from "./search.js";
 import { clickShow } from "./go.js";
 
 let cardContainer = document.querySelector(".cardContainer");
-let swiperWrapper = document.querySelectorAll(".swiper-wrapper");
 let isSearch = false;
 let num = 1;
 let temp = ""; //temp가 undefined 되는거 해결
-let tempSwiper = "";
+
 //장르값 모아둔 배열.
 let genreArr = ["", "28", "80", "10749", "14", "35"];
+
 //주소의 쿼리스트링 가져오기
 let urlVal = window.location.search;
-console.log(urlVal);
 
-//한글로 검색시에 urlVal 의 길이는 길어져서 길이로 장르list와 검색list를 구분할 수 없다.
-
-//주소에서 장르값 가져오기
+//주소에서 장르값 가져오기  __한글로 검색시 장르list와 검색list를 구분할 수 없어서 조건 변경.
 if (urlVal.includes("id=more&genre")) {
   let genreVal = urlVal.replace("?id=more&genre=", "");
-  // console.log(decodeURI(genreVal));
-  // console.log(genreArr.includes(genreVal));
-  //효진님 슬라이드 쪽에서 더보기 눌렀다면 이거 실행
+  //탭 슬라이드 쪽에서 더보기 눌렀다면 이거 실행
   if (genreArr.includes(genreVal)) {
-    console.log("포함");
     let genreurl = await genreUrlAdrHJ(genreVal, num);
-    console.log(genreurl);
     await searchStart2(genreurl);
   }
   //인기영화, 평점높은영화 더보기 눌렀다면 이거 실행
   else {
-    //인기영화 에서 더보기 눌렀다면
-    if (genreVal === "popular") {
-      console.log(decodeURI(genreVal));
-      let genreurl = await makeGenreUrl(genreVal, num);
-      console.log(genreurl);
-      await searchStart2(genreurl);
-    } //평점높은영화 에서 더보기 눌렀다면
-    else if (genreVal === "top_rated") {
-      console.log(decodeURI(genreVal));
-      let genreurl = await makeGenreUrl(genreVal, num);
-      console.log(genreurl);
-      await searchStart2(genreurl);
-    }
+    let genreurl = await makeGenreUrl(genreVal, num);
+    await searchStart2(genreurl);
   }
 } //주소에서 검색값 가져오기
 else {
   let inputVal = urlVal.replace("?val=", "");
-  console.log(decodeURI(inputVal));
   let inputurl = await makeSearchUrl(inputVal, num);
-  console.log(inputurl);
   await searchStart2(inputurl);
 }
 
@@ -71,9 +49,7 @@ async function makeSearchUrl(inputVal, num) {
 
 //검색 데이터 가져와서 붙여쥐기
 async function searchStart() {
-  console.log("서치");
-  let url = await getInput();
-  console.log(url);
+  let url = await getInput(num);
   let searchData = await getData(url);
   let searchTotal = searchData.total_pages;
   if (searchData.results.length === 0) {
@@ -86,8 +62,8 @@ async function searchStart() {
   }
 }
 
-//인풋값 가져오는 함수
-async function getInput() {
+//인풋값 가져와서 그에 해당하는 주소 가져온다.
+async function getInput(num) {
   let inputVal = document.querySelector("input").value;
   console.log(inputVal);
   //인풋 없으면 검색어 입력하라고 알러트
@@ -99,7 +75,6 @@ async function getInput() {
 }
 //데이터 가져와서 붙여주기
 async function searchStart2(url) {
-  console.log(url);
   let searchData = await getData(url);
   let total = searchData.total_pages;
   moreHide(searchData, num);
@@ -127,15 +102,37 @@ function moreHide(searchData, num) {
 //more버튼 누르면  more 함수 실행
 document.querySelector("#more").addEventListener("click", () => more());
 
-//more함수
-async function more(e) {
+async function more() {
+  let inputVal = document.querySelector("input").value;
   num++;
-  // let await makeGenreUrl(genreVal, num);
+  console.log(num);
+  //검색한 데이터 더보기
+  if (inputVal) {
+    let url = await makeSearchUrl(inputVal, num);
+    let data = await getData(url);
+    console.log(url);
+    return datasRepeat(data.results);
+  } //main에서 list로 넘어와서 데이터들 더보기
+  else {
+    let genreVal = urlVal.replace("?id=more&genre=", "");
+    //장르별 슬라이드 데이터 더 가져오기.
+    if (genreArr.includes(genreVal)) {
+      let url = await genreUrlAdrHJ(genreVal, num);
+      let data = await getData(url);
+      return datasRepeat(data.results);
+    } //인기영화, 최고평점영화 중 해당하는거 데이터 더 가져오기.
+    else {
+      let url = await makeGenreUrl(genreVal, num);
+      let data = await getData(url);
+      return datasRepeat(data.results);
+    }
+  }
 
-  let genreId = e.target.nextElementSibling.firstElementChild.id;
-  console.log(genreId);
-  window.location.href = `./populerList.html?id=more&genre=${genreId}`;
+  // if (!inputVal) {
+  //   alert("검색어를 입력하세요");
+  // }
 }
+
 // function urlAdr(num, what) {
 //   return `https://api.themoviedb.org/3/movie/${what}?language=ko-KR&page=${num}`;
 // }
@@ -147,11 +144,6 @@ async function more(e) {
 function datasRepeat(data) {
   temp = "";
   for (let i = 0; i < data.length; i++) {
-    if (i < 3) {
-      Object.assign(data[i], { king: "👑" });
-    } else {
-      Object.assign(data[i]);
-    }
     temp += appendFunc(data[i]);
   }
 
@@ -230,5 +222,8 @@ document
 document.querySelector(".upIconWarp").addEventListener("click", function () {
   window.scrollTo(0, 0);
 });
+
+//more버튼 누르면  more 함수 실행
+// document.querySelector("#more").addEventListener("click", () => listMore());
 
 export { cardContainer, num, temp, isSearch, datasRepeat };
