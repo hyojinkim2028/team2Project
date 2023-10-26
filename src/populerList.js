@@ -9,22 +9,28 @@ let isSearch = false;
 let num = 1;
 let temp = ""; //temp가 undefined 되는거 해결
 let tempSwiper = "";
-
+//장르값 모아둔 배열.
+let genreArr = ["", "28", "80", "10749", "14", "35"];
 //주소의 쿼리스트링 가져오기
 let urlVal = window.location.search;
 console.log(urlVal);
-console.log(urlVal.length);
 
 //한글로 검색시에 urlVal 의 길이는 길어져서 길이로 장르list와 검색list를 구분할 수 없다.
 
 //주소에서 장르값 가져오기
 if (urlVal.includes("id=more&genre")) {
   let genreVal = urlVal.replace("?id=more&genre=", "");
-  console.log(decodeURI(genreVal));
-  let genreurl = await makeGenreUrl(genreVal, num);
-  console.log(genreurl);
-
-  await searchStart2(genreurl);
+  // console.log(decodeURI(genreVal));
+  if (genreArr.indexOf(genreVal)) {
+    console.log("포함");
+    let genreurl = await genreUrlAdrHJ(genreVal, num);
+    console.log(genreurl);
+    await searchStart2(genreurl);
+  } else {
+    let genreurl = await makeGenreUrl(genreVal, num);
+    console.log(genreurl);
+    await searchStart2(genreurl);
+  }
 } //주소에서 검색값 가져오기
 else {
   let inputVal = urlVal.replace("?val=", "");
@@ -34,7 +40,12 @@ else {
   await searchStart2(inputurl);
 }
 
-//해당장르가 담긴 데이터주소 가져오기
+//효진님 슬라이드 데이터__ 해당장르가 담긴 데이터주소 가져오기
+async function genreUrlAdrHJ(genreNum, num) {
+  return `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=ko&page=${num}&sort_by=popularity.desc&with_genres=${genreNum}`;
+}
+
+//은지 슬라이드 데이터 __ 해당장르가 담긴 데이터주소 가져오기
 async function makeGenreUrl(genreVal, num) {
   return `https://api.themoviedb.org/3/movie/${genreVal}?language=ko-KR&page=${num}`;
 }

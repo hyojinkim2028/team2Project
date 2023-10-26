@@ -50,12 +50,11 @@ for (let i = 0; i < more.length; i++) {
   more[i].addEventListener("click", (e) => slideMore(e));
 }
 
-//main에서 장르별 더보기 눌렀을때 해당 장르 아이디값으로 주고 이동
+//main에서 더보기 눌렀을때 해당 장르 아이디값으로 주고 이동
 async function slideMore(e) {
   let genreId = e.target.nextElementSibling.firstElementChild.id;
   console.log(genreId);
-  console.log(e.target);
-  // window.location.href = `./populerList.html?id=more&genre=${genreId}`;
+  window.location.href = `./populerList.html?id=more&genre=${genreId}`;
 }
 
 //카드 누르면 아이디 값 보여주고, 해당 페이지로 이동
