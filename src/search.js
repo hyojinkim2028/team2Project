@@ -1,61 +1,58 @@
-import { num, datasRepeat } from "../main.js";
-import { getData } from "./getData.js";
+import { num, datasRepeat } from '../main.js'
+import { getData } from './getData.js'
 
 //인풋값을 가져오는 2가지경우 _ 1. main 에서 리스트로 넘어갈때. 2.리스트에서 검색할때
 
 //인풋값 가져오는 함수
 async function getInput() {
-  let inputVal = document.querySelector("input").value;
-  console.log(inputVal);
+  let inputVal = document.querySelector('input').value
+  console.log(inputVal)
   //인풋 없으면 검색어 입력하라고 알러트
   if (!inputVal) {
-    return alert("검색어를 입력하세요");
+    return alert('검색어를 입력하세요')
   }
 
-  return makeSearchUrl(inputVal, num);
+  return makeSearchUrl(inputVal, num)
 }
 
 //검색결과 담긴 데이터 주소 가져오기.
 async function makeSearchUrl(inputVal, num) {
-  inputVal = encodeURI(inputVal);
+  inputVal = encodeURI(inputVal)
 
-  let searchUrl = `https://api.themoviedb.org/3/search/movie?query=${inputVal}&include_adult=false&language=ko-KR&page=${num}`;
-  return searchUrl;
+  let searchUrl = `https://api.themoviedb.org/3/search/movie?query=${inputVal}&include_adult=false&language=ko-KR&page=${num}`
+  return searchUrl
 }
 
 //데이터 가져와서 붙여주기
 async function searchStart() {
-  console.log("서치");
-  let url = await getInput();
-  console.log(url);
-  let searchData = await getData(url);
-  // let searchTotal = searchData.total_pages;
+  let url = await getInput()
+  let searchData = await getData(url)
   if (searchData.results.length === 0) {
     document.querySelector(
-      ".cardContainer"
-    ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`;
-    document.querySelector("#more").classList.add("hide");
+      '.cardContainer'
+    ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`
+    document.querySelector('#more').classList.add('hide')
   } else {
-    moreHide(searchData, num);
+    moreHide(searchData, num)
   }
 }
 
 function moreHide(searchData, num) {
-  console.log(searchData.total_pages, "페이지 중에서 ", num);
-  let searchTotal = searchData.total_pages;
+  console.log(searchData.total_pages, '페이지 중에서 ', num)
+  let searchTotal = searchData.total_pages
   if (searchTotal === 1 && num === 1) {
-    document.querySelector("#more").classList.add("hide");
+    document.querySelector('#more').classList.add('hide')
   } //검색 결과의 마지막 페이지 일때.
   else if (num === searchTotal && num > 1) {
-    document.querySelector("#more").classList.add("hide");
+    document.querySelector('#more').classList.add('hide')
   } //현재 페이지는 1, 전체 페이지는 1보다 크면
   else if (num === 1 && num < searchTotal) {
-    document.querySelector("#more").classList.remove("hide");
+    document.querySelector('#more').classList.remove('hide')
   } //현재 페이지는 1이 아닌ㄴ데, 전체 페이지는 현재 페이지보다 크면
   else if (num < searchTotal && num !== 1) {
-    document.querySelector("#more").classList.remove("hide");
+    document.querySelector('#more').classList.remove('hide')
   }
-  datasRepeat(searchData.results);
+  datasRepeat(searchData.results)
 }
 
-export { getInput, searchStart, moreHide };
+export { getInput, searchStart, moreHide }

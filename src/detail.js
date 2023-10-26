@@ -30,6 +30,7 @@ const options = {
   },
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
@@ -131,6 +132,7 @@ function searchDirector(response) {
     ''
   )
 }
+
 
 function searchImage(response) {
   let tempHtml = ''
@@ -243,13 +245,11 @@ function onLogin(event) {
 
   const urlParams = new URLSearchParams(window.location.search)
   const movieId = urlParams.get('id')
-  
+
   let newReview = new Review(movieId, id, pwd, reviewPoint, review)
 
   let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
-  console.log({ oldReviews })
 
-  
   window.localStorage.setItem(
     'reviews',
     JSON.stringify([...oldReviews, newReview])
@@ -270,11 +270,23 @@ class Review {
 
 //새로고침을 해주는게 있으면 좋지 않을까?
 function drawReview() {
+
+  const urlParams = new URLSearchParams(window.location.search)
+  paramId = urlParams.get('id')
+  console.log(paramId);
+
   let drawTemp = ''
   reviewUl.innerHTML += drawTemp
 
   let oldReview = window.localStorage.getItem('reviews')
-  console.log({ oldReview })
+  console.log(Object.values({ oldReview }))
+
+  let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
+  
+  let view = oldReviews.filter(data => data.movieId == paramId );
+  console.log(view);
+  
+
 
   // for (let i = 0; i < window.localStorage.length; i++) {
   //   let usr = JSON.parse(

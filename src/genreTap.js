@@ -37,8 +37,8 @@ function genreUrlAdr(genreNum) {
 }
 
 let num = 1;
+
 //받은 url로 getData 함수 가동해서 데이터 추출
-// let datas = await getData(genreUrlAdr(28));
 
 // 액션탭
 fetch(genreUrlAdr(28), options)
