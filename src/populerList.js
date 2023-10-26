@@ -21,15 +21,27 @@ console.log(urlVal);
 if (urlVal.includes("id=more&genre")) {
   let genreVal = urlVal.replace("?id=more&genre=", "");
   // console.log(decodeURI(genreVal));
-  if (genreArr.indexOf(genreVal)) {
+  // console.log(genreArr.includes(genreVal));
+  //효진님 슬라이드 쪽에서 더보기 눌렀다면 이거 실행
+  if (genreArr.includes(genreVal)) {
     console.log("포함");
     let genreurl = await genreUrlAdrHJ(genreVal, num);
     console.log(genreurl);
     await searchStart2(genreurl);
-  } else {
-    let genreurl = await makeGenreUrl(genreVal, num);
-    console.log(genreurl);
-    await searchStart2(genreurl);
+  }
+  //인기영화, 평점높은영화 더보기 눌렀다면 이거 실행
+  else {
+    if (genreVal === "popular") {
+      console.log(decodeURI(genreVal));
+      let genreurl = await makeGenreUrl(genreVal, num);
+      console.log(genreurl);
+      await searchStart2(genreurl);
+    } else if (genreVal === "top_rated") {
+      console.log(decodeURI(genreVal));
+      let genreurl = await makeGenreUrl(genreVal, num);
+      console.log(genreurl);
+      await searchStart2(genreurl);
+    }
   }
 } //주소에서 검색값 가져오기
 else {
