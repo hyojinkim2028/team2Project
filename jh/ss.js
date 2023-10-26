@@ -4,6 +4,11 @@ const btn = document.querySelector("#btn")
 //버튼 클릭시 생성될 영역
 const section = document.querySelector("section");
 
+
+//ul태그
+const reviewUl = document.getElementById("ul");
+
+
 //form 태그에 정보 담아서 localstorage에 저장
 const reviewSubmit = document.querySelector(".reviewSubmit");
 const reviewInput = document.querySelector(".reviewSubmit input");
@@ -56,8 +61,24 @@ class Review {
 }
 
 //local Storage에 있는 데이터 불러서 li로 만들기
+//여기부터 만들면 됨
+function drawReview(){
+    let drawTemp ="";
+    
+    for(let i=0; i<window.localStorage.length; i++){
+        drawTemp = 
+        `<li>
+        <div>
+        <li>
+        `
+        
+    }
 
+    // localStorage.setItem(,JSON.stringify());
 
+    
+
+}
 
 
 
