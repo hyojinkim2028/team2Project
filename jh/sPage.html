@@ -15,16 +15,33 @@
         <button id="btn">관람평</button>
     </div>
     <section>
-        <form id="login">
-            아이디 <input class ="loginId" type="text" />
-            비번 <input class = "loginPwd" type="text" />
-            <textarea class = "review" placeholder="감상평"></textarea>
-            <button type="submit" >저장</button>
-          </form>
-        <ul id="reviewList">
-            <div>test</div>
-
-        </ul>
+           <!-- 관람평 -->
+           <div class="tab_inner">
+            <section>
+              <form id="login">
+                <div>닉네임 <input class="loginId" type="text" placeholder="닉네임을 입력해주세요" /> 
+                <span>비번  <input class="loginPwd" type="text" placeholder="비밀번호를 입력해주세요"/></span>
+                <select name="reviewPoint" class="reviewPoint">관람포인트 선택
+                    <option value="영상미">영상미</option>
+                    <option value="연기">연기</option>
+                    <option value="음악">음악</option>
+                    <option value="스토리">스토리</option>
+                </select>
+                <textarea class="review" placeholder="감상평을 입력해주세요"></textarea>
+                <button type="submit">저장</button>
+              </div>
+              </form>
+              <div>닉네임 감상 포인트 감상평 수정 </div>
+              <ul id="reviewList">
+                <div id="userId"></div>
+                <div id="userPwd"></div>
+                <div id="userReview"></div>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </body>
 
     </section>
 </body>
