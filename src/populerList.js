@@ -12,14 +12,15 @@ let tempSwiper = "";
 
 //주소의 쿼리스트링 가져오기
 let urlVal = window.location.search;
-console.log(urlVal.length);
+console.log(urlVal);
 
 //주소에서 장르값 가져오기
-if (urlVal.length > 30) {
-  let genreVal = urlVal.replace("?id%20=more&%20genre%20=%20", "");
+if (urlVal.length > 20) {
+  let genreVal = urlVal.replace("?id=more&genre=", "");
   console.log(decodeURI(genreVal));
   let genreurl = await makeGenreUrl(genreVal, num);
   console.log(genreurl);
+
   await searchStart2(genreurl);
 } //주소에서 검색값 가져오기
 else {
@@ -42,9 +43,11 @@ async function makeSearchUrl(inputVal, num) {
 
 //데이터 가져와서 붙여주기
 async function searchStart2(url) {
-  let datas = await getData(url);
-  let total = datas.total_pages;
-  datasRepeat(datas.results, { sort: "top_rated" }, 1, 10);
+  console.log(url);
+  let searchData = await getData(url);
+  console.log(searchData);
+  let total = searchData.total_pages;
+  // datasRepeat(searchDatas.results, { sort: "top_rated" }, 1, 10);
   // let searchTotal = searchData.total_pages;
   // if (searchData.results.length === 0) {
   //   document.querySelector(
