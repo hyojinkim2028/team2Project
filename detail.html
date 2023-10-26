@@ -1,171 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+    <script type="module" src="./src/detail.js"></script>
+  </head>
 
-  <script>
-    // 임시 tmdb 키
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZTIzYzhiYmQ5ZjQ0Yjg4NWRmMzNmMThhMzFiODI2YiIsInN1YiI6IjY1MmY3NTI3Y2FlZjJkMDExY2M3NjQwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Y2O9RbcGo7qPJ-yEOEqGlxpeVLpN8wEti5QxngyiAYo'
-      }
-    };
-
-    document.addEventListener('DOMContentLoaded', function () {
-      // 임시 url 파라메터 가져오는부분
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-
-
-
-
-      fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options)
-        .then(response => response.json())
-        .then(response => setDetailInfo(response))
-        .catch(err => console.error(err));
-
-      fetch(`https://api.themoviedb.org/3/movie/${id}/credits?language=ko-KR`, options)
-        .then(response => response.json())
-        .then(response => searchDirector(response))
-        .catch(err => console.error(err));
-
-      fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
-        .then(response => response.json())
-        .then(response => searchImage(response))
-        .catch(err => console.error(err));
-
-      fetch(`https://api.themoviedb.org/3/movie/${id}/release_dates`, options)
-        .then(response => response.json())
-        .then(response => searchRelease(response))
-        .catch(err => console.error(err));
-
-
-    });
-
-    function setDetailInfo(response) {
-      console.log(response);
-      document.querySelector('#detailInfo .title').innerHTML = response.title;
-      document.querySelector('#detailInfo .releaseDate').innerHTML = response.release_date;
-      document.querySelector('#detailInfo .voteAverage').innerHTML = response.vote_average;
-      // document.querySelector('#detailInfo .meme').innerHTML = response.vote_average;
-      document.querySelector('#detailInfo .genres').innerHTML = response.genres.reduce((str, e, idx) => { return str += e.name + (response.genres.length != idx + 1 ? ', ' : ''); }, '');
-      document.querySelector('#detailInfo .runtime').innerHTML = minToHourMin(response.runtime);
-      document.querySelector('#detailInfo .overview').innerHTML = response.overview;
-
-    }
-
-    function searchDirector(response) {
-      console.log(response);
-      // jsonData.crew.filter(({job})=> job ==='Director')
-      let directorArray = response.crew.filter((e) => { return e.job === 'Director' });
-      console.log(directorArray);
-      document.querySelector('#detailInfo .director').innerHTML = directorArray[0].name;
-
-      let actorArray = response.cast.filter((e) => { return e.known_for_department === 'Acting' });
-      console.log(actorArray);
-      document.querySelector('#detailInfo .actor').innerHTML = actorArray.reduce((str, e, idx) => { return str += e.name + (actorArray.length != idx + 1 ? ', ' : ''); }, '');
-    }
-
-    function searchImage(response) {
-      console.log(response);
-      let tempHtml = '';
-      response.backdrops.forEach((e) => {
-        tempHtml += `
-          <img src="https://image.tmdb.org/t/p/w300/${e.file_path}">
-        `;
-      });
-
-      document.querySelector('#detailInfo .images').innerHTML = tempHtml;
-    }
-
-    function searchRelease(response) {
-      console.log(response);
-
-      let releaseArray = response.results;
-      console.log(releaseArray);
-
-      let release = response.results.find((result) => {
-        if (result.iso_3166_1 === 'KR') {
-          return true;
-        }
-      });
-      // let release;
-
-      // 한국 없으면 최상단 배열값
-      if (release === undefined) {
-        release = releaseArray[0];
-      }
-
-      document.querySelector('#detailInfo .certification').innerHTML = release.release_dates[0].certification;
-
-      // 음.. 이부분 이슈가 있어서 그냥............
-      searchCertification(release.iso_3166_1, release.release_dates[0].certification);
-    }
-
-    function searchCertification(iso, cert) {
-      fetch(`https://api.themoviedb.org/3/certification/movie/list`, options)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response.certifications[iso]);
-          //console.log(response.certifications[iso]);
-          console.log(iso, response);
-          
-          document.querySelector('#detailInfo .meaning').innerHTML = '권장연령미확인';
-
-          let certificationByIso = response.certifications[iso];
-          if (certificationByIso !== undefined) {
-            let certification = certificationByIso.find((e) => { if (e.certification === cert) { return true; } });
-            console.log(certification);
-            if (certification !== undefined) {
-              document.querySelector('#detailInfo .meaning').innerHTML = '(' + certification.meaning + ')';
-            }
-          }
-        })
-        .catch(err => console.error(err));
-    }
-
-    function minToHourMin(min) {
-      let hour = Math.floor(min / 60);
-      let leftMin = min % 60;
-
-      return hour > 0 ? (hour + '시간 ' + leftMin + '분') : (leftMin + '분');
-    }
-  </script>
-</head>
-
-<body>
-  <!-- 상세정보 -->
-  <div id="detailInfo">
-    <h2 class="title">제목</h2>
-    <div>
-      <p class="releaseDate">개봉일자</p>
-    </div>
-    <div>
-      <p class="voteAverage">영화평점</p>
-    </div>
-    <div>
-      <span class="certification">관람가</span><small class="meaning">설명</small> / <span class="genres">장르</span> / <span
-        class="runtime">상영시간</span>
-    </div>
-    <div>
-      <span class="director">감독</span> / <span class="actor">출연진</span>
-    </div>
-    <div>
-      <p class="overview">세부내용</p>
-    </div>
-    <div>
-      <div class="images">
-        사진들
+  <body>
+    <!--  동영상 style="background-color: black;" -->
+    <div class="video">
+      <div>
+        <iframe
+          id="youtubeFrame"
+          width="1189"
+          height="669"
+          src="https://www.youtube.com/embed/dKUEIGYfY7A"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
-  </div>
-  <!-- 상세정보 끝 -->
+    <!--  탭 -->
+    <div class="tab_menu">
+      <ul class="tab">
+        <li class="tab_item active">탭메뉴1</li>
+        <li class="tab_item">탭메뉴2</li>
+      </ul>
+      <div class="tab_inner_wrap">
+        <div class="tab_inner active">
+          <!-- 상세정보 -->
+          <div id="detailInfo">
+            <h2 class="title">제목</h2>
+            <div>
+              <p class="releaseDate">개봉일자</p>
+            </div>
+            <div>
+              <p class="voteAverage">영화평점</p>
+            </div>
+            <div>
+              <span class="certification">관람가</span
+              ><small class="meaning">설명</small> /
+              <span class="genres">장르</span> /
+              <span class="runtime">상영시간</span>
+            </div>
+            <div>
+              <span class="director">감독</span> /
+              <span class="actor">출연진</span>
+            </div>
+            <div>
+              <p class="overview">세부내용</p>
+            </div>
+            <div>
+              <div class="images">사진들</div>
+            </div>
+          </div>
+          <!-- 상세정보 끝 -->
+        </div>
 
-</body>
-
+        <!-- 관람평 -->
+        <div class="tab_inner">
+          <section>
+            <form id="login">
+              아이디 <input class="loginId" type="text" /> 비번
+              <input class="loginPwd" type="text" />
+              <textarea class="review" placeholder="감상평"></textarea>
+              <button type="submit">저장</button>
+            </form>
+            <ul id="reviewList">
+              <div>test</div>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
