@@ -1,17 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+    <script type="module" src="./src/detail.js"></script>
   </head>
+
   <body>
-    <script>
-      let url = window.location.search;
-      console.log(url);
-      let id = url.replace("?id%20=%20", "");
-      console.log(id);
-    </script>
+    <!--  동영상 style="background-color: black;" -->
+    <div class="video">
+      <div>
+        <iframe
+          id="youtubeFrame"
+          width="1189"
+          height="669"
+          src="https://www.youtube.com/embed/dKUEIGYfY7A"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+    <!--  탭 -->
+    <div class="tab_menu">
+      <ul class="tab">
+        <li class="tab_item active">탭메뉴1</li>
+        <li class="tab_item">탭메뉴2</li>
+      </ul>
+      <div class="tab_inner_wrap">
+        <div class="tab_inner active">
+          <!-- 상세정보 -->
+          <div id="detailInfo">
+            <h2 class="title">제목</h2>
+            <div>
+              <p class="releaseDate">개봉일자</p>
+            </div>
+            <div>
+              <p class="voteAverage">영화평점</p>
+            </div>
+            <div>
+              <span class="certification">관람가</span
+              ><small class="meaning">설명</small> /
+              <span class="genres">장르</span> /
+              <span class="runtime">상영시간</span>
+            </div>
+            <div>
+              <span class="director">감독</span> /
+              <span class="actor">출연진</span>
+            </div>
+            <div>
+              <p class="overview">세부내용</p>
+            </div>
+            <div>
+              <div class="images">사진들</div>
+            </div>
+          </div>
+          <!-- 상세정보 끝 -->
+        </div>
+
+        <!-- 관람평 -->
+        <div class="tab_inner">
+          <section>
+            <form id="login">
+              아이디 <input class="loginId" type="text" /> 비번
+              <input class="loginPwd" type="text" />
+              <textarea class="review" placeholder="감상평"></textarea>
+              <button type="submit">저장</button>
+            </form>
+            <ul id="reviewList">
+              <div>test</div>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
