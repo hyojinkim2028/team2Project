@@ -104,7 +104,7 @@
       document.querySelector('#detailInfo .certification').innerHTML = release.release_dates[0].certification;
 
       // 음.. 이부분 이슈가 있어서 그냥............
-      //searchCertification(release.iso_3166_1, release.release_dates[0].certification);
+      searchCertification(release.iso_3166_1, release.release_dates[0].certification);
     }
 
     function searchCertification(iso, cert) {
@@ -149,7 +149,7 @@
       <p class="voteAverage">영화평점</p>
     </div>
     <div>
-      <span class="certification">관람가</span><!-- <small class="meaning">설명</small>--> / <span class="genres">장르</span> / <span
+      <span class="certification">관람가</span><small class="meaning">설명</small> / <span class="genres">장르</span> / <span
         class="runtime">상영시간</span>
     </div>
     <div>
