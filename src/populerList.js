@@ -1,6 +1,6 @@
 import { getData } from "./getData.js";
 // import { appendFunc } from "./append.js";
-// import { searchStart, moreHide } from "./search.js";
+// import { searchStart } from "./search.js";
 import { clickShow } from "./go.js";
 
 let cardContainer = document.querySelector(".cardContainer");
@@ -31,12 +31,14 @@ if (urlVal.includes("id=more&genre")) {
   }
   //인기영화, 평점높은영화 더보기 눌렀다면 이거 실행
   else {
+    //인기영화 에서 더보기 눌렀다면
     if (genreVal === "popular") {
       console.log(decodeURI(genreVal));
       let genreurl = await makeGenreUrl(genreVal, num);
       console.log(genreurl);
       await searchStart2(genreurl);
-    } else if (genreVal === "top_rated") {
+    } //평점높은영화 에서 더보기 눌렀다면
+    else if (genreVal === "top_rated") {
       console.log(decodeURI(genreVal));
       let genreurl = await makeGenreUrl(genreVal, num);
       console.log(genreurl);
@@ -67,11 +69,38 @@ async function makeSearchUrl(inputVal, num) {
   return `https://api.themoviedb.org/3/search/movie?query=${inputVal}&include_adult=false&language=ko-KR&page=${num}`;
 }
 
+//검색 데이터 가져와서 붙여쥐기
+async function searchStart() {
+  console.log("서치");
+  let url = await getInput();
+  console.log(url);
+  let searchData = await getData(url);
+  let searchTotal = searchData.total_pages;
+  if (searchData.results.length === 0) {
+    document.querySelector(
+      ".cardContainer"
+    ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`;
+    document.querySelector("#more").classList.add("hide");
+  } else {
+    moreHide(searchData, num);
+  }
+}
+
+//인풋값 가져오는 함수
+async function getInput() {
+  let inputVal = document.querySelector("input").value;
+  console.log(inputVal);
+  //인풋 없으면 검색어 입력하라고 알러트
+  if (!inputVal) {
+    return alert("검색어를 입력하세요");
+  }
+
+  return makeSearchUrl(inputVal, num);
+}
 //데이터 가져와서 붙여주기
 async function searchStart2(url) {
   console.log(url);
   let searchData = await getData(url);
-  console.log(searchData);
   let total = searchData.total_pages;
   moreHide(searchData, num);
 }
@@ -118,7 +147,6 @@ async function more(e) {
 function datasRepeat(data) {
   temp = "";
   for (let i = 0; i < data.length; i++) {
-    console.log(data[i]);
     if (i < 3) {
       Object.assign(data[i], { king: "👑" });
     } else {
@@ -126,7 +154,6 @@ function datasRepeat(data) {
     }
     temp += appendFunc(data[i]);
   }
-  console.log(temp);
 
   return (cardContainer.innerHTML += temp);
 }
