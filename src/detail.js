@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const urlParams = new URLSearchParams(window.location.search)
   paramId = urlParams.get('id')
 
+  if(paramId == null){
+    paramId = 122;
+  }
+
   fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
     .then((response) => response.json())
     .then((response) => setDetailInfo(response))
@@ -58,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => response.json())
     .then((response) => searchRelease(response))
     .catch((err) => console.error(err))
+
+
 })
 
 function setDetailInfo(response) {
