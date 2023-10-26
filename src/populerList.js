@@ -1,7 +1,7 @@
 import { getData } from "./getData.js";
 // import { appendFunc } from "./append.js";
 // import { searchStart, moreHide } from "./search.js";
-// import { clickShow } from "./go.js";
+import { clickShow } from "./go.js";
 
 let cardContainer = document.querySelector(".cardContainer");
 let swiperWrapper = document.querySelectorAll(".swiper-wrapper");
@@ -198,5 +198,10 @@ document.querySelector(".logo").addEventListener("click", function () {
 document
   .querySelector(".cardContainer")
   .addEventListener("click", (e) => clickShow(e));
+
+//화살표 누르면 좌표 맨 위로
+document.querySelector(".upIconWarp").addEventListener("click", function () {
+  window.scrollTo(0, 0);
+});
 
 export { cardContainer, num, temp, isSearch, datasRepeat };
