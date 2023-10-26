@@ -13,9 +13,12 @@ let tempSwiper = "";
 //주소의 쿼리스트링 가져오기
 let urlVal = window.location.search;
 console.log(urlVal);
+console.log(urlVal.length);
+
+//한글로 검색시에 urlVal 의 길이는 길어져서 길이로 장르list와 검색list를 구분할 수 없다.
 
 //주소에서 장르값 가져오기
-if (urlVal.length > 20) {
+if (urlVal.includes("id=more&genre")) {
   let genreVal = urlVal.replace("?id=more&genre=", "");
   console.log(decodeURI(genreVal));
   let genreurl = await makeGenreUrl(genreVal, num);

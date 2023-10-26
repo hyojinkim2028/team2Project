@@ -54,7 +54,8 @@ for (let i = 0; i < more.length; i++) {
 async function slideMore(e) {
   let genreId = e.target.nextElementSibling.firstElementChild.id;
   console.log(genreId);
-  window.location.href = `./populerList.html?id=more&genre=${genreId}`;
+  console.log(e.target);
+  // window.location.href = `./populerList.html?id=more&genre=${genreId}`;
 }
 
 //카드 누르면 아이디 값 보여주고, 해당 페이지로 이동
@@ -63,7 +64,6 @@ for (let i = 0; i < swiperLength; i++) {
   document
     .querySelectorAll(".swiper-wrapper")
     [i].addEventListener("click", (e) => {
-      console.log("d");
       clickShow(e);
     });
 }
