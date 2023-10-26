@@ -50,7 +50,7 @@ for (let i = 0; i < more.length; i++) {
   more[i].addEventListener("click", (e) => slideMore(e));
 }
 
-//main에서 장르별 더보기 눌렀을때 해당 장르 아이디값으로 주고 이동
+//main에서 더보기 눌렀을때 해당 장르 아이디값으로 주고 이동
 async function slideMore(e) {
   let genreId = e.target.nextElementSibling.firstElementChild.id;
   console.log(genreId);
@@ -63,7 +63,6 @@ for (let i = 0; i < swiperLength; i++) {
   document
     .querySelectorAll(".swiper-wrapper")
     [i].addEventListener("click", (e) => {
-      console.log("d");
       clickShow(e);
     });
 }
