@@ -2,9 +2,7 @@
 async function clickShow(e) {
   let name = e.target.className;
   let parentName = e.target.parentNode.className;
-  let a = "http://172.30.1.89:5500/detail.html?id%20=%20926393";
-  let b = a.replace("http://172.30.1.89:5500/detail.html?id%20=%20", "");
-  console.log("추출한거=>", b);
+
   console.log("name=>", name);
   console.log("parentName=>", parentName);
   console.log(e.target.parentNode.id);
@@ -28,8 +26,8 @@ async function clickShow(e) {
 }
 
 // 클릭한 카드 상세 정보 페이지로 이동
-function locat(goto) {
-  window.location.href = `https://www.themoviedb.org/movie/${goto}?language=ko`;
-}
+// function locat(goto) {
+//   window.location.href = `https://www.themoviedb.org/movie/${goto}?language=ko`;
+// }
 
 export { clickShow };

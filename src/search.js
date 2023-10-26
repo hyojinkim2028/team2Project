@@ -1,6 +1,8 @@
 import { num, datasRepeat } from "../main.js";
 import { getData } from "./getData.js";
 
+//인풋값을 가져오는 2가지경우 _ 1. main 에서 리스트로 넘어갈때. 2.리스트에서 검색할때
+
 //인풋값 가져오는 함수
 async function getInput() {
   let inputVal = document.querySelector("input").value;
@@ -56,4 +58,4 @@ function moreHide(searchData, num) {
   datasRepeat(searchData.results);
 }
 
-export { getInput, searchStart };
+export { getInput, searchStart, moreHide };

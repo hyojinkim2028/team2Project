@@ -16,16 +16,14 @@ function urlAdr(num, what) {
 //높은 평점순 데이터 가져오기
 let datas = await getData(urlAdr(num, "top_rated"));
 let total = datas.total_pages;
-datasRepeat(datas.results, { sort: "hightAvg" }, 1, 10);
+datasRepeat(datas.results, { sort: "top_rated" }, 1, 10);
 
 //인기영화 데이터 가져오기.
 let popularDatas = await getData(urlAdr(num, "popular"));
 datasRepeat(popularDatas.results, { sort: "popular" }, 0, 10);
 
-//인기영화 리스트 데이터
-// datasRepeat(popularDatas.results, { sort: "popularList" }, 0, 20);
-
 console.log(swiperWrapper[0]);
+//데이터, 영화구분, 클래스인덱스, 몇개 가져올건지
 function datasRepeat(data, sortType, index, many) {
   temp = "";
   for (let i = 0; i < many; i++) {
@@ -44,21 +42,19 @@ function datasRepeat(data, sortType, index, many) {
 }
 
 //more버튼 누르면  more 함수 실행
-// document.querySelector('#more').addEventListener('click', () => more())
+// document.querySelector("#more").addEventListener("click", () => more());
 
-//추가 데이터 가져와서 붙여주기.
-async function more() {
-  if (!isSearch && num < total) {
-    num++;
-    temp = "";
-    let datas = await getData(urlAdr(num));
-    console.log(total, " 페이지 중 ", num);
-    datasRepeat(datas.results);
-  } else if (isSearch) {
-    num++;
-    temp = "";
-    await searchStart();
-  }
+//more버튼 누르면  more 함수 실행
+let more = document.querySelectorAll(".more");
+for (let i = 0; i < more.length; i++) {
+  more[i].addEventListener("click", (e) => slideMore(e));
+}
+
+//main에서 장르별 더보기 눌렀을때 해당 장르 아이디값으로 주고 이동
+async function slideMore(e) {
+  let genreId = e.target.nextElementSibling.firstElementChild.id;
+  console.log(genreId);
+  window.location.href = `./populerList.html?id =more& genre = ${genreId}`;
 }
 
 //카드 누르면 아이디 값 보여주고, 해당 페이지로 이동
@@ -89,9 +85,10 @@ document
     num = 1;
     isSearch = true;
     let inputVal = document.querySelector("input").value;
-    window.location.href = `./populerList.html?val=${val}`;
+    // inputVal = encodeURI(inputVal);
+    window.location.href = `./populerList.html?val=${inputVal}`;
 
-    return await searchStart();
+    // return await searchStart();
   });
 
 //엔터키 입력하면 인풋값 가져오는 함수 실행
@@ -103,8 +100,11 @@ document
       // cardContainer.innerHTML = "";
       num = 1;
       isSearch = true;
+      let inputVal = document.querySelector("input").value;
+      // inputVal = encodeURI(inputVal);
+      window.location.href = `./populerList.html?val=${inputVal}`;
 
-      return await searchStart();
+      // return await searchStart();
     }
   });
 

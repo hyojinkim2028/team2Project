@@ -18,13 +18,14 @@ function appendFunc(data) {
 
 //받은 데이터로 html파일 보내주기.
 function temping(src, data) {
+  console.log(data);
   let length = 130;
   if (data.overview.length > length) {
     data.overview = data.overview.substr(0, length - 1) + "...";
   }
   if (data.king === "👑") {
     return `
-      <div class="swiper-slide">
+      <div class="swiper-slide" id= ${data.sort}>
         <div class="slideCard" id = ${data.id}>
           <img class="poster" src="${src}" alt="" />
           <h5 class="title">${data.king}  ${data.title} </h5>
@@ -35,7 +36,7 @@ function temping(src, data) {
     `;
   } else if (data.king !== "👑") {
     return `
-        <div class="swiper-slide">
+        <div class="swiper-slide" id= ${data.sort}>
           <div class="slideCard" id = ${data.id}>
             <img class="poster" src="${src}" alt="" />
             <h5 class="title">${data.title}</h5>
