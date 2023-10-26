@@ -1,0 +1,55 @@
+
+/* 동영상 */
+.video { 
+  margin: 50px 350px 50px 350px;  
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.tab_menu {
+  width: 800px;
+  margin: 200px auto;
+}
+
+.tab {
+  display: flex;
+  gap: 30px;
+}
+
+.tab_item {
+  border: 1px solid rgb(78, 12, 12);
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.tab_inner_wrap {
+  margin-top: 20px;
+  background: rgb(65, 6, 15);
+  border-radius: 20px;
+}
+
+.tab_inner {
+  padding: 20px;
+  color: #fff;
+  font-size: 24px;
+  display: none;
+}
+
+.tab_item.active {
+  background: rgb(53, 2, 17);
+  color: #fff;
+}
+
+.tab_inner.active {
+  display: block;
+}
+
