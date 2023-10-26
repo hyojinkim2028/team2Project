@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
   paramId = urlParams.get('id')
-
+  // console.log('아이디',paramId)
   if (paramId == null) {
     paramId = 122
   }
@@ -68,11 +68,35 @@ document.addEventListener('DOMContentLoaded', function () {
     options
   )
     .then((response) => response.json())
-    .then((response) => console.log(response.results[0].key)) // key값 불러오는 거
+    .then((response) => {
+      document
+        .getElementById('youtubeFrame')
+        .setAttribute(
+          'src',
+          `https://www.youtube.com/embed/${response.results[0].key}`
+        )
+      console.log(response.results[0].key)
+    }) // key값 불러오는 거
     .catch((err) => console.error(err))
 })
 
+// function search() {
+//   var ifrm = document.getElementById("iframe");
+//   ifrm.src = "https://www.youtube.com/embed/" + response.results[0].key
+// }
+
+// const movie = await sendHttpRequest('GET', `https://api.themoviedb.org/3/movie/${data.id}/videos?language=en-US`)
+// console.log(movie.results[0].key)
+// const video = document.querySelector(".movie")
+// const text = document.createElement("iframe")
+// text.src="https://www.youtube.com/embed/" + response.results[0].key
+
+// iframe.location.href = "url" ;
+// document.frames("iframe").location.href = "url" ;
+// const iframe = document.querySelector('#iframe');
+
 function setDetailInfo(response) {
+  console.log(response)
   document.querySelector('#detailInfo .title').innerHTML = response.title
   document.querySelector('#detailInfo .releaseDate').innerHTML =
     response.release_date
@@ -187,7 +211,6 @@ function minToHourMin(min) {
 
 // 관람평
 
-//
 //테스트용 버튼
 const btn = document.querySelector('#btn')
 
