@@ -253,7 +253,7 @@ textarea {
   width: 200px;
 }
 
-#reviewList {
+.reviewList {
   /* margin: 20px; */
   background-color: black;
   width: 95%;

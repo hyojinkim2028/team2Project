@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/detail.css" />
-    <script type="module" src="./src/detail.js"></script>
+    <script defer src="./src/detail.js"></script>
   </head>
 
 <body>
@@ -117,11 +117,11 @@
       >
       </textarea>
     <br/>
-    <button class="submitBtn" type="submit">저장</button>
+    <button class="submitBtn" type="button">저장</button>
 
     
       <!-- 관람평 조회  -->
-    <div id="reviewList">
+    <div class="reviewList">
       <table>
         <thead>
           <th class="th-id">닉네임</th>
@@ -129,7 +129,7 @@
           <th class="th-review">감상평</th>
           <th class="th-userRevDelete">삭제</th>
         </thead>
-        <tbody class="reviewList">
+        <tbody id="reviewList">
           <tr>
             <td class="td-id">rizzy</td>
             <td class="td-reveiw-point">영상미</td>
