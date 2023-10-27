@@ -77,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       console.log(response.results[0].key);
     }) // key값 불러오는 거
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 function setDetailInfo(response) {
