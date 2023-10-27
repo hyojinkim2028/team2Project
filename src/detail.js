@@ -77,9 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       console.log(response.results[0].key);
     }) // key값 불러오는 거
-    .catch((err) => {
-      console.error(err);
-    });
+    .catch((err) => console.error(err));
 });
 
 function setDetailInfo(response) {
@@ -258,6 +256,7 @@ function onLogin(event) {
       movieId,
       JSON.stringify([...oldReviews, newReview])
     );
+    location = location;
   }
 }
 
@@ -296,7 +295,7 @@ function chkInput() {
 }
 
 // 저장 버튼 누르면 onLogin 함수 실행됨.
-addEventListener("submit", onLogin);
+document.querySelector(".submitBtn").addEventListener("click", onLogin);
 
 // 리뷰 생성 클래스
 class Review {
@@ -327,12 +326,12 @@ function drawReview() {
     let drawTemp = "";
 
     drawTemp = `
-      <div class = "showReview" id=${data.reviewNum}>
-        <div class="userId">닉네임 : ${data.id}</div>
-        <div class="userComment">감상평 : <pre>${data.review}</pre></div>
-        <div class="userKeyPoint">감상포인트 : ${data.reviewPoint}</div>
-        <button class = "userRevDelete">삭제</button>
-      </div>
+        <tr>
+          <td class="td-id">${data.id}</td>
+          <td class="td-reveiw-point">${data.reviewPoint}</td>
+          <td class="td-review">${data.review}</td>
+          <td><button class="td-userRevDelete">삭제</button></td>
+        </tr>
     `;
     reviewUl.innerHTML += drawTemp;
   });

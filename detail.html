@@ -1,114 +1,147 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/reset.css" />
-  <link rel="stylesheet" href="./css/common.css" />
-  <link rel="stylesheet" href="./css/detail.css" />
-  <script type="module" src="./src/detail.js"></script>
-  
-</head>
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/detail.css" />
+    <script defer src="./src/detail.js"></script>
+  </head>
 
 <body>
-  <!--  동영상 style="background-color: black;" -->
-  <header class="head">
-    <button type="button" class="headBtn" onclick="javascript:location.href='index.html'">홈으로</button>
-  </header>
 
+  <div class="headBox">
+    <h2 class="headBtn" onclick="javascript:location.href='index.html'">Collection of Movies</h2>
+  </div>
+
+    <!-- 검색창 -->
+  <div class="searchContainer">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="영화 제목을 검색해 보세요"
+      autofocus
+    />
+    <button id="searchBtn">검색</button>
+  </div>
   <div class="video">
     <div class="videoContainer">
-      <iframe style="width:100%; height:100%" id="youtubeFrame" frameborder="0"
+      <iframe
+        style="width: 100%; height: 100%"
+        id="youtubeFrame"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
-  <!--  탭 -->
+
+  <!--  탭 메뉴 -->
   <div class="tab_menu">
     <ul class="tab">
       <li class="tab_item active">상세정보</li>
       <li class="tab_item">관람평</li>
     </ul>
     <div class="tab_inner_wrap">
-      <div class="tab_inner active">
-        <!-- 상세정보 -->
-        <div id="detailInfo">
-          <h2 class="title">제목</h2>
-          <div>
-            <p class="releaseDate">개봉일자</p>
-          </div>
-          <div>
-            <p class="voteAverage">영화평점</p>
-          </div>
-          <div>
-            <span class="certification">관람가</span> /
-            <span class="genres">장르</span> /
-            <span class="runtime">상영시간</span>
-          </div>
-          <div>
-            <span class="director">감독</span> /
-            <span class="actor">출연진</span>
-          </div>
-          <div>
-            <p class="overview">세부내용</p>
-          </div>
-          <div>
-            <div class="images">사진들</div>
-          </div>
-        </div>
-      </div>
-      <!-- 상세정보 끝 -->
+    <div class="tab_inner active">
 
-        <!-- 관람평 -->
-        <div class="tab_inner">
-          <section>
-            <form id="login">
-              <div>
-                닉네임
-                <input
-                  class="loginId"
-                  type="text"
-                  placeholder="닉네임을 입력해주세요"
-                />
-                <span
-                  >비번
-                  <input
-                    class="loginPwd"
-                    type="text"
-                    placeholder="비밀번호를 입력해주세요"
-                /></span>
-                <select name="reviewPoint" class="reviewPoint">
-                  관람포인트 선택
-                  <option value="영상미">영상미</option>
-                  <option value="연기">연기</option>
-                  <option value="음악">음악</option>
-                  <option value="스토리">스토리</option>
-                </select>
-                <textarea
-                  class="review"
-                  placeholder="감상평을 입력해주세요"
-                ></textarea>
-                <button type="submit">저장</button>
-              </div>
-            </form>
-            <div>닉네임 감상 포인트 감상평 수정</div>
-            <div id="reviewList">
-              <!-- <li id="userId"></li>
-              <li id="userPwd"></li>
-              <li id="userReview"></li> -->
-            </div>
-          </section>
+      <!-- 상세정보 -->
+      <div id="detailInfo">
+        <h2 class="title">제목</h2>
+        <div>
+          <p class="releaseDate">개봉일자</p>
+        </div>
+        <div>
+          <p class="voteAverage">영화평점</p>
+        </div>
+        <div>
+          <span class="certification">관람가</span> /
+          <span class="genres">장르</span> /
+          <span class="runtime">상영시간</span>
+        </div>
+        <div>
+          <span class="director">감독</span> /
+          <span class="actor">출연진</span>
+        </div>
+        <div>
+          <p class="overview">세부내용</p>
+        </div>
+        <div>
+          <div class="images">사진들</div>
         </div>
       </div>
     </div>
   </div>
-</body>
+  <!-- 상세정보 끝 -->
 
+  <!-- 관람평 -->
+  <div class="tab_inner">
+    <section class="reviewTab">
+    <br id="login">
+      <br>       
+        <input
+          class="loginId"
+          type="text"
+          placeholder="닉네임을 입력해주세요"
+        />
+        <span>
+          <input
+            class="loginPwd"
+            type="text"
+            placeholder="비밀번호를 입력해주세요"
+          />
+        </span>
+        <select name="reviewPoint" class="reviewPoint">
+          관람포인트 선택
+          <option selected disabled>감상포인트</option>
+          <option value="영상미">영상미</option>
+          <option value="연기">연기</option>
+          <option value="음악">음악</option>
+          <option value="스토리">스토리</option>
+        </select>
+      <br/>
+      <textarea
+        class="review"
+        placeholder="감상평을 입력해주세요"
+      >
+      </textarea>
+    <br/>
+    <button class="submitBtn" type="button">저장</button>
+
+    
+      <!-- 관람평 조회  -->
+    <div class="reviewList">
+      <table>
+        <thead>
+          <th class="th-id">닉네임</th>
+          <th class="th-reveiw-point">감상포인트</th>
+          <th class="th-review">감상평</th>
+          <th class="th-userRevDelete">삭제</th>
+        </thead>
+        <tbody id="reviewList">
+          <tr>
+            <td class="td-id">rizzy</td>
+            <td class="td-reveiw-point">영상미</td>
+            <td class="td-review">너무 재미있었고 소름끼쳤어요!</td>
+            <td><button class="td-userRevDelete">삭제</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+
+  
+</body>
 </html>
