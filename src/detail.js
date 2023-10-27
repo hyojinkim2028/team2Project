@@ -282,16 +282,6 @@ function drawReview() {
   // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
   // let views = oldReviews.filter((data) => data.movieId == paramId);
 
-<<<<<<< HEAD
-  // 해당 영화 아이디 값과 일치하는 데이터의 각 데이터 호출 
-  views.forEach((dataValues)=> {
-    console.log(`영화 아이디는${dataValues.movieId}`);
-    console.log(`아이디는 ${dataValues.id}`);
-    console.log(`패스워드는 ${dataValues.pwd}`);
-    console.log(`리뷰포인트는 ${dataValues.reviewPoint}`);
-    console.log(`리뷰는${dataValues.review}`);
-  })
-=======
   //현재 영화에 대한 리뷰데이터 반복하면서 데이터 뽑아서 붙여주기.
   oldReviews.forEach((data) => {
     let drawTemp = "";
@@ -306,7 +296,6 @@ function drawReview() {
     `;
     reviewUl.innerHTML += drawTemp;
   });
->>>>>>> c79e7151325445c831b2d9b69080ed2c80ddd7e0
 }
 
 drawReview();
