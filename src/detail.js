@@ -1,7 +1,7 @@
 // 탭버튼 구성
 const tabItem = document.querySelectorAll('.tab_item')
 const tabInner = document.querySelectorAll('.tab_inner')
-let paramId = '';
+let paramId = ''
 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener('click', function () {
@@ -18,7 +18,6 @@ tabItem.forEach((tab, idx) => {
   })
 })
 
-
 // 상세정보
 
 // 임시 tmdb 키
@@ -31,13 +30,14 @@ const options = {
   },
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
   paramId = urlParams.get('id')
-
-  if(paramId == null){
-    paramId = 122;
+  // console.log('아이디',paramId)
+  if (paramId == null) {
+    paramId = 122
   }
 
   fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
@@ -63,10 +63,41 @@ document.addEventListener('DOMContentLoaded', function () {
     .then((response) => searchRelease(response))
     .catch((err) => console.error(err))
 
-
+  //비디오 api
+  fetch(
+    `https://api.themoviedb.org/3/movie/${paramId}/videos?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      document
+        .getElementById('youtubeFrame')
+        .setAttribute(
+          'src',
+          `https://www.youtube.com/embed/${response.results[0].key}`
+        )
+      console.log(response.results[0].key)
+    }) // key값 불러오는 거
+    .catch((err) => console.error(err))
 })
 
+// function search() {
+//   var ifrm = document.getElementById("iframe");
+//   ifrm.src = "https://www.youtube.com/embed/" + response.results[0].key
+// }
+
+// const movie = await sendHttpRequest('GET', `https://api.themoviedb.org/3/movie/${data.id}/videos?language=en-US`)
+// console.log(movie.results[0].key)
+// const video = document.querySelector(".movie")
+// const text = document.createElement("iframe")
+// text.src="https://www.youtube.com/embed/" + response.results[0].key
+
+// iframe.location.href = "url" ;
+// document.frames("iframe").location.href = "url" ;
+// const iframe = document.querySelector('#iframe');
+
 function setDetailInfo(response) {
+  console.log(response)
   document.querySelector('#detailInfo .title').innerHTML = response.title
   document.querySelector('#detailInfo .releaseDate').innerHTML =
     response.release_date
@@ -102,6 +133,7 @@ function searchDirector(response) {
   )
 }
 
+
 function searchImage(response) {
   let tempHtml = ''
   response.backdrops.forEach((e) => {
@@ -126,11 +158,12 @@ function searchRelease(response) {
   // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
     // release = releaseArray[0]
-    // 
-    document.querySelector('#detailInfo .certification').innerHTML = '권장연령미확인'
-  }
-  else{
-    document.querySelector('#detailInfo .certification').innerHTML = release.release_dates[0].certification;
+    //
+    document.querySelector('#detailInfo .certification').innerHTML =
+      '권장연령미확인'
+  } else {
+    document.querySelector('#detailInfo .certification').innerHTML =
+      release.release_dates[0].certification
   }
 
   // document.querySelector('#detailInfo .certification').innerHTML =
@@ -141,7 +174,6 @@ function searchRelease(response) {
   //   release.iso_3166_1,
   //   release.release_dates[0].certification
   // )
-
 }
 
 function searchCertification(iso, cert) {
@@ -179,105 +211,100 @@ function minToHourMin(min) {
   return hour > 0 ? hour + '시간 ' + leftMin + '분' : leftMin + '분'
 }
 
-
 // 관람평
 
-
-//테스트용 버튼
-const btn = document.querySelector("#btn")
-
-//버튼 클릭시 생성될 영역
-const section = document.querySelector("section");
-
+let userInfo = []
 
 //ul태그
-const reviewUl = document.getElementById("ul");
+const reviewUl = document.querySelector('#reviewList')
 
-
-//form 태그에 정보 담아서 localstorage에 저장
-const reviewSubmit = document.querySelector(".reviewSubmit");
-const reviewInput = document.querySelector(".reviewSubmit input");
-
-
-// loginReviewPoint도 만들어야됨
-
-const login = document.querySelector("#login");
-const loginId = document.querySelector("#login .loginId");
-const loginPwd = document.querySelector("#login .loginPwd");
-const loginReview = document.querySelector("#login .review");
+const loginId = document.querySelector('.loginId')
+const loginPwd = document.querySelector('.loginPwd')
+const loginReviewPoint = document.querySelector('.reviewPoint')
+const loginReview = document.querySelector('.review')
 
 //클래스에 들어갈 변수 모음
-let id = "";
-let pwd = "";
-let reviewPoint = "";
-let review = "";
+let id = ''
+let pwd = ''
+let reviewPoint
+let review = ''
 
-let count = 0;
-
+//감상평 작성된것들 불러올 때 쓸 변수
+const userIdElement = document.getElementById('userId')
+const userPwdElement = document.getElementById('userPwd')
 
 function onLogin(event) {
-  //event.preventDefault();
+  event.preventDefault() //새로고침 막기
+  id = loginId.value
+  pwd = loginPwd.value
+  reviewPoint = loginReviewPoint.value
+  review = loginReview.value
 
-  id = loginId.value;
-  pwd = loginPwd.value;
-  review = loginReview.value;
-  //window.localStorage.setItem(id, pwd);  
+  //버튼 누르면 count++
+  // count 값을 기준으로 반복문
 
+  const urlParams = new URLSearchParams(window.location.search)
+  const movieId = urlParams.get('id')
 
-  //버튼 누르면 count++ 
-  // count 값을 기준으로 반복문 
+  let newReview = new Review(movieId, id, pwd, reviewPoint, review)
 
-  let user1 = new Review(id, pwd, review);
+  let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
 
-  window.localStorage.setItem(pwd, user1);
-  console.log(user1);
+  window.localStorage.setItem(
+    'reviews',
+    JSON.stringify([...oldReviews, newReview])
+  )
 }
 
-login.addEventListener("submit", onLogin);
+login.addEventListener('submit', onLogin)
 
 class Review {
-  constructor(id, pwd, reviewPoint, review) {
-    this.id = id;
-    this.pwd = pwd;
-    this.reviewPoint = reviewPoint;
-    this.review = review;
-
+  constructor(movieId, id, pwd, reviewPoint, review) {
+    this.movieId = movieId
+    this.id = id
+    this.pwd = pwd
+    this.reviewPoint = reviewPoint
+    this.review = review
   }
 }
 
-//local Storage에 있는 데이터 불러서 li로 만들기
-//여기부터 만들면 됨
+//새로고침을 해주는게 있으면 좋지 않을까?
 function drawReview() {
-  let drawTemp = "";
 
-  for (let i = 0; i < window.localStorage.length; i++) {
-    drawTemp =
-      `<li>
-        <div>
-        <li>
-        `
+  const urlParams = new URLSearchParams(window.location.search)
+  paramId = urlParams.get('id')
+  console.log(paramId);
 
-  }
+  let drawTemp = ''
+  reviewUl.innerHTML += drawTemp
 
+  let oldReview = window.localStorage.getItem('reviews')
+  console.log(Object.values({ oldReview }))
+
+  let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
+  
+  let view = oldReviews.filter(data => data.movieId == paramId );
+  console.log(view);
+  
+
+
+  // for (let i = 0; i < window.localStorage.length; i++) {
+  //   let usr = JSON.parse(
+  //     window.localStorage.getItem(window.localStorage.key(i))
+  //   )
+
+  //   drawTemp = `<li><div id="userId">${usr.id}</div>
+  //          <div id="userPwd">${usr.pwd}</div>
+  //           <div id="userReviwPoint>${usr.reviewPoint}</div>
+  //          <div id="userReview">${usr.review}</div>
+
+  //       `
+
+  //   reviewUl.innerHTML += drawTemp
+  // }
+
+  // window.localStorage.getItem("");
   // localStorage.setItem(,JSON.stringify());
-
-
-
 }
 
-
-
-
-
-//localStorage를 사용하기 위해선 변수가 필요할 듯?
-// 아이디 비번 (key, value)로 저장
-// 내용은?  내용 value로하고 수정할 때 쓸 비번을 key로 만들면 될듯? -> 안됨
-// Class 로 만들어서 cuz 로컬 스토리지에 객체로 저장 가능
-// JSON.parse(localStorage.getItem(""))
-// 객체는 생성자로 추가
-// let x = localStroage.getItem("") 넣고
-// if(x ===null ) 이면
-// const y = JSON.stringify([]);
-// localStorage.setItem("x", y);
-// 이런식으로? 
-
+drawReview()
