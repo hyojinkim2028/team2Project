@@ -273,7 +273,6 @@ function drawReview() {
     console.log(`패스워드는 ${dataValues.pwd}`);
     console.log(`리뷰포인트는 ${dataValues.reviewPoint}`);
     console.log(`리뷰는${dataValues.review}`);
-  
   })
 }
 
