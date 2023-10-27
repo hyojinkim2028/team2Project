@@ -210,50 +210,91 @@ let reviewNum = 0;
 // 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event) {
   event.preventDefault(); //새로고침 막기
-  reviewNum++;
 
+  // 입력값체크
+  if(chkInput()== true){
+    reviewNum++;
+  
+    id = loginId.value;
+    pwd = loginPwd.value;
+    reviewPoint = loginReviewPoint.value;
+    review = loginReview.value;
+  
+    //랜덤값 줘서 식별자 만들기
+    // var keyID = function () {
+    //   return Math.random().toString(36).substr(2, 16);
+    // };
+  
+    // 관람평 저장 시 영화 아이디값
+    const urlParams = new URLSearchParams(window.location.search);
+    const movieId = urlParams.get("id");
+  
+    // 기존에  있던 리뷰들 , 데이터 없는 경우 빈 배열 반환
+    let oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
+    console.log(oldReviews);
+    // if (oldReviews.length > 0) {
+    // 새로 작성하는 리뷰, 객체 생성
+    // let re = oldReviews[oldReviews.length - 1].reviewNum;
+    // console.log(re);
+    //   const newReview = new Review(movieId, re, id, pwd, reviewPoint, review);
+    // } else {
+    const newReview = new Review(
+      movieId,
+      reviewNum,
+      id,
+      pwd,
+      reviewPoint,
+      review
+    );
+    // }
+  
+    // newReview.reviewNum = newReview.reviewNum + 1;
+    // console.log(newReview.reviewNum);
+    // 새로운 리뷰를 작성하면 기존 리뷰들(oldReviews에 newReview 가 더해지며 로컬스토리지에 저장됨.)
+    // -> 로컬스토리지 set 기능은 데이터를 추가해주는 기능과는 달라서 이렇게 처리했음.
+    window.localStorage.setItem(
+      movieId,
+      JSON.stringify([...oldReviews, newReview])
+    );
+  }
+
+}
+
+// 관람평 입력시 벨리데이션
+// 1. 닉네임 특수문자 거르기
+// 2. 공백문자 있을때 거르기
+// 공백일때 거르기
+// 3. 비번은 빡세게
+// 4. 감상평 5글자이상 입력
+function chkInput(){
+  
   id = loginId.value;
   pwd = loginPwd.value;
   reviewPoint = loginReviewPoint.value;
   review = loginReview.value;
 
-  //랜덤값 줘서 식별자 만들기
-  // var keyID = function () {
-  //   return Math.random().toString(36).substr(2, 16);
-  // };
+  const blankExp = /[\s]/g;
+  const specialExp = /[^\w]/g;
+  const passExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,30}$/g;
 
-  // 관람평 저장 시 영화 아이디값
-  const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
-
-  // 기존에  있던 리뷰들 , 데이터 없는 경우 빈 배열 반환
-  let oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
-  console.log(oldReviews);
-  // if (oldReviews.length > 0) {
-  // 새로 작성하는 리뷰, 객체 생성
-  // let re = oldReviews[oldReviews.length - 1].reviewNum;
-  // console.log(re);
-  //   const newReview = new Review(movieId, re, id, pwd, reviewPoint, review);
-  // } else {
-  const newReview = new Review(
-    movieId,
-    reviewNum,
-    id,
-    pwd,
-    reviewPoint,
-    review
-  );
-  // }
-
-  // newReview.reviewNum = newReview.reviewNum + 1;
-  // console.log(newReview.reviewNum);
-  // 새로운 리뷰를 작성하면 기존 리뷰들(oldReviews에 newReview 가 더해지며 로컬스토리지에 저장됨.)
-  // -> 로컬스토리지 set 기능은 데이터를 추가해주는 기능과는 달라서 이렇게 처리했음.
-  window.localStorage.setItem(
-    movieId,
-    JSON.stringify([...oldReviews, newReview])
-  );
+  if(id == '' || blankExp.test(id) || specialExp.test(id)){
+    alert('아이디는 공백이나 특수문자가 들어갈 수 없습니다.');
+    loginId.focus();
+    return false;
+  }
+  else if(pwd == '' || blankExp.test(pwd) || !passExp.test(pwd)  ) {
+    alert('비밀번호는 공백문자는 들어갈수없으며, 영문, 숫자, 특수기호 조합 8자리 이상입니다.');
+    loginPwd.focus();
+    return false;
+  }
+  else if(review == '' ||  review.length < 5 ){
+    alert('리뷰는 5글자 이상 입력하셔야 합니다.');
+    loginReview.focus();
+    return false;
+  }
+   return true;
 }
+
 
 // 저장 버튼 누르면 onLogin 함수 실행됨.
 addEventListener("submit", onLogin);
@@ -289,7 +330,7 @@ function drawReview() {
     drawTemp = `
       <div class = "showReview" id=${data.reviewNum}>
         <div class="userId">닉네임 : ${data.id}</div>
-        <div class="userComment">감상평 : ${data.review}</div>
+        <div class="userComment">감상평 : <pre>${data.review}</pre></div>
         <div class="userKeyPoint">감상포인트 : ${data.reviewPoint}</div>
         <button class = "userRevDelete">삭제</button>
       </div>
