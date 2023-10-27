@@ -1,3 +1,4 @@
+
 // 탭버튼 구성
 const tabItem = document.querySelectorAll(".tab_item");
 const tabInner = document.querySelectorAll(".tab_inner");
