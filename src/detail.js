@@ -30,7 +30,6 @@ const options = {
   },
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
@@ -81,20 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch((err) => console.error(err))
 })
 
-// function search() {
-//   var ifrm = document.getElementById("iframe");
-//   ifrm.src = "https://www.youtube.com/embed/" + response.results[0].key
-// }
-
-// const movie = await sendHttpRequest('GET', `https://api.themoviedb.org/3/movie/${data.id}/videos?language=en-US`)
-// console.log(movie.results[0].key)
-// const video = document.querySelector(".movie")
-// const text = document.createElement("iframe")
-// text.src="https://www.youtube.com/embed/" + response.results[0].key
-
-// iframe.location.href = "url" ;
-// document.frames("iframe").location.href = "url" ;
-// const iframe = document.querySelector('#iframe');
 
 function setDetailInfo(response) {
   console.log(response)
@@ -133,7 +118,6 @@ function searchDirector(response) {
   )
 }
 
-
 function searchImage(response) {
   let tempHtml = ''
   response.backdrops.forEach((e) => {
@@ -166,14 +150,6 @@ function searchRelease(response) {
       release.release_dates[0].certification
   }
 
-  // document.querySelector('#detailInfo .certification').innerHTML =
-  //   release.release_dates[0].certification
-
-  // 음.. 이부분 이슈가 있어서 그냥............
-  // searchCertification(
-  //   release.iso_3166_1,
-  //   release.release_dates[0].certification
-  // )
 }
 
 function searchCertification(iso, cert) {
@@ -218,6 +194,7 @@ let userInfo = []
 //ul태그
 const reviewUl = document.querySelector('#reviewList')
 
+// 각 인풋 값 가져오는 변수
 const loginId = document.querySelector('.loginId')
 const loginPwd = document.querySelector('.loginPwd')
 const loginReviewPoint = document.querySelector('.reviewPoint')
@@ -229,10 +206,7 @@ let pwd = ''
 let reviewPoint
 let review = ''
 
-//감상평 작성된것들 불러올 때 쓸 변수
-const userIdElement = document.getElementById('userId')
-const userPwdElement = document.getElementById('userPwd')
-
+// 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event) {
   event.preventDefault() //새로고침 막기
   id = loginId.value
@@ -240,24 +214,28 @@ function onLogin(event) {
   reviewPoint = loginReviewPoint.value
   review = loginReview.value
 
-  //버튼 누르면 count++
-  // count 값을 기준으로 반복문
-
+  // 관람평 저장 시 영화 아이디값 
   const urlParams = new URLSearchParams(window.location.search)
   const movieId = urlParams.get('id')
 
-  let newReview = new Review(movieId, id, pwd, reviewPoint, review)
-
+  // 기존에  있던 리뷰들 , 데이터 없는 경우 빈 배열 반환
   let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
 
+  // 새로 작성하는 리뷰, 객체 생성
+  let newReview = new Review(movieId, id, pwd, reviewPoint, review)
+
+  // 새로운 리뷰를 작성하면 기존 리뷰들(oldReviews에 newReview 가 더해지며 로컬스토리지에 저장됨.) 
+  // -> 로컬스토리지 set 기능은 데이터를 추가해주는 기능과는 달라서 이렇게 처리했음.
   window.localStorage.setItem(
     'reviews',
     JSON.stringify([...oldReviews, newReview])
   )
 }
 
-login.addEventListener('submit', onLogin)
+// 저장 버튼 누르면 onLogin 함수 실행됨.
+addEventListener('submit', onLogin)
 
+// 리뷰 생성 클래스
 class Review {
   constructor(movieId, id, pwd, reviewPoint, review) {
     this.movieId = movieId
@@ -268,43 +246,35 @@ class Review {
   }
 }
 
-//새로고침을 해주는게 있으면 좋지 않을까?
+
+// 저장된 관람평 데이터들 화면에 보여주는 함수
 function drawReview() {
 
+  // 상세페이지 영화 아이디 값
   const urlParams = new URLSearchParams(window.location.search)
   paramId = urlParams.get('id')
-  console.log(paramId);
 
   let drawTemp = ''
   reviewUl.innerHTML += drawTemp
 
-  let oldReview = window.localStorage.getItem('reviews')
-  console.log(Object.values({ oldReview }))
 
+  // 기존에 저장되었던 리뷰들 변수에 담음
   let oldReviews = JSON.parse(window.localStorage.getItem('reviews')) ?? []
+
+
+  // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
+  let views = oldReviews.filter((data) => data.movieId == paramId)
   
-  let view = oldReviews.filter(data => data.movieId == paramId );
-  console.log(view);
+
+  // 해당 영화 아이디 값과 일치하는 데이터의 각 데이터 호출 
+  views.forEach((dataValues)=> {
+    console.log(`영화 아이디는${dataValues.movieId}`);
+    console.log(`아이디는 ${dataValues.id}`);
+    console.log(`패스워드는 ${dataValues.pwd}`);
+    console.log(`리뷰포인트는 ${dataValues.reviewPoint}`);
+    console.log(`리뷰는${dataValues.review}`);
   
-
-
-  // for (let i = 0; i < window.localStorage.length; i++) {
-  //   let usr = JSON.parse(
-  //     window.localStorage.getItem(window.localStorage.key(i))
-  //   )
-
-  //   drawTemp = `<li><div id="userId">${usr.id}</div>
-  //          <div id="userPwd">${usr.pwd}</div>
-  //           <div id="userReviwPoint>${usr.reviewPoint}</div>
-  //          <div id="userReview">${usr.review}</div>
-
-  //       `
-
-  //   reviewUl.innerHTML += drawTemp
-  // }
-
-  // window.localStorage.getItem("");
-  // localStorage.setItem(,JSON.stringify());
+  })
 }
 
 drawReview()
