@@ -45,15 +45,6 @@ function temping(src, data) {
           </div>
         </div>
       `;
-  } else if (data.sort === "populerList") {
-    return `
-        <div class="card" id = ${data.id}>
-          <img class="poster" src="${src}" alt="" />
-          <h5 class="title">${data.title}</h5>
-          <p class="avg">평점 : ${data.vote_average}</p>
-          <span class="comment">${data.overview}</span>
-        </div>
-      `;
   }
 }
 
