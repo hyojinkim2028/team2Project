@@ -1,12 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
 
-
-body {
+/* body {
   background-color: black;
 }
 
+.homeBtn {
+  cursor: pointer;
+}
+.homeBtn:hover {
+  color: gray;
+}
+.homeBtn:active {
+  font-size: 4rem;
+}
 
 .video {
   width: 100%;
@@ -34,7 +42,7 @@ body {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: "Gugi", sans-serif;
+  font-family: 'Gugi', sans-serif;
   letter-spacing: 4px;
   border-radius: 10px;
   background-color: var(--red);
@@ -43,6 +51,144 @@ body {
   width: 91px;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.tab_menu {
+  width: 800px;
+  margin: 200px auto;
+  background-color: brown;
+  width: 90%;
+  border-radius: 20px;
+}
+
+.tab {
+  width: 75%;
+  margin: auto;
+  padding: 30px;
+  display: flex;
+  gap: 30px;
+  text-align: center;
+}
+
+.tab_item {
+  margin: auto;
+  width: 400px;
+  border: 1px solid white(78, 12, 12);
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+}
+
+.tab_inner_wrap {
+  width: 75%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  background: brown;
+  border-radius: 20px;
+}
+
+.tab_inner {
+  padding: 20px;
+  color: #fff;
+  font-size: 24px;
+  display: none;
+}
+
+.tab_item.active {
+  background: rgb(53, 2, 17);
+  background-color: black;
+  color: #fff;
+}
+
+.tab_inner.active {
+  display: block;
+}
+
+#detailInfo {
+  width: 100%;
+  background-color: black;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: left;
+  color: white;
+}
+.images {
+  text-align: center;
+  border-radius: 20px;
+}
+
+#detailInfo .title {
+  font-size: 3rem;
+}
+#detailInfo > .releaseDate .releaseDate .certification .genres .runtime {
+  text-align: left;
+  font-size: 1.5rem;
+  margin: 10px;
+}
+#detailInfo .director {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+#detailInfo .actor {
+  font-size: 1rem;
+  margin: 10px;
+}
+
+#detailInfo p {
+  line-height: 30px;
+  font-size: 1.5rem;
+  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+} */
+
+body {
+  background-color: black;
+}
+
+.video {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  border-radius: 30px;
+  background-color: #f0f0f0;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0px 8px 33px #999;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.head {
+  text-align: center;
+  margin: 20px;
+}
+
+.headBtn {
+  padding: 0.6%;
+  margin-left: 20px;
+  font-size: 18px;
+  font-family: 'Gugi', sans-serif;
+  letter-spacing: 4px;
+  border-radius: 10px;
+  background-color: var(--red);
+  color: var(--white);
+  height: 46px;
+  width: 91px;
+}
 
 * {
   margin: 0;
