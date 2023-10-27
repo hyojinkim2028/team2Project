@@ -220,11 +220,6 @@ function onLogin(event) {
     reviewPoint = loginReviewPoint.value;
     review = loginReview.value;
 
-    //랜덤값 줘서 식별자 만들기
-    // var keyID = function () {
-    //   return Math.random().toString(36).substr(2, 16);
-    // };
-
     // 관람평 저장 시 영화 아이디값
     const urlParams = new URLSearchParams(window.location.search);
     const movieId = urlParams.get("id");
