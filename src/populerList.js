@@ -83,6 +83,7 @@ async function searchStart2(url) {
 
 //페이지에 따라 더보기 버튼
 function moreHide(searchData, num) {
+<<<<<<< Updated upstream
   console.log(searchData.total_pages, '페이지 중에서 ', num)
   let searchTotal = searchData.total_pages
   if (searchTotal === 1 && num === 1) {
@@ -96,6 +97,26 @@ function moreHide(searchData, num) {
   } //현재 페이지는 1이 아닌ㄴ데, 전체 페이지는 현재 페이지보다 크면
   else if (num < searchTotal && num !== 1) {
     document.querySelector('#more').classList.remove('hide')
+=======
+  console.log(searchData.total_pages, "페이지 중에서 ", num);
+  let searchTotal = searchData.total_pages;
+  console.log(num);
+  if (searchTotal === 1 && num === 1) {
+    console.log("1-1");
+    document.querySelector("#more").classList.add("hide");
+  } //검색 결과의 마지막 페이지 일때.
+  else if (num === searchTotal && num > 1) {
+    console.log("10-10");
+    document.querySelector("#more").classList.add("hide");
+  } //현재 페이지는 1, 전체 페이지는 1보다 크면
+  else if (num === 1 && num < searchTotal) {
+    console.log("1-10");
+    document.querySelector("#more").classList.remove("hide");
+  } //현재 페이지는 1이 아닌ㄴ데, 전체 페이지는 현재 페이지보다 크면
+  else if (num < searchTotal && num !== 1) {
+    console.log("3-10");
+    document.querySelector("#more").classList.remove("hide");
+>>>>>>> Stashed changes
   }
   datasRepeat(searchData.results)
 }
@@ -164,7 +185,19 @@ function temping(src, data) {
   if (data.overview.length > length) {
     data.overview = data.overview.substr(0, length - 1) + '...'
   }
-
+  let inputVal = document.querySelector("input").value;
+  console.log(inputVal);
+  let jointitle = data.title.split(" ").join("");
+  if (jointitle === inputVal) {
+    return `
+      <div class="card" id = ${data.id}>
+        <img class="poster" src="${src}" alt="" />
+        <h5 class="title">${data.title}</h5>
+        <p class="avg">평점 : ${data.vote_average}</p>
+        <span class="comment">${data.overview}</span>
+      </div>
+    `;
+  }
   return `
       <div class="card" id = ${data.id}>
         <img class="poster" src="${src}" alt="" />
