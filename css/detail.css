@@ -1,7 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
 
-/* 동영상 */
-.video { 
-  margin: 50px 350px 50px 350px;  
+
+body {
+  background-color: black;
+}
+
+
+.video {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  border-radius: 30px;
+  background-color: #f0f0f0;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 0px 8px 33px #999;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.head {
+  text-align: center;
+  margin: 20px;
+}
+
+.headBtn {
+  padding: 0.6%;
+  margin-left: 20px;
+  font-size: 18px;
+  font-family: "Gugi", sans-serif;
+  letter-spacing: 4px;
+  border-radius: 10px;
+  background-color: var(--red);
+  color: var(--white);
+  height: 46px;
+  width: 91px;
 }
 
 
@@ -29,6 +68,7 @@ li {
   border: 1px solid rgb(78, 12, 12);
   padding: 10px 20px;
   border-radius: 20px;
+  color: white;
 }
 
 .tab_inner_wrap {
@@ -52,4 +92,3 @@ li {
 .tab_inner.active {
   display: block;
 }
-
