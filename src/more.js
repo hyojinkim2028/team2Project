@@ -32,6 +32,13 @@ async function more() {
     await moreHide(data, num);
     return datasRepeat(data.results);
   }
+  //상세페이지 에서 검색해서 넘어온 후 더보기 눌렀을 경우
+  else if (urlGetVal && !inputVal) {
+    const url = await makeSearchUrl(urlGetVal, num);
+    const data = await getData(url);
+    await moreHide(data, num);
+    return datasRepeat(data.results);
+  }
   //main에서 넘어온 후에 list 에 나온 데이터를 더보기
   else {
     const genreVal = urlVal.replace("?id=more&genre=", "");
@@ -44,7 +51,7 @@ async function more() {
       return datasRepeat(data.results);
     }
     //인기영화, 최고평점영화 중 해당하는거 데이터 더 가져오기.
-    else {
+    else if (!genreArr.includes(genreVal)) {
       const url = await makeGenreUrl(genreVal, num);
       const data = await getData(url);
       await moreHide(data, num);

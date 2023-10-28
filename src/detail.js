@@ -350,35 +350,27 @@ reviewUl.addEventListener("click", (e) => {
     });
 
     modifyGet.splice(empty, 1);
-    console.log("이후 => ", modifyGet);
+    // console.log("이후 => ", modifyGet);
 
     window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
     location = location;
-
-    //배열을 삭제할 것을 자른다
-    // reviewNum === e.target.parentElemet.id 없앤다.
-    //그걸 setItem에 넣어준다?
-    // 그럼 끝
-
     const modifySet = 0;
-
-    // oldReviews.forEach((rev) => {
-
-    //   window.localStorage.setItem(
-    //     movieId,
-    //     JSON.stringify([...oldReviews, newReview])
-    //   )
-
-    // })
   }
 });
 
-//reviewNum만 뺴내는 함수
-// function getReviewNum(){
-//   return oldReviews[oldReviews.length-1].reviewNum;
+//디테일 페이지 검색기능
+document.querySelector("#searchBtn").addEventListener("click", inputHref);
 
-// }
+document
+  .querySelector("#searchInput")
+  .addEventListener("keypress", async function (e) {
+    if (e.keyCode == 13 || e.which == 13) {
+      inputHref();
+    }
+  });
 
-// document
-//   .querySelector(".userRevDelete")
-//   .addEventListener("click", function (e) {});
+//인풋값 가져와서 페이지 이동
+async function inputHref() {
+  let inputVal = document.querySelector("input").value;
+  window.location.href = `./populerList.html?val=${inputVal}`;
+}
