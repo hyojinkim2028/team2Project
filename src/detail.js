@@ -1,6 +1,13 @@
+// 상세페이지 영화 아이디 값
+const urlParams = new URLSearchParams(window.location.search)
+const movieId = urlParams.get('id')
+const oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? []
+
+
 // 탭버튼 구성
 const tabItem = document.querySelectorAll('.tab_item')
 const tabInner = document.querySelectorAll('.tab_inner')
+let paramId = ''
 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener('click', function () {
@@ -17,7 +24,6 @@ tabItem.forEach((tab, idx) => {
   })
 })
 
-
 // 상세정보
 
 // 임시 tmdb 키
@@ -33,29 +39,50 @@ const options = {
 document.addEventListener('DOMContentLoaded', function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search)
-  const id = urlParams.get('id')
+  paramId = urlParams.get('id')
+  // console.log('아이디',paramId)
+  if (paramId == null) {
+    paramId = 122
+  }
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
     .then((response) => response.json())
     .then((response) => setDetailInfo(response))
     .catch((err) => console.error(err))
 
   fetch(
-    `https://api.themoviedb.org/3/movie/${id}/credits?language=ko-KR`,
+    `https://api.themoviedb.org/3/movie/${paramId}/credits?language=ko-KR`,
     options
   )
     .then((response) => response.json())
     .then((response) => searchDirector(response))
     .catch((err) => console.error(err))
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}/images`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}/images`, options)
     .then((response) => response.json())
     .then((response) => searchImage(response))
     .catch((err) => console.error(err))
 
-  fetch(`https://api.themoviedb.org/3/movie/${id}/release_dates`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${paramId}/release_dates`, options)
     .then((response) => response.json())
     .then((response) => searchRelease(response))
+    .catch((err) => console.error(err))
+
+  //비디오 api
+  fetch(
+    `https://api.themoviedb.org/3/movie/${paramId}/videos?language=en-US`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      document
+        .getElementById('youtubeFrame')
+        .setAttribute(
+          'src',
+          `https://www.youtube.com/embed/${response.results[0].key}`
+        )
+      console.log(response.results[0].key)
+    }) // key값 불러오는 거
     .catch((err) => console.error(err))
 })
 
@@ -78,19 +105,16 @@ function setDetailInfo(response) {
 }
 
 function searchDirector(response) {
-  console.log(response)
   // jsonData.crew.filter(({job})=> job ==='Director')
   let directorArray = response.crew.filter((e) => {
     return e.job === 'Director'
   })
-  console.log(directorArray)
   document.querySelector('#detailInfo .director').innerHTML =
     directorArray[0].name
 
   let actorArray = response.cast.filter((e) => {
     return e.known_for_department === 'Acting'
   })
-  console.log(actorArray)
   document.querySelector('#detailInfo .actor').innerHTML = actorArray.reduce(
     (str, e, idx) => {
       return (str += e.name + (actorArray.length != idx + 1 ? ', ' : ''))
@@ -100,7 +124,6 @@ function searchDirector(response) {
 }
 
 function searchImage(response) {
-  console.log(response)
   let tempHtml = ''
   response.backdrops.forEach((e) => {
     tempHtml += `
@@ -112,10 +135,7 @@ function searchImage(response) {
 }
 
 function searchRelease(response) {
-  console.log(response)
-
   let releaseArray = response.results
-  console.log(releaseArray)
 
   let release = response.results.find((result) => {
     if (result.iso_3166_1 === 'KR') {
@@ -124,19 +144,16 @@ function searchRelease(response) {
   })
   // let release;
 
-  // 한국 없으면 최상단 배열값
+  // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
-    release = releaseArray[0]
+    // release = releaseArray[0]
+    //
+    document.querySelector('#detailInfo .certification').innerHTML =
+      '권장연령미확인'
+  } else {
+    document.querySelector('#detailInfo .certification').innerHTML =
+      release.release_dates[0].certification
   }
-
-  document.querySelector('#detailInfo .certification').innerHTML =
-    release.release_dates[0].certification
-
-  // 음.. 이부분 이슈가 있어서 그냥............
-  searchCertification(
-    release.iso_3166_1,
-    release.release_dates[0].certification
-  )
 }
 
 function searchCertification(iso, cert) {
@@ -174,128 +191,223 @@ function minToHourMin(min) {
   return hour > 0 ? hour + '시간 ' + leftMin + '분' : leftMin + '분'
 }
 
-
-
-
 // 관람평
 
-
-// localstorage에 저장된 pwd담을 배열 =(key값)
 let userInfo = []
 
-
 //ul태그
-const reviewUl = document.querySelector("#reviewList");
+const reviewUl = document.querySelector('#reviewList')
 
-
-
-//form 태그에 정보 담아서 localstorage에 저장
-const reviewSubmit = document.querySelector(".reviewSubmit");
-const reviewInput = document.querySelector(".reviewSubmit input");
-
-
-// loginReviewPoint도 만들어야됨
-const login = document.querySelector("#login");
-const loginId = document.querySelector("#login .loginId");
-const loginPwd = document.querySelector("#login .loginPwd");
-const loginReview = document.querySelector("#login .review");
-const loginReviewPoint = document.querySelector("#login .reviewPoint")
-
+// 각 인풋 값 가져오는 변수
+const loginId = document.querySelector('.loginId')
+const loginPwd = document.querySelector('.loginPwd')
+const loginReviewPoint = document.querySelector('.reviewPoint')
+const loginReview = document.querySelector('.review')
 
 //클래스에 들어갈 변수 모음
-let id = "";
-let pwd = "";
-let reviewPoint = "";
-let review = "";
+let id = ''
+let pwd = ''
+let reviewPoint
+let review = ''
+
+//각 영화별 리뷰 구분할 식별자값
+let reviewNum = 0;
 
 
-//감상평 작성된것들 불러올 때 쓸 변수
-const userIdElement = document.getElementById("userId");
-const userPwdElement = document.getElementById("userPwd");
+console.log(reviewNum);
 
-
+// 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event) {
-  event.preventDefault();                         //새로고침 막기
-  id = loginId.value;
-  pwd = loginPwd.value;
-  review = loginReview.textContent;
-  reviewPoint = loginReviewPoint.value;
-  //window.localStorage.setItem(id, pwd);  
+  event.preventDefault() //새로고침 막기
 
-  
 
-  //버튼 누르면 count++ 
-  // count 값을 기준으로 반복문 
-  
-  let user = new Review(id, pwd, review, reviewPoint);
+  // 입력값체크
+  if (chkInput() == true) {
 
-  // window.localStorage.setItem(pwd, user1); 객체 저장
-  window.localStorage.setItem(pwd, JSON.stringify(user));   
-
-}
-
-login.addEventListener("submit", onLogin);
-
-class Review {
-    constructor(id, pwd, reviewPoint, review) {
-        this.id = id;
-        this.pwd = pwd;
-        this.reviewPoint = reviewPoint;
-        this.review = review;
-
+    if (reviewNum > 0 || oldReviews.length > 0) {
+      reviewNum = oldReviews[oldReviews.length - 1].reviewNum;
     }
+    reviewNum++;
+
+    id = loginId.value
+    pwd = loginPwd.value
+    reviewPoint = loginReviewPoint.value
+    review = loginReview.value
+
+    console.log(oldReviews)
+ 
+    const newReview = new Review(
+      movieId,
+      reviewNum,
+      id,
+      pwd,
+      reviewPoint,
+      review
+    )
+
+    window.localStorage.setItem(
+      movieId,
+      JSON.stringify([...oldReviews, newReview])
+    )
+    location = location
+
+    return reviewNum;
+
+  }
+
+  
 }
 
-//local Storage에 있는 데이터 불러서 li로 만들기
-//여기부터 만들면 됨
-// 객체배열을 가지고오기? 
-// 객체 배열을 그려주기  
-// 객체 배열을 가지고 온다음에  그려줘야 할듯
+// 관람평 입력시 벨리데이션
+// 1. 닉네임 특수문자 거르기
+// 2. 공백문자 있을때 거르기
+// 공백일때 거르기
+// 3. 비번은 빡세게
+// 4. 감상평 5글자이상 입력
+function chkInput() {
+  id = loginId.value
+  pwd = loginPwd.value
+  reviewPoint = loginReviewPoint.value
+  review = loginReview.value
+
+  const blankExp = /[\s]/g
+  const specialExp = /[^\w]/g
+  const passExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,30}$/g
+
+  if (id == '' || blankExp.test(id) || specialExp.test(id)) {
+    alert('아이디는 공백이나 특수문자가 들어갈 수 없습니다.')
+    loginId.focus()
+    return false
+  } else if (pwd == '' || blankExp.test(pwd) || !passExp.test(pwd)) {
+    alert(
+      '비밀번호는 공백문자는 들어갈수없으며, 영문, 숫자, 특수기호 조합 8자리 이상입니다.'
+    )
+    loginPwd.focus()
+    return false
+  } else if (review == '' || review.length < 5) {
+    alert('리뷰는 5글자 이상 입력하셔야 합니다.')
+    loginReview.focus()
+    return false
+  }
+  return true
+}
+
+// 저장 버튼 누르면 onLogin 함수 실행됨.
+document.querySelector('.submitBtn').addEventListener('click', onLogin)
+
+// 리뷰 생성 클래스
+class Review {
+  constructor(movieId, reviewNum, id, pwd, reviewPoint, review) {
+    this.movieId = movieId
+    this.reviewNum = reviewNum
+    this.id = id
+    this.pwd = pwd
+    this.reviewPoint = reviewPoint
+    this.review = review
+  }
+}
 
 
-//새로고침을 해주는게 있으면 좋지 않을까?
-function drawReview(){
-    
-    let drawTemp ="";
-    reviewUl.innerHTML += drawTemp;
 
 
-    
+// 저장된 관람평 데이터들 화면에 보여주는 함수
+function drawReview() {
 
-    for(let i=0; i<window.localStorage.length; i++){
-        
-        let usr = JSON.parse(window.localStorage.getItem(window.localStorage.key(i)));
-       
-        drawTemp = 
-        
-        `<li><div id="userId">${usr.id}</div>
-           <div id="userPwd">${usr.pwd}</div>
-            <div id="userReviwPoint>${usr.reviewPoint}</div>
-           <div id="userReview">${usr.review}</div>
+  // 기존에 저장되었던 리뷰들 중 현재 영화에 대한 리뷰만 변수에 담음
 
-        `
-        
-        reviewUl.innerHTML += drawTemp;
-    }   
+  console.log(oldReviews)
+  // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
+  // let views = oldReviews.filter((data) => data.movieId == paramId);
+
+  //현재 영화에 대한 리뷰데이터 반복하면서 데이터 뽑아서 붙여주기.
+  oldReviews.forEach((data) => {
+    let drawTemp = ''
+
+    drawTemp = `
+        <tr>
+          <td class="td-id">${data.id}</td>
+          <td class="td-reveiw-point">${data.reviewPoint}</td>
+          <td class="td-review">${data.review}</td>
+          <td id=${data.reviewNum}><button class="td-userRevDelete">삭제</button></td>
+        </tr>
+    `
+    reviewUl.innerHTML += drawTemp
 
 
-    // window.localStorage.getItem("");
-    // localStorage.setItem(,JSON.stringify());
-
+  })
 
 }
 
-drawReview();
+drawReview()
 
-//localStorage를 사용하기 위해선 변수가 필요할 듯?
-// 아이디 비번 (key, value)로 저장
-// 내용은?  내용 value로하고 수정할 때 쓸 비번을 key로 만들면 될듯? -> 안됨
-// Class 로 만들어서 cuz 로컬 스토리지에 객체로 저장 가능
-// JSON.parse(localStorage.getItem(""))
-// 객체는 생성자로 추가
-// let x = localStroage.getItem("") 넣고
-// if(x ===null ) 이면
-// const y = JSON.stringify([]);
-// localStorage.setItem("x", y);
-// 이런식으로? 
+// //삭제버튼 누르면 데이터 삭제
 
+
+// 댓글 삭제 기능
+const userRevDelete = document.querySelector(".td-userRevDelete");
+
+//삭제후 새로고침 해야될 듯
+// id = reviewList 에 이벤트를 주고 e.traget -> userRevDelete로 
+
+
+let modifyGet = window.localStorage.getItem(movieId);
+modifyGet = JSON.parse(modifyGet);
+
+reviewUl.addEventListener("click", (e) => {
+  if (e.target.className === "td-userRevDelete") {
+
+    console.log("이전 => ", modifyGet);
+    
+
+    let empty;
+
+    const mm = modifyGet.map((a, i)=>{
+      if(String(a.reviewNum) === e.target.parentElement.id){ 
+        return empty = i;
+      }
+
+    })
+    
+    modifyGet.splice(empty, 1);
+    console.log("이후 => ",modifyGet);
+    
+
+    window.localStorage.setItem(movieId , JSON.stringify(modifyGet));
+    location = location;
+
+
+  
+    //배열을 삭제할 것을 자른다
+    // reviewNum === e.target.parentElemet.id 없앤다.
+    //그걸 setItem에 넣어준다?
+    // 그럼 끝
+
+    
+    const modifySet =0; 
+    
+    // oldReviews.forEach((rev) => {
+      
+
+
+    //   window.localStorage.setItem(
+    //     movieId,
+    //     JSON.stringify([...oldReviews, newReview])
+    //   )
+      
+    // })
+  }
+})
+
+
+//reviewNum만 뺴내는 함수
+// function getReviewNum(){
+//   return oldReviews[oldReviews.length-1].reviewNum;
+
+// }
+
+
+
+
+// document
+//   .querySelector(".userRevDelete")
+//   .addEventListener("click", function (e) {});
