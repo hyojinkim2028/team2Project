@@ -1,3 +1,8 @@
+// 상세페이지 영화 아이디 값
+const urlParams = new URLSearchParams(window.location.search);
+const movieId = urlParams.get("id");
+const oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
+
 // 탭버튼 구성
 const tabItem = document.querySelectorAll(".tab_item");
 const tabInner = document.querySelectorAll(".tab_inner");
@@ -207,12 +212,17 @@ let review = "";
 //각 영화별 리뷰 구분할 식별자값
 let reviewNum = 0;
 
+console.log(reviewNum);
+
 // 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event) {
   event.preventDefault(); //새로고침 막기
 
   // 입력값체크
   if (chkInput() == true) {
+    if (reviewNum > 0 || oldReviews.length > 0) {
+      reviewNum = oldReviews[oldReviews.length - 1].reviewNum;
+    }
     reviewNum++;
 
     id = loginId.value;
@@ -220,19 +230,8 @@ function onLogin(event) {
     reviewPoint = loginReviewPoint.value;
     review = loginReview.value;
 
-    // 관람평 저장 시 영화 아이디값
-    const urlParams = new URLSearchParams(window.location.search);
-    const movieId = urlParams.get("id");
-
-    // 기존에  있던 리뷰들 , 데이터 없는 경우 빈 배열 반환
-    let oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
     console.log(oldReviews);
-    // if (oldReviews.length > 0) {
-    // 새로 작성하는 리뷰, 객체 생성
-    // let re = oldReviews[oldReviews.length - 1].reviewNum;
-    // console.log(re);
-    //   const newReview = new Review(movieId, re, id, pwd, reviewPoint, review);
-    // } else {
+
     const newReview = new Review(
       movieId,
       reviewNum,
@@ -241,17 +240,14 @@ function onLogin(event) {
       reviewPoint,
       review
     );
-    // }
 
-    // newReview.reviewNum = newReview.reviewNum + 1;
-    // console.log(newReview.reviewNum);
-    // 새로운 리뷰를 작성하면 기존 리뷰들(oldReviews에 newReview 가 더해지며 로컬스토리지에 저장됨.)
-    // -> 로컬스토리지 set 기능은 데이터를 추가해주는 기능과는 달라서 이렇게 처리했음.
     window.localStorage.setItem(
       movieId,
       JSON.stringify([...oldReviews, newReview])
     );
     location = location;
+
+    return reviewNum;
   }
 }
 
@@ -306,12 +302,8 @@ class Review {
 
 // 저장된 관람평 데이터들 화면에 보여주는 함수
 function drawReview() {
-  // 상세페이지 영화 아이디 값
-  const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
-
   // 기존에 저장되었던 리뷰들 중 현재 영화에 대한 리뷰만 변수에 담음
-  const oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
+
   console.log(oldReviews);
   // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
   // let views = oldReviews.filter((data) => data.movieId == paramId);
@@ -325,7 +317,7 @@ function drawReview() {
           <td class="td-id">${data.id}</td>
           <td class="td-reveiw-point">${data.reviewPoint}</td>
           <td class="td-review">${data.review}</td>
-          <td><button class="td-userRevDelete">삭제</button></td>
+          <td id=${data.reviewNum}><button class="td-userRevDelete">삭제</button></td>
         </tr>
     `;
     reviewUl.innerHTML += drawTemp;
@@ -335,6 +327,58 @@ function drawReview() {
 drawReview();
 
 // //삭제버튼 누르면 데이터 삭제
+
+// 댓글 삭제 기능
+const userRevDelete = document.querySelector(".td-userRevDelete");
+
+//삭제후 새로고침 해야될 듯
+// id = reviewList 에 이벤트를 주고 e.traget -> userRevDelete로
+
+let modifyGet = window.localStorage.getItem(movieId);
+modifyGet = JSON.parse(modifyGet);
+
+reviewUl.addEventListener("click", (e) => {
+  if (e.target.className === "td-userRevDelete") {
+    console.log("이전 => ", modifyGet);
+
+    let empty;
+
+    const mm = modifyGet.map((a, i) => {
+      if (String(a.reviewNum) === e.target.parentElement.id) {
+        return (empty = i);
+      }
+    });
+
+    modifyGet.splice(empty, 1);
+    console.log("이후 => ", modifyGet);
+
+    window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
+    location = location;
+
+    //배열을 삭제할 것을 자른다
+    // reviewNum === e.target.parentElemet.id 없앤다.
+    //그걸 setItem에 넣어준다?
+    // 그럼 끝
+
+    const modifySet = 0;
+
+    // oldReviews.forEach((rev) => {
+
+    //   window.localStorage.setItem(
+    //     movieId,
+    //     JSON.stringify([...oldReviews, newReview])
+    //   )
+
+    // })
+  }
+});
+
+//reviewNum만 뺴내는 함수
+// function getReviewNum(){
+//   return oldReviews[oldReviews.length-1].reviewNum;
+
+// }
+
 // document
 //   .querySelector(".userRevDelete")
 //   .addEventListener("click", function (e) {});

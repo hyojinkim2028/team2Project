@@ -11,9 +11,17 @@ function appendFunc(data) {
 
 //받은 이미지와 데이터로 html파일 만들어서 내보내기
 function temping(src, data) {
-  // 구조분해 할당 _ obj를 export 하려고?!
-  const { sort, id, king, title, vote_average, release_date } = data;
-  if (data.king === "👑") {
+  console.log("temping 함수 실행중");
+  // 구조분해 할당
+  let { sort, id, king, title, vote_average, release_date, overview } = data;
+
+  //카드 내용 글자수 제한
+  const length = 130;
+  if (overview.length > length) {
+    overview = overview.substr(0, length - 1) + "...";
+  }
+
+  if (data.king === "👑" && data.sort) {
     return `
       <div class="swiper-slide" id= ${sort}>
         <div class="slideCard" id = ${id}>
@@ -24,7 +32,7 @@ function temping(src, data) {
         </div>
       </div>
     `;
-  } else if (data.king !== "👑") {
+  } else if (data.king !== "👑" && data.sort) {
     return `
         <div class="swiper-slide" id= ${sort}>
           <div class="slideCard" id = ${id}>
@@ -35,6 +43,15 @@ function temping(src, data) {
           </div>
         </div>
       `;
+  } else {
+    return `
+    <div class="card" id = ${id}>
+      <img class="poster" src="${src}" alt="" />
+      <h5 class="title">${title}</h5>
+      <p class="avg">평점 : ${vote_average}</p>
+      <span class="comment">${overview}</span>
+    </div>
+  `;
   }
 }
 

@@ -1,15 +1,11 @@
 import { getData } from "./src/getData.js";
 import { appendFunc } from "./src/append.js";
 import { clickShow } from "./src/go.js";
+import { urlAdr } from "./src/makeUrl.js";
 
 const swiperWrapper = document.querySelectorAll(".swiper-wrapper");
 let num = 1;
 let temp = "";
-
-//인기순, 높은평점순 데이터 가져오기 위한 주소 생성기
-function urlAdr(num, what) {
-  return `https://api.themoviedb.org/3/movie/${what}?language=ko-KR&page=${num}`;
-}
 
 //인기영화 데이터 가져오기.
 const popularUrl = urlAdr(num, "popular");
@@ -24,6 +20,7 @@ await datasRepeat(datas.results, { sort: "top_rated" }, 1, 10);
 
 //데이터 반복하면서 appendFunc로 보내주고 거기서 받은 값 붙여주기
 async function datasRepeat(data, sortType, index, many) {
+  console.log("datasRepeat 함수 실행중");
   temp = "";
   for (let i = 0; i < many; i++) {
     //3위 까지는 왕관모양 붙여주기
@@ -39,9 +36,9 @@ async function datasRepeat(data, sortType, index, many) {
 }
 
 //more버튼 중 어떤걸 눌러도 slideMore 함수 실행
-const more = document.querySelectorAll(".more");
-for (let i = 0; i < more.length; i++) {
-  more[i].addEventListener("click", slideMore);
+const selectMore = document.querySelectorAll(".more");
+for (let i = 0; i < selectMore.length; i++) {
+  selectMore[i].addEventListener("click", slideMore);
 }
 
 //클릭한 해당 장르id 찾아서 리스트 페이지로 이동
@@ -81,4 +78,4 @@ async function inputHref() {
   window.location.href = `./populerList.html?val=${inputVal}`;
 }
 
-export { num, temp };
+export { num, temp, selectMore };
