@@ -24,17 +24,22 @@ async function moreHide(searchData, num) {
 async function more() {
   const inputVal = document.querySelector("input").value;
   const urlGetVal = decodeURI(urlVal.replace("?val=", ""));
-
+  console.log(urlGetVal.includes("="));
+  console.log(!inputVal); //string 타입 . 빈게 나옴
+  console.log(Boolean(urlGetVal));
+  console.log(inputVal, "그리고", urlGetVal);
   //검색한 데이터를 더보기
   if (inputVal.length > 0) {
     const url = await makeSearchUrl(inputVal, num);
+    console.log(url);
     const data = await getData(url);
     await moreHide(data, num);
     return datasRepeat(data.results);
   }
   //상세페이지 에서 검색해서 넘어온 후 더보기 눌렀을 경우
-  else if (urlGetVal && !inputVal) {
+  else if (!urlGetVal.includes("=") && !inputVal) {
     const url = await makeSearchUrl(urlGetVal, num);
+    console.log(url);
     const data = await getData(url);
     await moreHide(data, num);
     return datasRepeat(data.results);
@@ -46,6 +51,7 @@ async function more() {
     //장르별 슬라이드 데이터 더 가져오기.
     if (genreArr.includes(genreVal)) {
       const url = await genreUrlNum(genreVal, num);
+      console.log(url);
       const data = await getData(url);
       await moreHide(data, num);
       return datasRepeat(data.results);
@@ -53,6 +59,7 @@ async function more() {
     //인기영화, 최고평점영화 중 해당하는거 데이터 더 가져오기.
     else if (!genreArr.includes(genreVal)) {
       const url = await makeGenreUrl(genreVal, num);
+      console.log(url);
       const data = await getData(url);
       await moreHide(data, num);
       return datasRepeat(data.results);
