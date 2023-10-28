@@ -201,6 +201,7 @@ const reviewUl = document.querySelector("#reviewList");
 const loginId = document.querySelector(".loginId");
 const loginPwd = document.querySelector(".loginPwd");
 const loginReviewPoint = document.querySelector(".reviewPoint");
+console.log(loginReviewPoint);
 const loginReview = document.querySelector(".review");
 
 //클래스에 들어갈 변수 모음
@@ -268,7 +269,7 @@ function chkInput() {
   const passExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,30}$/g;
 
   if (id == "" || blankExp.test(id) || specialExp.test(id)) {
-    alert("아이디는 공백이나 특수문자가 들어갈 수 없습니다.");
+    alert("아이디는 공백이나 특수문자, 한글이 들어갈 수 없습니다.");
     loginId.focus();
     return false;
   } else if (pwd == "" || blankExp.test(pwd) || !passExp.test(pwd)) {
@@ -280,6 +281,10 @@ function chkInput() {
   } else if (review == "" || review.length < 5) {
     alert("리뷰는 5글자 이상 입력하셔야 합니다.");
     loginReview.focus();
+    return false;
+  } //셀렉트 안할 경우 에러
+  else if (reviewPoint === "none") {
+    alert("감상 포인트를 선택하세요");
     return false;
   }
   return true;

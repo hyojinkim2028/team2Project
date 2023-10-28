@@ -93,7 +93,7 @@
         <input
           class="loginId"
           type="text"
-          placeholder="닉네임을 입력해주세요(한글제외)"
+          placeholder="닉네임을 입력해주세요"
         />
         <span>
           <input
@@ -103,19 +103,16 @@
           />
         </span>
         <select name="reviewPoint" class="reviewPoint">
-          관람포인트 선택
-          <option selected disabled>감상포인트</option>
+          <!-- 관람포인트 선택 -->
+          <option value="none" selected disabled >--감상포인트--</option>
+          <!-- <option value="none">--감상포인트--</option> -->
           <option value="영상미">영상미</option>
           <option value="연기">연기</option>
           <option value="음악">음악</option>
           <option value="스토리">스토리</option>
         </select>
       <br/>
-      <textarea
-        class="review"
-        placeholder="감상평을 입력해주세요"
-      >
-      </textarea>
+      <textarea class="review" placeholder="감상평을 입력해주세요"></textarea>
     <br/>
     <button class="submitBtn" type="button">저장</button>
 
