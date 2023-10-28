@@ -37,7 +37,8 @@ const userPwdElement = document.getElementById("userPwd");
 
 
 function onLogin(event) {
-  event.preventDefault();                         //새로고침 막기
+  //event.preventDefault();\
+  
   id = loginId.value;
   pwd = loginPwd.value;
   review = loginReview.textContent;
@@ -54,6 +55,7 @@ function onLogin(event) {
   // window.localStorage.setItem(pwd, user1); 객체 저장
   window.localStorage.setItem(pwd, JSON.stringify(user));   
 
+  window.localStorage.setItem(pwd, JSON.stringify(user1));
 }
 
 login.addEventListener("submit", onLogin);
@@ -77,37 +79,39 @@ class Review {
 
 //새로고침을 해주는게 있으면 좋지 않을까?
 function drawReview(){
-    
     let drawTemp ="";
-    reviewUl.innerHTML += drawTemp;
+    console.log(window.localStorage);
+    a = window.localStorage.getItem(33);
+    console.log(a);
+    console.log(JSON.parse(a));
+    console.log(typeof a);
 
-
-    
+    temp1 = new Review('aa', 'bb', 'cc');
+    console.log(typeof temp1);
+    console.log(temp1);
 
     for(let i=0; i<window.localStorage.length; i++){
-        
-        let usr = JSON.parse(window.localStorage.getItem(window.localStorage.key(i)));
-       
-        drawTemp = 
-        
-        `<li><div id="userId">${usr.id}</div>
-           <div id="userPwd">${usr.pwd}</div>
-            <div id="userReviwPoint>${usr.reviewPoint}</div>
-           <div id="userReview">${usr.review}</div>
+        let usr = JSON.parse( window.localStorage.getItem( window.localStorage.key(i) ) );
+        console.log(usr);
 
+
+        drawTemp += 
+        `<li>
+            ${usr.id}
+        <li>
         `
         
-        reviewUl.innerHTML += drawTemp;
-    }   
+    }
+    document.getElementById('reviewList').append(drawTemp);
 
-
-    // window.localStorage.getItem("");
     // localStorage.setItem(,JSON.stringify());
 
 
 }
-
 drawReview();
+
+
+
 
 //localStorage를 사용하기 위해선 변수가 필요할 듯?
 // 아이디 비번 (key, value)로 저장

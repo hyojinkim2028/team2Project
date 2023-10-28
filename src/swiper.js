@@ -1,5 +1,4 @@
 // 메인화면의 슬라이드 기능 구현
-
 let swipers = new Swiper(".mySwiper", {
   direction: "horizontal", // 가로 슬라이드 설정
 
@@ -15,9 +14,3 @@ let swipers = new Swiper(".mySwiper", {
     prevEl: ".swiper-button-prev",
   },
 });
-
-// more 버튼 누르면 더 많은 리스트가 보여지는 html로 넘어감
-// document.querySelector('.slideMore').addEventListener('click', function () {
-//   console.log(e.target.prev())
-//   window.location.href = 'populerList.html'
-// })
