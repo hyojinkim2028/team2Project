@@ -29,6 +29,7 @@ body {
 
 .headBtn:hover {
   color: gray;
+  cursor: pointer;
 }
 
 .headBtn:active {

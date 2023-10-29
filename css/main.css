@@ -18,6 +18,15 @@ header {
   font-family: "Playfair Display", serif;
 }
 
+.logo:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+.logo:active {
+  font-size: 5rem;
+}
+
 main {
   background-color: var(--red);
   height: 100%;
