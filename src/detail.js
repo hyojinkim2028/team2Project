@@ -8,6 +8,17 @@ const tabItem = document.querySelectorAll(".tab_item");
 const tabInner = document.querySelectorAll(".tab_inner");
 let paramId = "";
 
+//리뷰작성후 페이지 리로드 된다면 리뷰 탭으로 자동 보여주기
+const urlVal = window.location.search;
+console.log(urlVal.includes("review"));
+if (urlVal.includes("review")) {
+  tabInner[0].classList.remove("active");
+  tabInner[1].classList.add("active");
+
+  tabItem[0].classList.remove("active");
+  tabItem[1].classList.add("active");
+}
+
 tabItem.forEach((tab, idx) => {
   tab.addEventListener("click", function () {
     tabInner.forEach((inner) => {
@@ -246,7 +257,7 @@ function onLogin(event) {
       movieId,
       JSON.stringify([...oldReviews, newReview])
     );
-    location = location;
+    window.location.href = `detail.html?id=${movieId}&review`;
 
     return reviewNum;
   }
@@ -341,7 +352,6 @@ drawReview();
 
 let modifyGet = window.localStorage.getItem(movieId);
 modifyGet = JSON.parse(modifyGet);
-
 reviewUl.addEventListener("click", (e) => {
   //삭제기능
   if (e.target.className === "td-userRevDelete") {
