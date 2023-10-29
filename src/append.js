@@ -21,6 +21,9 @@ function temping(src, data) {
     overview = overview.substr(0, length - 1) + "...";
   }
 
+  //평점 소숫점 1번째 자리까지만 나오게
+  vote_average = vote_average.toFixed(2);
+
   if (data.king === "👑" && data.sort) {
     return `
       <div class="swiper-slide" id= ${sort}>

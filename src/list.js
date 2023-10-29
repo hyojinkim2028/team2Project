@@ -39,13 +39,13 @@ else {
 //데이터 가져와서 붙여주기
 async function searchStart2(url) {
   const searchData = await getData(url);
-  temp = "";
   await moreHide(searchData, num);
   return datasRepeat(searchData.results);
 }
 
 //받은 데이터 반복하며 appendFunc 실행 결과물 cardContainer에 붙여주기
 function datasRepeat(data) {
+  temp = "";
   for (let i = 0; i < data.length; i++) {
     temp += appendFunc(data[i]);
   }
