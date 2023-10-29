@@ -456,3 +456,8 @@ async function inputHref() {
   let inputVal = document.querySelector("input").value;
   window.location.href = `./populerList.html?val=${inputVal}`;
 }
+
+//화살표 누르면 좌표 맨 위로
+document
+  .querySelector(".upIconWarp")
+  .addEventListener("click", () => window.scrollTo(0, 0));
