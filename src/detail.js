@@ -323,6 +323,7 @@ function drawReview() {
           <td class="td-reveiw-point">${data.reviewPoint}</td>
           <td class="td-review">${data.review}</td>
           <td id=${data.reviewNum}><button class="td-userRevDelete">삭제</button></td>
+          <td class=${data.reviewNum}><button id="myModal" class="td-userRevModify">수정</button></td>
         </tr>
     `;
     reviewUl.innerHTML += drawTemp;
@@ -334,7 +335,6 @@ drawReview();
 // //삭제버튼 누르면 데이터 삭제
 
 // 댓글 삭제 기능
-const userRevDelete = document.querySelector(".td-userRevDelete");
 
 //삭제후 새로고침 해야될 듯
 // id = reviewList 에 이벤트를 주고 e.traget -> userRevDelete로
@@ -343,23 +343,100 @@ let modifyGet = window.localStorage.getItem(movieId);
 modifyGet = JSON.parse(modifyGet);
 
 reviewUl.addEventListener("click", (e) => {
+  //삭제기능
   if (e.target.className === "td-userRevDelete") {
-    console.log("이전 => ", modifyGet);
+    let password = prompt("비밀번호를 입력해 주세요");
 
+    //데이터 위치값 담을 변수
     let empty;
 
+    //어떤 데이터에서 삭제할건지 데이터 위치 탐색
     const mm = modifyGet.map((a, i) => {
       if (String(a.reviewNum) === e.target.parentElement.id) {
         return (empty = i);
       }
     });
 
-    modifyGet.splice(empty, 1);
-    // console.log("이후 => ", modifyGet);
+    console.log(empty);
+    //비밀번호 입력값이 동일하면 리뷰삭제
+    if (password === modifyGet[empty].pwd) {
+      modifyGet.splice(empty, 1);
+      window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
+      location = location;
+    } else {
+      alert("작정자의 비밀번호와 다릅니다.");
+    }
+  }
 
-    window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
-    location = location;
-    const modifySet = 0;
+  //수정기능
+  if (e.target.className === "td-userRevModify") {
+    let password = prompt("비밀번호를 입력해 주세요");
+
+    //데이터 위치값 담을 변수
+    let empty;
+
+    //데이터 위치 탐색
+    modifyGet.forEach((a, i) => {
+      if (String(a.reviewNum) === e.target.parentElement.className) {
+        return (empty = i);
+      }
+    });
+    let reviewNumIdx = modifyGet[empty].reviewNum;
+
+    //비밀번호 입력값이 동일하면 리뷰 수정
+    if (password === modifyGet[empty].pwd) {
+      window.scrollTo(0, 1050);
+      //수정버튼 누르면 값들 채워넣기.
+      let { id, movieId, pwd, review, reviewNum, reviewPoint } =
+        modifyGet[empty];
+
+      document.querySelector(".loginId").value = id;
+      document.querySelector(".loginPwd").value = pwd;
+      document.querySelector(".reviewPoint").value = reviewPoint;
+      document.querySelector(".review").value = review;
+
+      //저장버튼 누르면 기존에 데이터 삭제하고, 새로운 데이터 집어넣기.
+      document
+        .querySelector(".submitBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          modifyGet.splice(empty, 1);
+          window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
+          // 입력값체크
+          if (chkInput() == true) {
+            if (reviewNum > 0 || oldReviews.length > 0) {
+              reviewNum = oldReviews[oldReviews.length - 1].reviewNum;
+            }
+            reviewNum++;
+
+            id = loginId.value;
+            pwd = loginPwd.value;
+            reviewPoint = loginReviewPoint.value;
+            review = loginReview.value;
+
+            console.log(oldReviews);
+
+            const newReview = new Review(
+              movieId,
+              reviewNum,
+              id,
+              pwd,
+              reviewPoint,
+              review
+            );
+
+            window.localStorage.setItem(
+              movieId,
+              JSON.stringify([...oldReviews, newReview])
+            );
+            location = location;
+
+            return reviewNum;
+          }
+        });
+    } else {
+      alert("작정자의 비밀번호와 다릅니다.");
+    }
   }
 });
 
