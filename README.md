@@ -1,8 +1,17 @@
-# 영화 검색 및 소개 서비스
+# 영화 정보 제공 서비스
 
 <br/>
 <br/>
 https://hyojinkim2028.github.io/team2Project/
+
+<img src="./img/main1.png"/>
+<img src="./img/main2.png"/>
+<img src="./img/main3.png"/>
+<img src="./img/listMore.png"/>
+<img src="./img/detailInfo.png"/>
+<img src="./img/detailModify.png"/>
+<img src="./img/detail.png"/>
+
 <br/>
 <br/>
 <br/>
@@ -127,12 +136,12 @@ https://hyojinkim2028.github.io/team2Project/
 
 ## 사용 도구
 
-<img style = "float:left" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
-<img style = "float:left" src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS&logoColor=white"/>
-<img style = "float:left" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
-<img style = "float:left" src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=GIT&logoColor=white"/>
-<img style = "float:left" src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GITHUB&logoColor=white"/>
-<img style = "float:left" src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=GIT&logoColor=white"/>
+<img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=GITHUB&logoColor=white"/>
+<img src="https://img.shields.io/badge/VisualStudioCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white"/>
 
 </br>
 </br>
