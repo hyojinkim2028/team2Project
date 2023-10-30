@@ -14,23 +14,23 @@
 
 <br/>
 <img src="./img/Main2.jpg"/>
--------
+* * *
 <br/>
 <img src="./img/Main3.jpg"/>
--------
+* * *
 <br/>
 <img src="./img/ListMore.jpg"/>
--------
+* * *
 <br/>
 <img src="./img/Datail.jpeg"/>
--------
+* * *
 <br/>
 <img src="./img/DetailModify.jpg"/>
--------
+* * *
 <br/>
 <img src="./img/DetailInfo.jpg"/>
 <br/>
--------
+
 <br/>
 <br/>
 <br/>
