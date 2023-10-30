@@ -24,6 +24,8 @@ function temping(src, data) {
   //평점 소숫점 1번째 자리까지만 나오게
   vote_average = vote_average.toFixed(2);
 
+
+  // 1, 2, 3위만 왕관표시 되도록 함. 
   if (data.king === "👑" && data.sort) {
     return `
       <div class="swiper-slide" id= ${sort}>

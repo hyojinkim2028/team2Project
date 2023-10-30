@@ -27,6 +27,7 @@ if (urlVal.includes("review")) {
 
 // 상세페이지 탭버튼 구성 
 tabItem.forEach((tab, idx) => {
+  // 탭 버튼에 클릭 이벤트를 준다
   tab.addEventListener("click", function () {
     tabInner.forEach((inner) => {
       inner.classList.remove("active");
@@ -35,6 +36,10 @@ tabItem.forEach((tab, idx) => {
     tabItem.forEach((item) => {
       item.classList.remove("active");
     });
+
+    // 탭 버튼과 탭 내용 영역의 index에 해당하는 부분에 active 클래스를 추가한다 
+    // 만약 첫번째 탭을 클릭했다면, 같은 인덱스에 있는 첫번째 탭 내용 영역에 
+    // active 클래스가 추가된다.
 
     tabItem[idx].classList.add("active");
     tabInner[idx].classList.add("active");
@@ -89,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   )
     .then((response) => response.json())
     .then((response) => {
+       // 비디오 api에서 유튜브 key값 불러오기
       document
         .getElementById("youtubeFrame")
         .setAttribute(
@@ -99,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((err) => console.error(err));
 });
 
+// 영화상세 기본정보 세팅
 function setDetailInfo(response) {
   document.querySelector("#detailInfo .title").innerHTML = response.title;
   document.querySelector("#detailInfo .releaseDate").innerHTML =
@@ -115,6 +122,7 @@ function setDetailInfo(response) {
   document.querySelector("#detailInfo .overview").innerHTML = response.overview;
 }
 
+// 영화상세 감독 세팅
 function searchDirector(response) {
   let directorArray = response.crew.filter((e) => {
     return e.job === "Director";
@@ -132,7 +140,7 @@ function searchDirector(response) {
     ""
   );
 }
-
+// 영화상세 영화포스터 세팅
 function searchImage(response) {
   let tempHtml = "";
   response.backdrops.forEach((e) => {
@@ -144,6 +152,7 @@ function searchImage(response) {
   document.querySelector("#detailInfo .images").innerHTML = tempHtml;
 }
 
+// 영화상세 권장연령 세팅
 function searchRelease(response) {
   let releaseArray = response.results;
 
@@ -163,32 +172,7 @@ function searchRelease(response) {
   }
 }
 
-function searchCertification(iso, cert) {
-  fetch(`https://api.themoviedb.org/3/certification/movie/list`, options)
-    .then((response) => response.json())
-    .then((response) => {
-      console.log(response.certifications[iso]);
-      console.log(iso, response);
-
-      document.querySelector("#detailInfo .meaning").innerHTML =
-        "권장연령미확인";
-
-      let certificationByIso = response.certifications[iso];
-      if (certificationByIso !== undefined) {
-        let certification = certificationByIso.find((e) => {
-          if (e.certification === cert) {
-            return true;
-          }
-        });
-        console.log(certification);
-        if (certification !== undefined) {
-          document.querySelector("#detailInfo .meaning").innerHTML =
-            "(" + certification.meaning + ")";
-        }
-      }
-    })
-    .catch((err) => console.error(err));
-}
+// 분을 시간분으로 리턴
 
 function minToHourMin(min) {
   let hour = Math.floor(min / 60);
@@ -343,7 +327,7 @@ reviewUl.addEventListener("click", (e) => {
   if (e.target.className === "td-userRevDelete") {
     let password = prompt("비밀번호를 입력해 주세요");
 
-    //데이터 위치값 담을 변수
+    // 삭제, 수정 데이터 위치하는 인덱스 담을 변수
     let empty;
 
     //어떤 데이터에서 삭제할건지 데이터 위치 탐색
