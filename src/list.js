@@ -2,11 +2,11 @@ import { getData } from "./getData.js";
 import { clickShow } from "./go.js";
 import { genreUrlNum, makeGenreUrl, makeSearchUrl } from "./makeUrl.js";
 import { moreHide, more } from "./more.js";
-import { appendFunc } from "./append.js";
+import { searchStart, searchStart2 } from "./append.js";
 
 const cardContainer = document.querySelector(".cardContainer");
 let num = 1;
-let temp = "";
+// let temp = "";
 
 //영화 장르값 모아둔 배열.
 const genreArr = ["", "28", "80", "10749", "14", "35"];
@@ -36,41 +36,41 @@ else {
   await searchStart2(inputUrl);
 }
 
-//데이터 가져와서 붙여주기
-async function searchStart2(url) {
-  const searchData = await getData(url);
-  await moreHide(searchData, num);
-  return datasRepeat(searchData.results);
-}
+// //데이터 가져와서 붙여주기
+// async function searchStart2(url) {
+//   const searchData = await getData(url);
+//   await moreHide(searchData, num);
+//   return datasRepeat(searchData.results);
+// }
 
-//받은 데이터 반복하며 appendFunc 실행 결과물 cardContainer에 붙여주기
-function datasRepeat(data) {
-  temp = "";
-  for (let i = 0; i < data.length; i++) {
-    temp += appendFunc(data[i]);
-  }
-  return (cardContainer.innerHTML += temp);
-}
+// //받은 데이터 반복하며 appendFunc 실행 결과물 cardContainer에 붙여주기
+// function datasRepeat(data) {
+//   temp = "";
+//   for (let i = 0; i < data.length; i++) {
+//     temp += appendFunc(data[i]);
+//   }
+//   return (cardContainer.innerHTML += temp);
+// }
 
-//검색 데이터 가져와서 붙여쥐기 _ 데이터 없으면 없다고 처리.
-async function searchStart() {
-  temp = "";
-  cardContainer.innerHTML = "";
-  num = 1;
+// //검색 데이터 가져와서 붙여쥐기 _ 데이터 없으면 없다고 처리.
+// async function searchStart() {
+//   temp = "";
+//   cardContainer.innerHTML = "";
+//   num = 1;
 
-  const url = await getInput(num);
-  const searchData = await getData(url);
+//   const url = await getInput(num);
+//   const searchData = await getData(url);
 
-  if (searchData.results.length === 0) {
-    document.querySelector(
-      ".cardContainer"
-    ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`;
-    document.querySelector("#more").classList.add("hide");
-  } else {
-    await moreHide(searchData, num);
-    return datasRepeat(searchData.results);
-  }
-}
+//   if (searchData.results.length === 0) {
+//     document.querySelector(
+//       ".cardContainer"
+//     ).innerHTML = `<h2 class = "noResult"> 검색 결과가 없습니다. 😢 </h2>`;
+//     document.querySelector("#more").classList.add("hide");
+//   } else {
+//     await moreHide(searchData, num);
+//     return datasRepeat(searchData.results);
+//   }
+// }
 
 //인풋값 가져와서 그에 해당하는 주소 가져온다.
 async function getInput(num) {
@@ -112,4 +112,4 @@ document.querySelector(".upIconWarp").addEventListener("click", function () {
   window.scrollTo(0, 0);
 });
 
-export { cardContainer, num, temp, urlVal, genreArr, datasRepeat, moreHide };
+export { cardContainer, num, urlVal, genreArr, moreHide };

@@ -25,3 +25,10 @@ h5 {
   margin: 15px 0px 10px 10px;
   line-height: 140%;
 }
+
+.upIconWarp {
+  position: fixed;
+  top: 90%;
+  right: 2%;
+  color: var(--icon);
+}

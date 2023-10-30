@@ -29,6 +29,7 @@ body {
 
 .headBtn:hover {
   color: gray;
+  cursor: pointer;
 }
 
 .headBtn:active {
@@ -299,7 +300,7 @@ table > .th-review,
 }
 
 .td-userRevDelete,
-.te-userRevModify {
+.td-userRevModify {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
