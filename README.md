@@ -164,22 +164,22 @@ https://hyojinkim2028.github.io/team2Project/
 
 ## 폴더 구조
 
-📦
-├─ src
-│  ├─ genreTap.js
-│  ├─ swiper.js
-│  ├─ main.js
-│  │  └─ getData.js
-│  │  └─ append.js
-│  │  └─ go.js
-│  │  └─ makeUrl.js
-│  │  
-│  ├─ list.js
-│  │  └─ getData.js
-│  │  └─ append.js
-│  │  └─ go.js
-│  │  └─ makeUrl.js
-│  │  └─ more.js
-│  │  
-│  ├─ detail.js
-└─
+📦</br>
+├─ src</br>
+│  ├─ genreTap.js</br>
+│  ├─ swiper.js</br>
+│  ├─ main.js</br>
+│  │  └─ getData.js</br>
+│  │  └─ append.js</br>
+│  │  └─ go.js</br>
+│  │  └─ makeUrl.js</br>
+│  │  </br>
+│  ├─ list.js</br>
+│  │  └─ getData.js</br>
+│  │  └─ append.js</br>
+│  │  └─ go.js</br>
+│  │  └─ makeUrl.js</br>
+│  │  └─ more.js</br>
+│  │  </br>
+│  ├─ detail.js</br>
+└─</br>
