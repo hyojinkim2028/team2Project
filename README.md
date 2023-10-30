@@ -184,21 +184,24 @@ https://hyojinkim2028.github.io/team2Project/
 │  ├─ detail.js</br>
 └─</br>
 
-📦src
-┣ 📜append.js
-┣ 📜detail.js
-┣ 📜genreTap.js
-┣ 📜getData.js
-┣ 📜go.js
-┣ 📜list.js
-┣ 📜main.js
-┣ 📜makeUrl.js
-┣ 📜more.js
-┗ 📜swiper.js
+📦src</br>
+┣ 📜append.js</br>
+┣ 📜detail.js</br>
+┣ 📜genreTap.js</br>
+┣ 📜getData.js</br>
+┣ 📜go.js</br>
+┣ 📜list.js</br>
+┣ 📜main.js</br>
+┣ 📜makeUrl.js</br>
+┣ 📜more.js</br>
+┗ 📜swiper.js</br>
 
-📦css
-┣ 📜common.css
-┣ 📜detail.css
-┣ 📜main.css
-┣ 📜reset.css
-┗ 📜swiper.css
+</br>
+</br>
+
+📦css</br>
+┣ 📜common.css</br>
+┣ 📜detail.css</br>
+┣ 📜main.css</br>
+┣ 📜reset.css</br>
+┗ 📜swiper.css</br>
