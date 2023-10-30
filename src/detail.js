@@ -7,6 +7,19 @@ const oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
 const tabItem = document.querySelectorAll(".tab_item");
 const tabInner = document.querySelectorAll(".tab_inner");
 let paramId = "";
+let modifyGet = window.localStorage.getItem(movieId);
+modifyGet = JSON.parse(modifyGet);
+
+//리뷰작성후 페이지 리로드 된다면 리뷰 탭으로 자동 보여주기
+const urlVal = window.location.search;
+console.log(urlVal.includes("review"));
+if (urlVal.includes("review")) {
+  tabInner[0].classList.remove("active");
+  tabInner[1].classList.add("active");
+
+  tabItem[0].classList.remove("active");
+  tabItem[1].classList.add("active");
+}
 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener("click", function () {
@@ -204,7 +217,7 @@ let reviewNum = 0;
 console.log(reviewNum);
 
 // 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
-function onLogin(event) {
+function onLogin(event, modifyGet) {
   event.preventDefault(); //새로고침 막기
 
   // 입력값체크
@@ -232,9 +245,9 @@ function onLogin(event) {
 
     window.localStorage.setItem(
       movieId,
-      JSON.stringify([...oldReviews, newReview])
+      JSON.stringify([...modifyGet, newReview])
     );
-    location = location;
+    window.location.href = `detail.html?id=${movieId}&review`;
 
     return reviewNum;
   }
@@ -316,10 +329,7 @@ drawReview();
 
 // 댓글 삭제 기능
 
-let modifyGet = window.localStorage.getItem(movieId);
-modifyGet = JSON.parse(modifyGet);
 
-// reviewUl 누르면 삭제 이벤트 발생
 reviewUl.addEventListener("click", (e) => {
   //삭제기능
   if (e.target.className === "td-userRevDelete") {
@@ -364,6 +374,7 @@ reviewUl.addEventListener("click", (e) => {
     //비밀번호 입력값이 동일하면 리뷰 수정
     if (password === modifyGet[empty].pwd) {
       window.scrollTo(0, 1050);
+
       //수정버튼 누르면 값들 채워넣기.
       let { id, movieId, pwd, review, reviewNum, reviewPoint } =
         modifyGet[empty];
@@ -373,44 +384,14 @@ reviewUl.addEventListener("click", (e) => {
       document.querySelector(".reviewPoint").value = reviewPoint;
       document.querySelector(".review").value = review;
 
+      modifyGet.splice(empty, 1);
+      window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
       //저장버튼 누르면 기존에 데이터 삭제하고, 새로운 데이터 집어넣기.
       document
         .querySelector(".submitBtn")
-        .addEventListener("click", function (e) {
-          e.preventDefault();
-          modifyGet.splice(empty, 1);
-          window.localStorage.setItem(movieId, JSON.stringify(modifyGet));
-          // 입력값체크
-          if (chkInput() == true) {
-            if (reviewNum > 0 || oldReviews.length > 0) {
-              reviewNum = oldReviews[oldReviews.length - 1].reviewNum;
-            }
-            reviewNum++;
-
-            id = loginId.value;
-            pwd = loginPwd.value;
-            reviewPoint = loginReviewPoint.value;
-            review = loginReview.value;
-
-            console.log(oldReviews);
-
-            const newReview = new Review(
-              movieId,
-              reviewNum,
-              id,
-              pwd,
-              reviewPoint,
-              review
-            );
-
-            window.localStorage.setItem(
-              movieId,
-              JSON.stringify([...oldReviews, newReview])
-            );
-            location = location;
-
-            return reviewNum;
-          }
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          onLogin(event, modifyGet);
         });
     } else {
       alert("작정자의 비밀번호와 다릅니다.");
@@ -434,3 +415,8 @@ async function inputHref() {
   let inputVal = document.querySelector("input").value;
   window.location.href = `./list.html?val=${inputVal}`;
 }
+
+//화살표 누르면 좌표 맨 위로
+document
+  .querySelector(".upIconWarp")
+  .addEventListener("click", () => window.scrollTo(0, 0));
