@@ -1,4 +1,4 @@
-import { num, urlVal, genreArr, datasRepeat } from "./list.js";
+import { num, urlVal, genreArr } from "./list.js";
 import { genreUrlNum, makeGenreUrl, makeSearchUrl } from "./makeUrl.js";
 import { getData } from "./getData.js";
 
