@@ -3,14 +3,15 @@
 <br/>
 <br/>
 https://hyojinkim2028.github.io/team2Project/
+<br/>
 
-<img src="./img/main1.png"/>
-<img src="./img/main2.png"/>
-<img src="./img/main3.png"/>
-<img src="./img/listMore.png"/>
-<img src="./img/detailInfo.png"/>
-<img src="./img/detailModify.png"/>
-<img src="./img/detail.png"/>
+<img src="./img/main1.png"/><br/>
+<img src="./img/main2.png"/><br/>
+<img src="./img/main3.png"/><br/>
+<img src="./img/listMore.png"/><br/>
+<img src="./img/detailInfo.png"/><br/>
+<img src="./img/detailModify.png"/><br/>
+<img src="./img/detail.png"/><br/>
 
 <br/>
 <br/>
