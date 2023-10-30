@@ -75,6 +75,9 @@ document
 //인풋값 가져와서 페이지 이동
 async function inputHref() {
   let inputVal = document.querySelector('input').value
+  if (!inputVal) {
+    return alert('검색어를 입력하세요')
+  }
   window.location.href = `./list.html?val=${inputVal}`
 }
 
