@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Playfair+Display:ital,wght@1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
 
 body {
   background-color: black;
@@ -23,7 +23,7 @@ body {
 
   letter-spacing: 2px;
   word-spacing: 4px;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 4rem;
 }
 
@@ -49,7 +49,7 @@ body {
   height: 35px;
   width: 300px;
   font-size: 17px;
-  font-family: 'Gugi', sans-serif;
+  font-family: "Gugi", sans-serif;
   letter-spacing: 2px;
   word-spacing: 4px;
   outline: none;
@@ -60,7 +60,7 @@ body {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: 'Gugi', sans-serif;
+  font-family: "Gugi", sans-serif;
   letter-spacing: 4px;
   border-radius: 10px;
   background-color: var(--red);
@@ -244,7 +244,7 @@ textarea {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: 'Gugi', sans-serif;
+  font-family: "Gugi", sans-serif;
   letter-spacing: 4px;
   border-radius: 10px;
   background-color: var(--red);
@@ -298,11 +298,12 @@ table > .th-review,
   height: 40px;
 }
 
-.td-userRevDelete {
+.td-userRevDelete,
+.te-userRevModify {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;
-  font-family: 'Gugi', sans-serif;
+  font-family: "Gugi", sans-serif;
   letter-spacing: 4px;
   border-radius: 10px;
   background-color: var(--red);

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -16,7 +15,7 @@
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/detail.css" />
-    <script defer src="./src/detail.js"></script>
+    <script type = "module" src="./src/detail.js"></script>
   </head>
 
 <body>
@@ -24,8 +23,7 @@
   <div class="headBox">
     <h2 class="headBtn" onclick="javascript:location.href='index.html'">Collection of Movies</h2>
   </div>
-
-    <!-- 검색창 -->
+  <!-- 검색창 -->
   <div class="searchContainer">
     <input
       id="searchInput"
@@ -103,19 +101,16 @@
           />
         </span>
         <select name="reviewPoint" class="reviewPoint">
-          관람포인트 선택
-          <option selected disabled>감상포인트</option>
+          <!-- 관람포인트 선택 -->
+          <option value="none" selected disabled >--감상포인트--</option>
+          <!-- <option value="none">--감상포인트--</option> -->
           <option value="영상미">영상미</option>
           <option value="연기">연기</option>
           <option value="음악">음악</option>
           <option value="스토리">스토리</option>
         </select>
       <br/>
-      <textarea
-        class="review"
-        placeholder="감상평을 입력해주세요"
-      >
-      </textarea>
+      <textarea class="review" placeholder="감상평을 입력해주세요"></textarea>
     <br/>
     <button class="submitBtn" type="button">저장</button>
 
@@ -131,10 +126,10 @@
         </thead>
         <tbody id="reviewList">
           <tr>
-            <td class="td-id">rizzy</td>
+            <!-- <td class="td-id">rizzy</td>
             <td class="td-reveiw-point">영상미</td>
             <td class="td-review">너무 재미있었고 소름끼쳤어요!</td>
-            <td><button class="td-userRevDelete">삭제</button></td>
+            <td><button class="td-userRevDelete">삭제</button></td> -->
           </tr>
         </tbody>
       </table>
