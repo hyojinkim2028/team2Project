@@ -4,13 +4,19 @@
 ![프로젝트 로고 또는 이미지](URL)
 <br/>
 <br/>
+<br/>
+<br/>
 
 ## 프로젝트 개요
 
 <br/>
-영화에 대한 정보를 제공하는 서비스를 만들었습니다.<br/>
-사용자가 원하는 순위로 영화를 볼 수 있으며 영화를 장르별로 찾아볼 수 있는 기능을 제공합니다.<br/>
+영화 정보를 제공하는 서비스를 만들었습니다.<br/>
+사용자는 원하는 순위로 영화를 볼 수 있으며, 영화를 장르별로 찾아볼 수 있는 기능을 제공합니다.<br/>
 또한 로컬 스토리지를 이용해 자신의 리뷰를 작성할 수 있으며 리뷰를 남길 수 있습니다.<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 ## 주요 기능
 
@@ -25,10 +31,15 @@
 - 더보기 기능: 더보기 기능은 검색결과를 포함한 모든 페이지에서 사용 가능합니다.
 - 이미지 없을때 다른 이미지: 영화 이미지가 존재하지 않는경우, 다른 이미지로 대체하여 보여줍니다.
 
+<br/>
+<br/>
+<br/>
+<br/>
+
 ## 사용 도구
 
-<img src="https://img.shields.io/badge/HTML5-#E34F26?style=flat&logo=HTML5&logoColor=#E34F26"/>
-<img src="https://img.shields.io/badge/JavaScript-#F7DF1E?style=flat&logo=JavaScript&logoColor=#F7DF1E"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=HTML5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=#F7DF1E"/>
 
 - Git 및 GitHub: 버전 관리 및 협업
 - Font Awesome: 프론트엔드 아이콘 사용
