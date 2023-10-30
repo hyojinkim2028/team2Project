@@ -22,13 +22,13 @@
 <img src="./img/listMore.png"/>
 
 <br/>
-<img src="./img/detailInfo.png"/>
+<img src="./img/detail.png"/>
 
 <br/>
 <img src="./img/detailModify.png"/>
 
 <br/>
-<img src="./img/detail.png"/>
+<img src="./img/detailInfo.png"/>
 <br/>
 
 <br/>
