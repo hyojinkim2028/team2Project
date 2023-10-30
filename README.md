@@ -8,7 +8,7 @@ https://hyojinkim2028.github.io/team2Project/
 <br/>
 <br/>
 
-# 영화 검색 및 소개 서비스
+# 팀원 및 맡은 역할
 
 <br/>
 
@@ -25,7 +25,7 @@ https://hyojinkim2028.github.io/team2Project/
 - 유은지
   > 메인페이지, 리스트페이지 css 작업<br/>
   > 메인페이지 상단 인기순위 & 평점순 순위 슬라이드 기능<br/>
-  > 상세페이지 항목별 영화 보여주기 기능<br/>
+  > 리스트페이지 항목별 영화 보여주기 기능<br/>
   > 모든 페이지 더보기 기능 구현<br/>
   > 모든 페이지 검색 기능 구현<br/>
   > 검색값 입력 벨리데이션 구현<br/>
@@ -149,19 +149,6 @@ https://hyojinkim2028.github.io/team2Project/
 
 </br>
 </br>
-</br>
-</br>
-
-## 팀원
-
-</br>
-
-> - 고병옥
-> - 김효진
-> - 유은지
-> - 이상권
-> - 하정현
-
 </br>
 </br>
 
