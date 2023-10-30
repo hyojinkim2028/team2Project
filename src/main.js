@@ -72,9 +72,14 @@ document
     }
   })
 
-//인풋값 가져와서 페이지 이동
+// 인풋값 가져와서 페이지 이동
+// tmdb 자체 검색 기능을 활용해서 대소문자 구분 없이 검색 및 일부만 검색해도 결과값 반환됨.
 async function inputHref() {
   let inputVal = document.querySelector('input').value
+  // 인풋값 없으면 검색어 입력하라고 팝업
+  if (!inputVal) {
+    return alert('검색어를 입력하세요')
+  }
   window.location.href = `./list.html?val=${inputVal}`
 }
 
