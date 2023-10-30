@@ -39,10 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 임시 url 파라메터 가져오는부분
   const urlParams = new URLSearchParams(window.location.search);
   paramId = urlParams.get("id");
-  // console.log('아이디',paramId)
-  if (paramId == null) {
-    paramId = 122;
-  }
 
   fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
     .then((response) => response.json())
@@ -92,7 +88,6 @@ function setDetailInfo(response) {
     response.release_date;
   document.querySelector("#detailInfo .voteAverage").innerHTML =
     response.vote_average;
-  // document.querySelector('#detailInfo .meme').innerHTML = response.vote_average;
   document.querySelector("#detailInfo .genres").innerHTML =
     response.genres.reduce((str, e, idx) => {
       return (str += e.name + (response.genres.length != idx + 1 ? ", " : ""));
@@ -104,7 +99,6 @@ function setDetailInfo(response) {
 }
 
 function searchDirector(response) {
-  // jsonData.crew.filter(({job})=> job ==='Director')
   let directorArray = response.crew.filter((e) => {
     return e.job === "Director";
   });
@@ -141,12 +135,9 @@ function searchRelease(response) {
       return true;
     }
   });
-  // let release;
 
   // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
-    // release = releaseArray[0]
-    //
     document.querySelector("#detailInfo .certification").innerHTML =
       "권장연령미확인";
   } else {
@@ -159,9 +150,6 @@ function searchCertification(iso, cert) {
   fetch(`https://api.themoviedb.org/3/certification/movie/list`, options)
     .then((response) => response.json())
     .then((response) => {
-      console.log(response.certifications[iso]);
-      //console.log(response.certifications[iso]);
-      console.log(iso, response);
 
       document.querySelector("#detailInfo .meaning").innerHTML =
         "권장연령미확인";
@@ -307,12 +295,6 @@ class Review {
 
 // 저장된 관람평 데이터들 화면에 보여주는 함수
 function drawReview() {
-  // 기존에 저장되었던 리뷰들 중 현재 영화에 대한 리뷰만 변수에 담음
-
-  console.log(oldReviews);
-  // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
-  // let views = oldReviews.filter((data) => data.movieId == paramId);
-
   //현재 영화에 대한 리뷰데이터 반복하면서 데이터 뽑아서 붙여주기.
   oldReviews.forEach((data) => {
     let drawTemp = "";
@@ -332,16 +314,12 @@ function drawReview() {
 
 drawReview();
 
-// //삭제버튼 누르면 데이터 삭제
-
 // 댓글 삭제 기능
-
-//삭제후 새로고침 해야될 듯
-// id = reviewList 에 이벤트를 주고 e.traget -> userRevDelete로
 
 let modifyGet = window.localStorage.getItem(movieId);
 modifyGet = JSON.parse(modifyGet);
 
+// reviewUl 누르면 삭제 이벤트 발생
 reviewUl.addEventListener("click", (e) => {
   //삭제기능
   if (e.target.className === "td-userRevDelete") {
@@ -454,5 +432,5 @@ document
 //인풋값 가져와서 페이지 이동
 async function inputHref() {
   let inputVal = document.querySelector("input").value;
-  window.location.href = `./populerList.html?val=${inputVal}`;
+  window.location.href = `./list.html?val=${inputVal}`;
 }

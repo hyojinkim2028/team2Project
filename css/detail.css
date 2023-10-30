@@ -41,7 +41,6 @@ body {
   align-items: center;
   justify-content: right;
   background-color: var(--black);
-  /* background-color: brown; */
 }
 
 #searchInput {
@@ -254,7 +253,6 @@ textarea {
 }
 
 .reviewList {
-  /* margin: 20px; */
   background-color: black;
   width: 95%;
   border-radius: 20px;
@@ -299,7 +297,7 @@ table > .th-review,
 }
 
 .td-userRevDelete,
-.te-userRevModify {
+.td-userRevModify {
   padding: 0.6%;
   margin-left: 20px;
   font-size: 18px;

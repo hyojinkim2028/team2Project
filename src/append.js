@@ -11,7 +11,6 @@ function appendFunc(data) {
 
 //받은 이미지와 데이터로 html파일 만들어서 내보내기
 function temping(src, data) {
-  console.log("temping 함수 실행중");
   // 구조분해 할당
   let { sort, id, king, title, vote_average, release_date, overview } = data;
 

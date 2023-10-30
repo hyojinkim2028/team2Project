@@ -26,7 +26,6 @@ main {
 
 footer {
   background-color: var(--red);
-  /* background-color: rgb(253, 246, 239); */
   height: 300px;
   width: 100%;
   display: flex;
@@ -45,7 +44,6 @@ footer {
   align-items: center;
   justify-content: right;
   background-color: var(--black);
-  /* background-color: brown; */
 }
 
 #searchInput {
