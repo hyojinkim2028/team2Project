@@ -115,6 +115,7 @@ https://hyojinkim2028.github.io/team2Project/
 <br/><br/>
 
 - 이미지 없을때 다른 이미지
+
   > 영화 이미지가 존재하지 않는경우, 다른 이미지로 대체하여 보여줍니다.
 
 <br/><br/>
