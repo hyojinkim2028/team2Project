@@ -9,7 +9,7 @@ const tabInner = document.querySelectorAll(".tab_inner");
 let paramId = "";
 let modifyGet = window.localStorage.getItem(movieId);
 modifyGet = JSON.parse(modifyGet);
-
+console.log(modifyGet);
 //리뷰작성후 페이지 리로드 된다면 리뷰 탭으로 자동 보여주기
 const urlVal = window.location.search;
 console.log(urlVal.includes("review"));
@@ -254,7 +254,7 @@ function onLogin(event, modifyGet) {
       reviewPoint,
       review
     );
-
+    console.log(modifyGet);
     window.localStorage.setItem(
       movieId,
       JSON.stringify([...modifyGet, newReview])
@@ -304,7 +304,9 @@ function chkInput() {
 }
 
 // 저장 버튼 누르면 onLogin 함수 실행됨.
-document.querySelector(".submitBtn").addEventListener("click", onLogin);
+document
+  .querySelector(".submitBtn")
+  .addEventListener("click", (event) => onLogin(event, modifyGet));
 
 // 리뷰 생성 클래스
 class Review {
