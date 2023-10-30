@@ -10,27 +10,41 @@
 <br/>
 <br/>
 
-## <img src="./img/Main1.jpg"/>
+<img src="./img/Main1.jpg"/>
+
+<hr>
 
 <br/>
 <img src="./img/Main2.jpg"/>
-* * *
+
+<hr>
+
 <br/>
 <img src="./img/Main3.jpg"/>
-* * *
+
+<hr>
+
 <br/>
 <img src="./img/ListMore.jpg"/>
-* * *
+
+<hr>
+
 <br/>
 <img src="./img/Datail.jpeg"/>
-* * *
+
+<hr>
+
 <br/>
 <img src="./img/DetailModify.jpg"/>
-* * *
+
+<hr>
+
 <br/>
 <img src="./img/DetailInfo.jpg"/>
-<br/>
 
+<hr>
+
+<br/>
 <br/>
 <br/>
 <br/>
