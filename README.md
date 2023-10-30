@@ -2,7 +2,7 @@
 
 <br/>
 <br/>
-![프로젝트 로고 또는 이미지](URL)
+https://hyojinkim2028.github.io/team2Project/
 <br/>
 <br/>
 <br/>
