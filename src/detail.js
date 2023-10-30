@@ -231,7 +231,6 @@ console.log(reviewNum);
 // 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event, modifyGet) {
   event.preventDefault(); //새로고침 막기
-
   // 입력값체크
   if (chkInput() == true) {
     if (reviewNum > 0 || oldReviews.length > 0) {
@@ -255,10 +254,15 @@ function onLogin(event, modifyGet) {
       review
     );
     console.log(modifyGet);
-    window.localStorage.setItem(
-      movieId,
-      JSON.stringify([...modifyGet, newReview])
-    );
+    if (modifyGet === null) {
+      window.localStorage.setItem(movieId, JSON.stringify([newReview]));
+    } else {
+      window.localStorage.setItem(
+        movieId,
+        JSON.stringify([...modifyGet, newReview])
+      );
+    }
+
     window.location.href = `detail.html?id=${movieId}&review`;
 
     return reviewNum;
