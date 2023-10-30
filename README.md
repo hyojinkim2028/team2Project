@@ -154,13 +154,15 @@ https://hyojinkim2028.github.io/team2Project/
 ## 팀원
 
 </br>
-</br>
 
 > - 고병옥
 > - 김효진
 > - 유은지
 > - 이상권
 > - 하정현
+
+</br>
+</br>
 
 ## 폴더 구조
 
