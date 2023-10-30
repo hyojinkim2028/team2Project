@@ -42,7 +42,6 @@ body {
   align-items: center;
   justify-content: right;
   background-color: var(--black);
-  /* background-color: brown; */
 }
 
 #searchInput {
@@ -255,7 +254,6 @@ textarea {
 }
 
 .reviewList {
-  /* margin: 20px; */
   background-color: black;
   width: 95%;
   border-radius: 20px;

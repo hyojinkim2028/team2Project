@@ -1,26 +1,31 @@
 // 상세페이지 영화 아이디 값
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
+
+// 기존 리뷰데이터 저장된 변수
 const oldReviews = JSON.parse(window.localStorage.getItem(movieId)) ?? [];
+
+// 삭제, 수정 시 필요한 데이터를 담은 변수
+let modifyGet = window.localStorage.getItem(movieId);
+modifyGet = JSON.parse(modifyGet);
 
 // 탭버튼 구성
 const tabItem = document.querySelectorAll(".tab_item");
 const tabInner = document.querySelectorAll(".tab_inner");
 let paramId = "";
-let modifyGet = window.localStorage.getItem(movieId);
-modifyGet = JSON.parse(modifyGet);
-console.log(modifyGet);
+
+
 //리뷰작성후 페이지 리로드 된다면 리뷰 탭으로 자동 보여주기
 const urlVal = window.location.search;
-console.log(urlVal.includes("review"));
+
 if (urlVal.includes("review")) {
   tabInner[0].classList.remove("active");
   tabInner[1].classList.add("active");
-
   tabItem[0].classList.remove("active");
   tabItem[1].classList.add("active");
 }
 
+// 상세페이지 탭버튼 구성 
 tabItem.forEach((tab, idx) => {
   tab.addEventListener("click", function () {
     tabInner.forEach((inner) => {
@@ -49,13 +54,10 @@ const options = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  // 임시 url 파라메터 가져오는부분
+  // 영화별 url 가져옴
   const urlParams = new URLSearchParams(window.location.search);
   paramId = urlParams.get("id");
-  // console.log('아이디',paramId)
-  if (paramId == null) {
-    paramId = 122;
-  }
+
 
   fetch(`https://api.themoviedb.org/3/movie/${paramId}?language=ko-KR`, options)
     .then((response) => response.json())
@@ -93,19 +95,16 @@ document.addEventListener("DOMContentLoaded", function () {
           "src",
           `https://www.youtube.com/embed/${response.results[0].key}`
         );
-      console.log(response.results[0].key);
-    }) // key값 불러오는 거
+    })
     .catch((err) => console.error(err));
 });
 
 function setDetailInfo(response) {
-  console.log(response);
   document.querySelector("#detailInfo .title").innerHTML = response.title;
   document.querySelector("#detailInfo .releaseDate").innerHTML =
     response.release_date;
   document.querySelector("#detailInfo .voteAverage").innerHTML =
     response.vote_average;
-  // document.querySelector('#detailInfo .meme').innerHTML = response.vote_average;
   document.querySelector("#detailInfo .genres").innerHTML =
     response.genres.reduce((str, e, idx) => {
       return (str += e.name + (response.genres.length != idx + 1 ? ", " : ""));
@@ -117,7 +116,6 @@ function setDetailInfo(response) {
 }
 
 function searchDirector(response) {
-  // jsonData.crew.filter(({job})=> job ==='Director')
   let directorArray = response.crew.filter((e) => {
     return e.job === "Director";
   });
@@ -154,12 +152,9 @@ function searchRelease(response) {
       return true;
     }
   });
-  // let release;
 
   // 한국 없으면 권장연령미확인으로
   if (release === undefined) {
-    // release = releaseArray[0]
-    //
     document.querySelector("#detailInfo .certification").innerHTML =
       "권장연령미확인";
   } else {
@@ -173,7 +168,6 @@ function searchCertification(iso, cert) {
     .then((response) => response.json())
     .then((response) => {
       console.log(response.certifications[iso]);
-      //console.log(response.certifications[iso]);
       console.log(iso, response);
 
       document.querySelector("#detailInfo .meaning").innerHTML =
@@ -214,7 +208,6 @@ const reviewUl = document.querySelector("#reviewList");
 const loginId = document.querySelector(".loginId");
 const loginPwd = document.querySelector(".loginPwd");
 const loginReviewPoint = document.querySelector(".reviewPoint");
-console.log(loginReviewPoint);
 const loginReview = document.querySelector(".review");
 
 //클래스에 들어갈 변수 모음
@@ -225,8 +218,6 @@ let review = "";
 
 //각 영화별 리뷰 구분할 식별자값
 let reviewNum = 0;
-
-console.log(reviewNum);
 
 // 관람평 저장 버튼 누르면 입력한 데이터 저장되는 함수.
 function onLogin(event, modifyGet) {
@@ -243,8 +234,6 @@ function onLogin(event, modifyGet) {
     reviewPoint = loginReviewPoint.value;
     review = loginReview.value;
 
-    console.log(oldReviews);
-
     const newReview = new Review(
       movieId,
       reviewNum,
@@ -253,7 +242,7 @@ function onLogin(event, modifyGet) {
       reviewPoint,
       review
     );
-    console.log(modifyGet);
+
     if (modifyGet === null) {
       window.localStorage.setItem(movieId, JSON.stringify([newReview]));
     } else {
@@ -325,12 +314,8 @@ class Review {
 }
 
 // 저장된 관람평 데이터들 화면에 보여주는 함수
+// 기존에 저장되었던 리뷰들 중 현재 영화에 대한 리뷰만 변수에 담음
 function drawReview() {
-  // 기존에 저장되었던 리뷰들 중 현재 영화에 대한 리뷰만 변수에 담음
-
-  console.log(oldReviews);
-  // 저장된 영화 아이디와 조회하고자 하는 영화 아이디 값이 같은 데이터만 필터링
-  // let views = oldReviews.filter((data) => data.movieId == paramId);
 
   //현재 영화에 대한 리뷰데이터 반복하면서 데이터 뽑아서 붙여주기.
   oldReviews.forEach((data) => {
@@ -351,14 +336,9 @@ function drawReview() {
 
 drawReview();
 
-// //삭제버튼 누르면 데이터 삭제
-
-// 댓글 삭제 기능
-
-//삭제후 새로고침 해야될 듯
-// id = reviewList 에 이벤트를 주고 e.traget -> userRevDelete로
-
+// 데이터 수정,삭제 기능
 reviewUl.addEventListener("click", (e) => {
+
   //삭제기능
   if (e.target.className === "td-userRevDelete") {
     let password = prompt("비밀번호를 입력해 주세요");
@@ -373,7 +353,6 @@ reviewUl.addEventListener("click", (e) => {
       }
     });
 
-    console.log(empty);
     //비밀번호 입력값이 동일하면 리뷰삭제
     if (password === modifyGet[empty].pwd) {
       modifyGet.splice(empty, 1);
@@ -441,7 +420,7 @@ document
 //인풋값 가져와서 페이지 이동
 async function inputHref() {
   let inputVal = document.querySelector("input").value;
-  window.location.href = `./populerList.html?val=${inputVal}`;
+  window.location.href = `./list.html?val=${inputVal}`;
 }
 
 //화살표 누르면 좌표 맨 위로
