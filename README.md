@@ -4,8 +4,10 @@
 ![프로젝트 로고 또는 이미지](URL)
 <br/>
 <br/>
+
 ## 프로젝트 개요
 
+<br/>
 영화에 대한 정보를 제공하는 서비스를 만들었습니다.<br/>
 사용자가 원하는 순위로 영화를 볼 수 있으며 영화를 장르별로 찾아볼 수 있는 기능을 제공합니다.<br/>
 또한 로컬 스토리지를 이용해 자신의 리뷰를 작성할 수 있으며 리뷰를 남길 수 있습니다.<br/>
@@ -25,7 +27,9 @@
 
 ## 사용 도구
 
- <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=HTML5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/HTML5-3178C6?style=flat&logo=HTML5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/JavaScript-3178C6?style=flat&logo=JavaScript&logoColor=#F7DF1E"/>
+
 - Git 및 GitHub: 버전 관리 및 협업
 - Font Awesome: 프론트엔드 아이콘 사용
 - Swiper: 프론트엔드 카드 슬라이드 기능 사용
