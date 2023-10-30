@@ -27,8 +27,8 @@
 
 ## 사용 도구
 
-<img src="https://img.shields.io/badge/HTML5-3178C6?style=flat&logo=HTML5&logoColor=#E34F26"/>
-<img src="https://img.shields.io/badge/JavaScript-3178C6?style=flat&logo=JavaScript&logoColor=#F7DF1E"/>
+<img src="https://img.shields.io/badge/HTML5-#E34F26?style=flat&logo=HTML5&logoColor=#E34F26"/>
+<img src="https://img.shields.io/badge/JavaScript-#F7DF1E?style=flat&logo=JavaScript&logoColor=#F7DF1E"/>
 
 - Git 및 GitHub: 버전 관리 및 협업
 - Font Awesome: 프론트엔드 아이콘 사용
