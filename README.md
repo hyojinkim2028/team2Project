@@ -10,25 +10,25 @@
 <br/>
 <br/>
 
-<img src="./img/Main1.png"/>
+<img src="./img/Main1.jpg"/>
 
 <br/>
-<img src="./img/Main2.png"/>
+<img src="./img/Main2.jpg"/>
 
 <br/>
-<img src="./img/Main3.png"/>
+<img src="./img/Main3.jpg"/>
 
 <br/>
-<img src="./img/ListMore.png"/>
+<img src="./img/ListMore.jpg"/>
 
 <br/>
-<img src="./img/Detail.png"/>
+<img src="./img/Detail.jpg"/>
 
 <br/>
-<img src="./img/DetailModify.png"/>
+<img src="./img/DetailModify.jpg"/>
 
 <br/>
-<img src="./img/DetailInfo.png"/>
+<img src="./img/DetailInfo.jpg"/>
 <br/>
 
 <br/>
